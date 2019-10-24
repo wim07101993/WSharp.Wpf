@@ -5,6 +5,16 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetFramework", "WSharp.Wpf.NetFramework\WSharp.Wpf.NetFramework.csproj", "{B5441805-FDA8-465E-9F0D-8D74638E1299}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetFramework.Tests", "WSharp.Wpf.NetFramework.Tests\WSharp.Wpf.NetFramework.Tests.csproj", "{D9A68A84-AC9B-4A46-880F-2A67DF3DA811}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetFramework.Demo", "WSharp.Wpf.NetFramework.Demo\WSharp.Wpf.NetFramework.Demo.csproj", "{E9629168-CA28-48FF-9B8B-9D638EB611EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore", "WSharp.Wpf.NetCore\WSharp.Wpf.NetCore.csproj", "{0F67FA66-4185-4534-BB72-2FEDE591EA27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore.Tests", "WSharp.Wpf.NetCore.Tests\WSharp.Wpf.NetCore.Tests.csproj", "{64A7C0E1-6679-4401-808C-E47BE58EB8C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore.Demo", "WSharp.Wpf.NetCore.Demo\WSharp.Wpf.NetCore.Demo.csproj", "{B7FDAD2C-2D64-4540-9247-9D8560204C9C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +25,26 @@ Global
 		{B5441805-FDA8-465E-9F0D-8D74638E1299}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5441805-FDA8-465E-9F0D-8D74638E1299}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5441805-FDA8-465E-9F0D-8D74638E1299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9A68A84-AC9B-4A46-880F-2A67DF3DA811}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9A68A84-AC9B-4A46-880F-2A67DF3DA811}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9A68A84-AC9B-4A46-880F-2A67DF3DA811}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9A68A84-AC9B-4A46-880F-2A67DF3DA811}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9629168-CA28-48FF-9B8B-9D638EB611EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9629168-CA28-48FF-9B8B-9D638EB611EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9629168-CA28-48FF-9B8B-9D638EB611EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9629168-CA28-48FF-9B8B-9D638EB611EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F67FA66-4185-4534-BB72-2FEDE591EA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F67FA66-4185-4534-BB72-2FEDE591EA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F67FA66-4185-4534-BB72-2FEDE591EA27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F67FA66-4185-4534-BB72-2FEDE591EA27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64A7C0E1-6679-4401-808C-E47BE58EB8C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64A7C0E1-6679-4401-808C-E47BE58EB8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64A7C0E1-6679-4401-808C-E47BE58EB8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64A7C0E1-6679-4401-808C-E47BE58EB8C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7FDAD2C-2D64-4540-9247-9D8560204C9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7FDAD2C-2D64-4540-9247-9D8560204C9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7FDAD2C-2D64-4540-9247-9D8560204C9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7FDAD2C-2D64-4540-9247-9D8560204C9C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
