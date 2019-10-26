@@ -9,11 +9,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetFramework.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetFramework.Demo", "WSharp.Wpf.NetFramework.Demo\WSharp.Wpf.NetFramework.Demo.csproj", "{E9629168-CA28-48FF-9B8B-9D638EB611EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore", "WSharp.Wpf.NetCore\WSharp.Wpf.NetCore.csproj", "{0F67FA66-4185-4534-BB72-2FEDE591EA27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSharp.Wpf.NetCore", "WSharp.Wpf.NetCore\WSharp.Wpf.NetCore.csproj", "{0F67FA66-4185-4534-BB72-2FEDE591EA27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore.Tests", "WSharp.Wpf.NetCore.Tests\WSharp.Wpf.NetCore.Tests.csproj", "{64A7C0E1-6679-4401-808C-E47BE58EB8C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSharp.Wpf.NetCore.Tests", "WSharp.Wpf.NetCore.Tests\WSharp.Wpf.NetCore.Tests.csproj", "{64A7C0E1-6679-4401-808C-E47BE58EB8C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSharp.Wpf.NetCore.Demo", "WSharp.Wpf.NetCore.Demo\WSharp.Wpf.NetCore.Demo.csproj", "{B7FDAD2C-2D64-4540-9247-9D8560204C9C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WSharp.Wpf.NetCore.Demo", "WSharp.Wpf.NetCore.Demo\WSharp.Wpf.NetCore.Demo.csproj", "{B7FDAD2C-2D64-4540-9247-9D8560204C9C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo's", "Demo's", "{C872D0C5-C1EF-43C9-A6D3-6CBEBE92077F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{175C5B9C-63DC-48E1-9109-8D8885FACBE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -48,6 +52,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D9A68A84-AC9B-4A46-880F-2A67DF3DA811} = {175C5B9C-63DC-48E1-9109-8D8885FACBE5}
+		{E9629168-CA28-48FF-9B8B-9D638EB611EE} = {C872D0C5-C1EF-43C9-A6D3-6CBEBE92077F}
+		{64A7C0E1-6679-4401-808C-E47BE58EB8C9} = {175C5B9C-63DC-48E1-9109-8D8885FACBE5}
+		{B7FDAD2C-2D64-4540-9247-9D8560204C9C} = {C872D0C5-C1EF-43C9-A6D3-6CBEBE92077F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FF0541FB-2402-4877-BFED-31C0BC78D903}
