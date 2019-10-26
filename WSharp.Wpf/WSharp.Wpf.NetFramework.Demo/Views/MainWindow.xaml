@@ -30,6 +30,9 @@
             <TabItem Header="Fields">
                 <views:Fields />
             </TabItem>
+            <TabItem Header="Logging">
+                <views:Logging DataContext="{Binding LoggingViewModel}" />
+            </TabItem>
         </dragablz:TabablzControl>
     </materialDesign:DialogHost>
 </Window>

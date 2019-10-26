@@ -4,6 +4,7 @@ using Unity;
 using WSharp.Extensions;
 using WSharp.Logging;
 using WSharp.Logging.Loggers;
+using WSharp.Wpf.NetFramework.Demo.ViewModels;
 using WSharp.Wpf.NetFramework.Demo.Views;
 
 namespace WSharp.Wpf.NetFramework.Demo
@@ -36,7 +37,9 @@ namespace WSharp.Wpf.NetFramework.Demo
                 .EnableDiagnostic()
 #endif
                 .RegisterWSharp()
-                .RegisterSingleton<ILogger, ILogDispatcher>();
+                .RegisterSingleton<ILogger, ILogDispatcher>()
+                .RegisterType<LoggingViewModel>()
+                .RegisterType<MainViewModel>();
         }
 
         private void InitLogging()
