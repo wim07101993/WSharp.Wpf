@@ -90,9 +90,12 @@
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
+    <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
     <Compile Include="Converters\ToJsonConverter.cs" />
+    <Compile Include="Converters\TraceEventTypeToStringConverter.cs" />
     <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -128,6 +131,10 @@
     <Page Include="Themes\Material\LogEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Material\LogsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Themes\Material\NumericUpDown.xaml">
       <SubType>Designer</SubType>
