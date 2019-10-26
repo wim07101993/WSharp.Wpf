@@ -131,7 +131,7 @@
                                                 <TextBlock
                                                     MaxWidth="300"
                                                     VerticalAlignment="Center"
-                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Body, Converter={x:Static converters:NewLineRemover}}"
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Body, Converter={x:Static converters:NewLineRemover.Instance}}"
                                                     TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
                                         </Expander.Header>
@@ -165,7 +165,7 @@
                                                 <TextBlock
                                                     MaxWidth="300"
                                                     VerticalAlignment="Center"
-                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Footer, Converter={x:Static converters:NewLineRemover}}"
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Footer, Converter={x:Static converters:NewLineRemover.Instance}}"
                                                     TextTrimming="CharacterEllipsis" />
                                             </StackPanel>
                                         </Expander.Header>
