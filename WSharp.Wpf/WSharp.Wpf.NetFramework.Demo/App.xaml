@@ -14,7 +14,7 @@
                 <!--  Include the Dragablz Material Design style  -->
                 <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml" />
 
-                <!--<ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.NetFramework;component/Themes.xaml" />-->
+                <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.NetFramework;component/Themes/Material.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
 

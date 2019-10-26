@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.NetFramework;component/Themes/Material/NumericUpDown.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>
