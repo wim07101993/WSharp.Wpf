@@ -20,7 +20,7 @@
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
-                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Header}" />
+                                                    <Run Text="Header" />
                                                     <Run Text="   " />
                                                 </TextBlock>
                                                 <TextBlock
@@ -50,7 +50,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,0,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Title}"
+                                                Text="Title"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="0"
@@ -63,7 +63,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Id}"
+                                                Text="Id"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="1"
@@ -76,7 +76,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Source}"
+                                                Text="Source"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="2"
@@ -89,7 +89,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Tag}"
+                                                Text="Tag"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="3"
@@ -102,7 +102,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.EventType}"
+                                                Text="EventType"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="4"
@@ -125,7 +125,7 @@
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
-                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Body}" />
+                                                    <Run Text="Body" />
                                                     <Run Text="   " />
                                                 </TextBlock>
                                                 <TextBlock
@@ -159,7 +159,7 @@
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
-                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Footer}" />
+                                                    <Run Text="Footer" />
                                                     <Run Text="   " />
                                                 </TextBlock>
                                                 <TextBlock
@@ -189,7 +189,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,0,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.OperationStack}"
+                                                Text="OperationStack"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="0"
@@ -202,7 +202,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.TimeStamp}"
+                                                Text="TimeStamp"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="1"
@@ -215,7 +215,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.ProcessId}"
+                                                Text="ProcessId"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="2"
@@ -228,7 +228,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.ThreadId}"
+                                                Text="ThreadId"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="3"
@@ -241,7 +241,7 @@
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
                                                 Style="{StaticResource MaterialDesignBody2TextBlock}"
-                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.CallStack}"
+                                                Text="CallStack"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
                                                 Grid.Row="4"
