@@ -1,0 +1,262 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.NetFramework.Controls"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Style TargetType="{x:Type controls:LogEntry}">
+        <Style.Setters>
+            <Setter Property="MinWidth" Value="500" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:LogEntry}">
+                        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                            <materialDesign:Card Margin="10" Background="{DynamicResource MaterialDesignBackground}">
+                                <StackPanel TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+
+                                    <!--  HEADER  -->
+                                    <Expander HorizontalAlignment="Stretch" IsExpanded="True">
+                                        <Expander.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Header}" />
+                                                    <Run Text="   " />
+                                                </TextBlock>
+                                                <TextBlock
+                                                    MaxWidth="300"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Header, Converter={StaticResource NewLineRemover}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                        </Expander.Header>
+
+                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Title}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Title}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Id}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Id}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Source}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Source}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Tag}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Tag}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.EventType}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventType}"
+                                                TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Expander>
+
+                                    <Border
+                                        Height="1"
+                                        HorizontalAlignment="Stretch"
+                                        Background="{DynamicResource MaterialDesignDivider}"
+                                        SnapsToDevicePixels="True" />
+
+
+                                    <!--  BODY  -->
+                                    <Expander HorizontalAlignment="Stretch" IsExpanded="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Path=Value.Payload, Converter={StaticResource ObjectToBooleanConverter}}">
+                                        <Expander.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Body}" />
+                                                    <Run Text="   " />
+                                                </TextBlock>
+                                                <TextBlock
+                                                    MaxWidth="300"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Body, Converter={StaticResource NewLineRemover}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                        </Expander.Header>
+
+                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <ItemsControl ItemsSource="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Payload}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <TextBlock Text="{Binding ., Converter={StaticResource ToJsonConverter}}" />
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Expander>
+
+                                    <Border
+                                        Height="1"
+                                        HorizontalAlignment="Stretch"
+                                        Background="{DynamicResource MaterialDesignDivider}"
+                                        SnapsToDevicePixels="True" />
+
+
+                                    <!--  FOOTER  -->
+                                    <Expander IsExpanded="False">
+                                        <Expander.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                    <Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.Footer}" />
+                                                    <Run Text="   " />
+                                                </TextBlock>
+                                                <TextBlock
+                                                    MaxWidth="300"
+                                                    VerticalAlignment="Center"
+                                                    Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Footer, Converter={StaticResource NewLineRemover}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </StackPanel>
+                                        </Expander.Header>
+
+                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="0,0,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.OperationStack}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                Margin="0,0,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventCache.LogicalOperationStack}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.TimeStamp}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventCache.Timestamp}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.ProcessId}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="2"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventCache.ProcessId}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.ThreadId}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="3"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventCache.ThreadId}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="4"
+                                                Grid.Column="0"
+                                                Margin="0,10,0,10"
+                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.CallStack}"
+                                                TextWrapping="Wrap" />
+                                            <TextBlock
+                                                Grid.Row="4"
+                                                Grid.Column="1"
+                                                Margin="0,10,0,10"
+                                                Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.EventCache.Callstack}"
+                                                TextWrapping="Wrap" />
+                                        </Grid>
+                                    </Expander>
+
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>
