@@ -18,6 +18,7 @@
                 Margin="10"
                 HorizontalAlignment="Left"
                 Text="abc" />
+            <controls:DateTimePicker MinWidth="100" Margin="10" />
         </StackPanel>
 
     </StackPanel>
