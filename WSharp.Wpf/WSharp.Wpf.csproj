@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Controls\AControl.cs" />
     <Compile Include="Controls\ButtonsAlignment.cs" />
+    <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
     <Compile Include="Controls\NumericInput.cs" />
