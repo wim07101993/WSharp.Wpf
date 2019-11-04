@@ -15,15 +15,15 @@ namespace WSharp.Wpf.Controls
 
         public static readonly DependencyProperty TimeOfDayProperty = DependencyProperty.Register(
           nameof(TimeOfDay),
-          typeof(TimeSpan?),
+          typeof(DateTime?),
           typeof(DateTimePicker),
-            new PropertyMetadata(default(TimeSpan), OnTimeOfDayChanged));
+            new PropertyMetadata(DateTime.Now, OnTimeOfDayChanged));
 
         public static readonly DependencyProperty DateProperty = DependencyProperty.Register(
           nameof(Date),
           typeof(DateTime?),
           typeof(DateTimePicker),
-            new PropertyMetadata(default(DateTime), OnDateChanged));
+            new PropertyMetadata(DateTime.Now, OnDateChanged));
 
         #endregion DEPENDENCY PROPERTIES
 
@@ -53,9 +53,9 @@ namespace WSharp.Wpf.Controls
             set => SetValue(ValueProperty, value);
         }
 
-        public TimeSpan? TimeOfDay
+        public DateTime? TimeOfDay
         {
-            get => (TimeSpan?)GetValue(TimeOfDayProperty);
+            get => (DateTime?)GetValue(TimeOfDayProperty);
             set => SetValue(ValueProperty, value);
         }
 
@@ -81,7 +81,7 @@ namespace WSharp.Wpf.Controls
 
             if (e.NewValue is DateTime newValue)
             {
-                dateTimePicker.TimeOfDay = newValue.TimeOfDay;
+                dateTimePicker.TimeOfDay = newValue;
                 dateTimePicker.Date = newValue.Date;
             }
             else
@@ -102,15 +102,15 @@ namespace WSharp.Wpf.Controls
 
             dateTimePicker._isUpdatingValue = true;
 
-            var newValue = e.NewValue as TimeSpan?;
+            var newValue = e.NewValue as DateTime?;
             dateTimePicker.Value = new DateTime(
                 year: dateTimePicker.Value?.Year ?? dateTimePicker.Date?.Year ?? default,
                 month: dateTimePicker.Value?.Month ?? dateTimePicker.Date?.Month ?? default,
                 day: dateTimePicker.Value?.Day ?? dateTimePicker.Date?.Day ?? default,
-                hour: newValue?.Hours ?? default,
-                minute: newValue?.Minutes ?? default,
-                second: newValue?.Seconds ?? default,
-                millisecond: newValue?.Milliseconds ?? default);
+                hour: newValue?.TimeOfDay.Hours ?? default,
+                minute: newValue?.TimeOfDay.Minutes ?? default,
+                second: newValue?.TimeOfDay.Seconds ?? default,
+                millisecond: newValue?.TimeOfDay.Milliseconds ?? default);
 
             dateTimePicker._isUpdatingValue = false;
         }
