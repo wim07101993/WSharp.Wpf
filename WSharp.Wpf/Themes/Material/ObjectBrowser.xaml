@@ -1,0 +1,144 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:reflection="clr-namespace:WSharp.Reflection;assembly=WSharp">
+
+    <DataTemplate x:Key="StringEditorTemplate" DataType="{x:Type reflection:ObjectBrowserProperty}">
+
+        <StackPanel Orientation="Vertical" Visibility="{Binding IsBrowsable, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+            <TextBox
+                MinWidth="100"
+                HorizontalAlignment="Left"
+                materialDesign:HintAssist.Hint="{Binding DisplayName}"
+                materialDesign:ValidationAssist.UsePopup="True"
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                <TextBox.Resources>
+                    <helpers:BindingProxy x:Key="Proxy" Data="{Binding}" />
+                </TextBox.Resources>
+                <TextBox.IsEnabled>
+                    <MultiBinding Converter="{x:Static converters:MultiBooleanAndConverter.Instance}">
+                        <Binding Converter="{x:Static converters:InvertedBooleanConverter.Instance}" Path="IsReadOnly" />
+                        <Binding Converter="{x:Static converters:EditorBrowsableStateToBooleanConverter.Instance}" Path="EditableState" />
+                    </MultiBinding>
+                </TextBox.IsEnabled>
+                <TextBox.Text>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Value"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <controls:ObjectBrowserPropertyValidationRule>
+                                <controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                                    <controls:ValidationAttributesWrapper Value="{Binding Data.ValidationAttributes, Source={StaticResource Proxy}}" />
+                                </controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                            </controls:ObjectBrowserPropertyValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <TextBlock Text="{Binding Description}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="NumberWithDecimalTemplate" DataType="{x:Type reflection:ObjectBrowserProperty}">
+        <StackPanel Orientation="Vertical" Visibility="{Binding IsBrowsable, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+            <controls:NumericUpDown
+                MinWidth="100"
+                HorizontalAlignment="Left"
+                materialDesign:HintAssist.Hint="{Binding DisplayName}"
+                NumericInputMode="Decimal">
+                <controls:NumericUpDown.Resources>
+                    <helpers:BindingProxy x:Key="Proxy" Data="{Binding}" />
+                </controls:NumericUpDown.Resources>
+
+                <controls:NumericUpDown.IsEnabled>
+                    <MultiBinding Converter="{x:Static converters:MultiBooleanAndConverter.Instance}">
+                        <Binding Converter="{x:Static converters:InvertedBooleanConverter.Instance}" Path="IsReadOnly" />
+                        <Binding Converter="{x:Static converters:EditorBrowsableStateToBooleanConverter.Instance}" Path="EditableState" />
+                    </MultiBinding>
+                </controls:NumericUpDown.IsEnabled>
+                <controls:NumericUpDown.Value>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Value"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <controls:ObjectBrowserPropertyValidationRule>
+                                <controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                                    <controls:ValidationAttributesWrapper Value="{Binding Data.ValidationAttributes, Source={StaticResource Proxy}}" />
+                                </controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                            </controls:ObjectBrowserPropertyValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </controls:NumericUpDown.Value>
+            </controls:NumericUpDown>
+            <TextBlock Text="{Binding Description}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="NumberWithoutDecimalTemplate" DataType="{x:Type reflection:ObjectBrowserProperty}">
+        <StackPanel Orientation="Vertical" Visibility="{Binding IsBrowsable, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+            <controls:NumericUpDown
+                MinWidth="100"
+                HorizontalAlignment="Left"
+                materialDesign:HintAssist.Hint="{Binding DisplayName}"
+                NumericInputMode="Numbers">
+                <controls:NumericUpDown.Resources>
+                    <helpers:BindingProxy x:Key="Proxy" Data="{Binding}" />
+                </controls:NumericUpDown.Resources>
+                <controls:NumericUpDown.IsEnabled>
+                    <MultiBinding Converter="{x:Static converters:MultiBooleanAndConverter.Instance}">
+                        <Binding Converter="{x:Static converters:InvertedBooleanConverter.Instance}" Path="IsReadOnly" />
+                        <Binding Converter="{x:Static converters:EditorBrowsableStateToBooleanConverter.Instance}" Path="EditableState" />
+                    </MultiBinding>
+                </controls:NumericUpDown.IsEnabled>
+                <controls:NumericUpDown.Value>
+                    <Binding
+                        Mode="TwoWay"
+                        Path="Value"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <controls:ObjectBrowserPropertyValidationRule>
+                                <controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                                    <controls:ValidationAttributesWrapper Value="{Binding Data.ValidationAttributes, Source={StaticResource Proxy}}" />
+                                </controls:ObjectBrowserPropertyValidationRule.ValidationAttributes>
+                            </controls:ObjectBrowserPropertyValidationRule>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </controls:NumericUpDown.Value>
+            </controls:NumericUpDown>
+            <TextBlock Text="{Binding Description}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ObjectHeaderTemplate" DataType="{x:Type reflection:ObjectBrowserProperty}">
+        <StackPanel Orientation="Vertical">
+            <TextBlock Style="{StaticResource MaterialDesignBody2TextBlock}" Text="{Binding DisplayName}" />
+            <TextBlock Style="{StaticResource MaterialDesignBody1TextBlock}" Text="{Binding Description}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <Style TargetType="{x:Type controls:ObjectBrowser}">
+        <Style.Setters>
+            <Setter Property="TemplateSelector">
+                <Setter.Value>
+                    <controls:ObjectBrowserDataTemplateSelector
+                        NumberWithDecimalTemplate="{StaticResource NumberWithDecimalTemplate}"
+                        NumberWithoutDecimalTemplate="{StaticResource NumberWithoutDecimalTemplate}"
+                        StringTemplate="{StaticResource StringEditorTemplate}" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:ObjectBrowser}">
+                        <TreeView x:Name="PartTreeView" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>
