@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ToStringConverter : IValueConverter
+    public class InvertedBooleanConverter : IValueConverter
     {
-        private static ToStringConverter _instance;
-        public static ToStringConverter Instance => _instance ?? (_instance = new ToStringConverter());
+        private static InvertedBooleanConverter _instance;
+        public static InvertedBooleanConverter Instance => _instance ?? (_instance = new InvertedBooleanConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value?.ToString();
+            => value is bool b && !b;
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => DependencyProperty.UnsetValue;
+            => value is bool b && !b;
     }
 }
