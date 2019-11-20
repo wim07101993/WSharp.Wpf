@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/NumericUpDown.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/DateTimePicker.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/LogEntry.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/LogsView.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

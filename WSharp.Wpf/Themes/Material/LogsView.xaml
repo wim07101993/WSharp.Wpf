@@ -1,0 +1,300 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Style TargetType="{x:Type controls:LogsView}">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type controls:LogsView}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition x:Name="DetailColumn" Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+
+                            <!--  FILTER  -->
+                            <Expander
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Header="Filter">
+                                <WrapPanel ScrollViewer.HorizontalScrollBarVisibility="Auto">
+                                    <WrapPanel.Resources>
+                                        <Style BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}" TargetType="{x:Type TextBox}">
+                                            <Style.Setters>
+                                                <Setter Property="Margin" Value="10,0,10,10" />
+                                                <Setter Property="MinWidth" Value="100" />
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style BasedOn="{StaticResource MaterialDesignFloatingHintDatePicker}" TargetType="{x:Type DatePicker}">
+                                            <Style.Setters>
+                                                <Setter Property="Margin" Value="10,0,10,10" />
+                                                <Setter Property="MinWidth" Value="100" />
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style BasedOn="{StaticResource MaterialDesignFloatingHintTimePicker}" TargetType="{x:Type materialDesign:TimePicker}">
+                                            <Style.Setters>
+                                                <Setter Property="Margin" Value="10,0,10,10" />
+                                                <Setter Property="MinWidth" Value="100" />
+                                            </Style.Setters>
+                                        </Style>
+                                    </WrapPanel.Resources>
+
+                                    <!--  id  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Id"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=IdFilter}"
+                                        Visibility="{TemplateBinding IdFilterVisibility}" />
+
+                                    <!--  source  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Source"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SourceFilter}"
+                                        Visibility="{TemplateBinding SourceFilterVisibility}" />
+
+                                    <!--  tag  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Tag"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TagFilter}"
+                                        Visibility="{TemplateBinding TagFilterVisibility}" />
+
+                                    <!--  event type  -->
+                                    <ComboBox
+                                        MinWidth="100"
+                                        Margin="10,0,10,10"
+                                        materialDesign:HintAssist.Hint="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.EventType}"
+                                        SelectedItem="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EventTypeFilter, Converter={x:Static converters:TraceEventTypeToStringConverter.Instance}}"
+                                        Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBoxItem Content="Everything" />
+                                        <ComboBoxItem Content="Critical" />
+                                        <ComboBoxItem Content="Error" />
+                                        <ComboBoxItem Content="Warning" />
+                                        <ComboBoxItem Content="Information" />
+                                        <ComboBoxItem Content="Verbose" />
+                                        <ComboBoxItem Content="Start" />
+                                        <ComboBoxItem Content="Stop" />
+                                        <ComboBoxItem Content="Suspend" />
+                                        <ComboBoxItem Content="Resume" />
+                                        <ComboBoxItem Content="Transfer" />
+                                    </ComboBox>
+
+                                    <!--  title  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Title"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TitleFilter}"
+                                        Visibility="{TemplateBinding TitleFilterVisibility}" />
+
+                                    <!--  payload  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="Payload"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=PayloadFilter}"
+                                        Visibility="{TemplateBinding PayloadFilterVisibility}" />
+
+                                    <!--  operation stack  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="OperationStack"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=OperationStackFilter}"
+                                        Visibility="{TemplateBinding OperationStackFilterVisibility}" />
+
+                                    <!--  time lower limit  -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <DatePicker
+                                            materialDesign:HintAssist.Hint="StartDate"
+                                            SelectedDate="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=DateLowerLimit}"
+                                            Visibility="{TemplateBinding TimeFilterVisibility}" />
+                                        <materialDesign:TimePicker
+                                            materialDesign:HintAssist.Hint="StartTime"
+                                            SelectedTime="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TimeLowerLimit}"
+                                            Visibility="{TemplateBinding TimeFilterVisibility}" />
+                                    </StackPanel>
+
+                                    <!--  time upper limit  -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <DatePicker
+                                            materialDesign:HintAssist.Hint="EndDate"
+                                            SelectedDate="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=DateUpperLimit}"
+                                            Visibility="{TemplateBinding TimeFilterVisibility}" />
+                                        <materialDesign:TimePicker
+                                            materialDesign:HintAssist.Hint="EndTime"
+                                            SelectedTime="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TimeUpperLimit}"
+                                            Visibility="{TemplateBinding TimeFilterVisibility}" />
+                                    </StackPanel>
+
+                                    <!--  timestamp lower limit  -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox
+                                            materialDesign:HintAssist.Hint="Start"
+                                            Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TimeStampLowerLimit}"
+                                            Visibility="{TemplateBinding TimeStampFilterVisibility}" />
+                                        <!--  timestamp upper limit  -->
+                                        <TextBox
+                                            materialDesign:HintAssist.Hint="End"
+                                            Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=TimeStampUpperLimit}"
+                                            Visibility="{TemplateBinding TimeStampFilterVisibility}" />
+                                    </StackPanel>
+
+                                    <!--  process id  -->
+                                    <controls:NumericUpDown
+                                        materialDesign:HintAssist.Hint="ProcessId"
+                                        Visibility="{TemplateBinding ProcessIdFilterVisibility}"
+                                        Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ProcessIdFilter}" />
+
+                                    <!--  thread id  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="ThreadId"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ThreadIdFilter}"
+                                        Visibility="{TemplateBinding ThreadIdFilterVisibility}" />
+
+                                    <!--  call stack  -->
+                                    <TextBox
+                                        materialDesign:HintAssist.Hint="CallStack"
+                                        Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=CallStackFilter}"
+                                        Visibility="{TemplateBinding CallStackFilterVisibility}" />
+
+                                    <!--  buttons  -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <Button
+                                            x:Name="SearchButton"
+                                            Width="100"
+                                            Margin="10,0,10,10"
+                                            Content="Search"
+                                            Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+
+                                        <Button
+                                            x:Name="ClearFilterButton"
+                                            Width="100"
+                                            Margin="10,0,10,10"
+                                            Content="Clear" />
+                                    </StackPanel>
+                                </WrapPanel>
+                            </Expander>
+
+
+                            <!--  TABLE  -->
+                            <DataGrid
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                AutoGenerateColumns="False"
+                                CanUserAddRows="False"
+                                CanUserDeleteRows="False"
+                                CanUserReorderColumns="True"
+                                ItemsSource="{TemplateBinding FilteredItemsSource}"
+                                SelectedItem="{Binding Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}, Path=SelectedItem}"
+                                SelectionMode="Single"
+                                SelectionUnit="FullRow">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn
+                                        x:Name="IdColumn"
+                                        Binding="{Binding Id, Mode=OneWay}"
+                                        Header="Id"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="TimeColumn"
+                                        Binding="{Binding EventCache.DateTime, Mode=OneWay}"
+                                        Header="Time"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="SourceColumn"
+                                        Binding="{Binding Source, Mode=OneWay}"
+                                        Header="Source"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="TagColumn"
+                                        Binding="{Binding Tag, Mode=OneWay}"
+                                        Header="Tag"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="EventTypeColumn"
+                                        Binding="{Binding EventType, Mode=OneWay}"
+                                        Header="EventType"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="TitleColumn"
+                                        Binding="{Binding Title, Mode=OneWay}"
+                                        Header="Title"
+                                        IsReadOnly="True" />
+                                    <DataGridTemplateColumn
+                                        x:Name="PayloadColumn"
+                                        MaxWidth="400"
+                                        Header="Payload"
+                                        IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    MaxWidth="400"
+                                                    Text="{Binding Payload, Mode=OneWay, Converter={x:Static converters:ListToStringConverter.Instance}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn
+                                        x:Name="OperationStackColumn"
+                                        MaxWidth="200"
+                                        Header="OperationStack}"
+                                        IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    MaxWidth="200"
+                                                    Text="{Binding EventCache.LogicalOperationStack, Mode=OneWay, Converter={x:Static converters:ListToStringConverter.Instance}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn
+                                        x:Name="TimeStampColumn"
+                                        Binding="{Binding EventCache.Timestamp, Mode=OneWay}"
+                                        Header="TimeStamp"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="ProcessIdColumn"
+                                        Binding="{Binding EventCache.ProcessId, Mode=OneWay}"
+                                        Header="ProcessId"
+                                        IsReadOnly="True" />
+                                    <DataGridTextColumn
+                                        x:Name="ThreadIdColumn"
+                                        Binding="{Binding EventCach.ThreadId, Mode=OneWay}"
+                                        Header="ThreadId"
+                                        IsReadOnly="True" />
+                                    <DataGridTemplateColumn
+                                        x:Name="CallStackColumn"
+                                        MaxWidth="200"
+                                        Header="CallStack"
+                                        IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock
+                                                    MaxWidth="200"
+                                                    Text="{Binding EventCache.Callstack, Mode=OneWay, Converter={x:Static converters:NewLineRemover.Instance}}"
+                                                    TextTrimming="CharacterEllipsis" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+
+                            <!--  DETAIL  -->
+                            <controls:LogEntry
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="1"
+                                Width="600"
+                                Visibility="{TemplateBinding SelectedItem,
+                                                             Converter={x:Static converters:ObjectToVisibilityConverter.Instance}}"
+                                Value="{TemplateBinding SelectedItem}" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>
