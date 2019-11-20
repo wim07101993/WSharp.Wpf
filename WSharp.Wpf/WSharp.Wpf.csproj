@@ -96,6 +96,7 @@
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ListToStringConverter.cs" />
+    <Compile Include="Converters\MultiBooleanAndConverter.cs" />
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
