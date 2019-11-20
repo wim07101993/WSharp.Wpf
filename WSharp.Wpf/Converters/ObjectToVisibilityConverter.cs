@@ -7,7 +7,8 @@ namespace WSharp.Wpf.Converters
 {
     public class ObjectToVisibilityConverter : IValueConverter
     {
-        public static ObjectToVisibilityConverter Instance { get; } = new ObjectToVisibilityConverter();
+        private static ObjectToVisibilityConverter _instance;
+        public static ObjectToVisibilityConverter Instance => _instance ?? (_instance = new ObjectToVisibilityConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -7,7 +7,8 @@ namespace WSharp.Wpf.Converters
 {
     public class ToStringConverter : IValueConverter
     {
-        public static ToStringConverter Instance { get; } = new ToStringConverter();
+        private static ToStringConverter _instance;
+        public static ToStringConverter Instance => _instance ?? (_instance = new ToStringConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             => value?.ToString();

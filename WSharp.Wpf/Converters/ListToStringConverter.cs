@@ -11,7 +11,8 @@ namespace WSharp.Wpf.Converters
 {
     public class ListToStringConverter : IValueConverter
     {
-        public static ListToStringConverter Instance { get; } = new ListToStringConverter();
+        private static ListToStringConverter _instance;
+        public static ListToStringConverter Instance => _instance ?? (_instance = new ListToStringConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

@@ -6,7 +6,8 @@ namespace WSharp.Wpf.Converters
 {
     public class ObjectToBooleanConverter : IValueConverter
     {
-        public static ObjectToBooleanConverter Instance { get; } = new ObjectToBooleanConverter();
+        private static ObjectToBooleanConverter _instance;
+        public static ObjectToBooleanConverter Instance => _instance ?? (_instance = new ObjectToBooleanConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
             => value != null;

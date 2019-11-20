@@ -7,7 +7,8 @@ namespace WSharp.Wpf.Converters
 {
     public class ToJsonConverter : IValueConverter
     {
-        public static ToJsonConverter Instance { get; } = new ToJsonConverter();
+        private static ToJsonConverter _instance;
+        public static ToJsonConverter Instance => _instance ?? (_instance = new ToJsonConverter());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) 
             => value?.SerializeJson();
