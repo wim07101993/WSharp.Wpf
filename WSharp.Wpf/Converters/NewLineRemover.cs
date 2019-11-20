@@ -7,7 +7,8 @@ namespace WSharp.Wpf.Converters
 {
     public class NewLineRemover : IValueConverter
     {
-        public static NewLineRemover Instance { get; } = new NewLineRemover();
+        private static NewLineRemover _instance;
+        public static NewLineRemover Instance => _instance ?? (_instance = new NewLineRemover());
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
