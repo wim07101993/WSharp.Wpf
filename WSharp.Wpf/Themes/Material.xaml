@@ -5,6 +5,8 @@
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/LogEntry.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/LogsView.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Material/ObjectBrowser.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
