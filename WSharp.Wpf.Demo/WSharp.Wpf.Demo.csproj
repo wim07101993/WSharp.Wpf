@@ -107,6 +107,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\Person.cs" />
+    <Compile Include="Models\EAnimalSpecies.cs" />
     <Compile Include="ViewModels\LoggingViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\Fields.xaml.cs">
