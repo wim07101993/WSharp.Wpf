@@ -5,8 +5,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using WSharp.Extensions;
+using WSharp.Wpf.Extensions;
 using WSharp.Logging;
+using WSharp.Extensions;
 
 namespace WSharp.Wpf.Controls
 {
@@ -634,12 +635,12 @@ namespace WSharp.Wpf.Controls
         private void GetTemplateChilds()
         {
             foreach (var collumn in _collumns.Keys.ToList())
-                _collumns[collumn] = GetTemplateChild<DataGridColumn>(collumn);
+                _collumns[collumn] = this.GetTemplateChild<DataGridColumn>(collumn);
 
-            _searchButton = GetTemplateChild<Button>(PartSearchButton);
+            _searchButton = this.GetTemplateChild<Button>(PartSearchButton);
             _searchButton.Click += OnSearchButtonClick;
 
-            _clearFilterButton = GetTemplateChild<Button>(PartClearFilterButton);
+            _clearFilterButton = this.GetTemplateChild<Button>(PartClearFilterButton);
             _clearFilterButton.Click += OnClearFilterButtonClick;
         }
 

@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using WSharp.Wpf.Extensions;
 using WSharp.Wpf.Helpers;
 
 namespace WSharp.Wpf.Controls
@@ -640,9 +641,9 @@ namespace WSharp.Wpf.Controls
         {
             base.OnApplyTemplate();
 
-            _repeatUp = GetTemplateChild<RepeatButton>(ElementNumericUp);
-            _repeatDown = GetTemplateChild<RepeatButton>(ElementNumericDown);
-            _valueTextBox = GetTemplateChild<TextBox>(ElementTextBox);
+            _repeatUp = this.GetTemplateChild<RepeatButton>(ElementNumericUp);
+            _repeatDown = this.GetTemplateChild<RepeatButton>(ElementNumericDown);
+            _valueTextBox = this.GetTemplateChild<TextBox>(ElementTextBox);
 
             ToggleReadOnlyMode(IsReadOnly | !InterceptManualEnter);
 

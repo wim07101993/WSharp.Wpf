@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="Controls\AControl.cs" />
     <Compile Include="Controls\ButtonsAlignment.cs" />
+    <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
@@ -100,11 +101,16 @@
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\ShadowEdgeConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\ToJsonConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Converters\TraceEventTypeToStringConverter.cs" />
+    <Compile Include="EShadowDepth.cs" />
+    <Compile Include="EShadowEdge.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
+    <Compile Include="Helpers\ShadowHelper.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -119,6 +125,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ShadowInfo.cs" />
+    <Compile Include="ShadowLocalInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -149,6 +157,10 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="Themes\Material\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Shadows.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

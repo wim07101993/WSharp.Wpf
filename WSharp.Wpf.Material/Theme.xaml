@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Card.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style BasedOn="{StaticResource Card}" TargetType="{x:Type controls:ClippedContentControl}" />
+    <Style BasedOn="{StaticResource Card}" TargetType="{x:Type material:Card}" />
+</ResourceDictionary>
