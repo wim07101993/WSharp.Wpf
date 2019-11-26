@@ -23,7 +23,7 @@ namespace WSharp.Wpf.Controls
     [TemplatePart(Name = nameof(PartCallStackColumn), Type = typeof(DataGridColumn))]
     [TemplatePart(Name = nameof(PartSearchButton), Type = typeof(Button))]
     [TemplatePart(Name = nameof(PartClearFilterButton), Type = typeof(Button))]
-    public class LogsView : AControl
+    public class LogsView : Control
     {
         #region DEPENDENCY PROPERTIES
 
@@ -341,6 +341,10 @@ namespace WSharp.Wpf.Controls
         static LogsView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LogsView), new FrameworkPropertyMetadata(typeof(LogsView)));
+        }
+
+        public LogsView()
+        {
         }
 
         #endregion CONSTRUCTORS

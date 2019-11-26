@@ -91,6 +91,9 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Views\Texts.xaml.cs">
+      <DependentUpon>Texts.xaml</DependentUpon>
+    </Compile>
     <Page Include="Views\Fields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +122,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -149,6 +156,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\WSharp.Wpf.Material\WSharp.Wpf.Material.csproj">
+      <Project>{8720ea06-0160-467f-9a6d-767a4c396136}</Project>
+      <Name>WSharp.Wpf.Material</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WSharp.Wpf\WSharp.Wpf.csproj">
       <Project>{b5441805-fda8-465e-9f0d-8d74638e1299}</Project>
       <Name>WSharp.Wpf</Name>

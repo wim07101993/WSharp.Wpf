@@ -1,0 +1,483 @@
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.Texts"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="5"
+            Text="Enable" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="5"
+            Text="Hyperlink" />
+
+        <controls:Divider
+            Grid.Row="0"
+            Grid.RowSpan="14"
+            Grid.Column="1"
+            Orientation="Vertical" />
+
+        <controls:Divider
+            Grid.Row="0"
+            Grid.RowSpan="14"
+            Grid.Column="3"
+            Orientation="Vertical" />
+
+        <!--#region TextBlock-->
+
+        <CheckBox
+            x:Name="TextBlockEnabled"
+            Grid.Row="1"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="HyperlinkVisible"
+            Grid.Row="1"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="1"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=TextBlockEnabled, Path=IsChecked}"
+                Text="TextBlock"
+                Visibility="{Binding ElementName=HyperlinkVisible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=TextBlockEnabled, Path=IsChecked}" Visibility="{Binding ElementName=HyperlinkVisible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Hyperlink}">
+                    Hyperlink
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion TextBlock-->
+
+
+        <!--#region Caption-->
+
+        <CheckBox
+            x:Name="CaptionEnabled"
+            Grid.Row="2"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="CaptionVisible"
+            Grid.Row="2"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="2"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=CaptionEnabled, Path=IsChecked}"
+                Style="{StaticResource CaptionTextBlock}"
+                Text="Caption"
+                Visibility="{Binding ElementName=CaptionVisible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=CaptionEnabled, Path=IsChecked}" Visibility="{Binding ElementName=CaptionVisible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource CaptionHyperlink}">
+                    Caption
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Caption-->
+
+
+        <!--#region Body1-->
+
+        <CheckBox
+            x:Name="Body1Enabled"
+            Grid.Row="3"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Body1Visible"
+            Grid.Row="3"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="3"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Body1Enabled, Path=IsChecked}"
+                Style="{StaticResource Body1TextBlock}"
+                Text="Body1"
+                Visibility="{Binding ElementName=Body1Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Body1Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Body1Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Body1Hyperlink}">
+                    Body1
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Body1-->
+
+
+        <!--#region Body2-->
+
+        <CheckBox
+            x:Name="Body2Enabled"
+            Grid.Row="4"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Body2Visible"
+            Grid.Row="4"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="4"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Body2Enabled, Path=IsChecked}"
+                Style="{StaticResource Body2TextBlock}"
+                Text="Body2"
+                Visibility="{Binding ElementName=Body2Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Body2Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Body2Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Body2Hyperlink}">
+                    Body2
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Body2-->
+
+
+        <!--#region Overline-->
+
+        <CheckBox
+            x:Name="OverlineEnabled"
+            Grid.Row="5"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="OverlineVisible"
+            Grid.Row="5"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="5"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=OverlineEnabled, Path=IsChecked}"
+                Style="{StaticResource OverlineTextBlock}"
+                Text="Overline"
+                Visibility="{Binding ElementName=OverlineVisible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=OverlineEnabled, Path=IsChecked}" Visibility="{Binding ElementName=OverlineVisible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource OverlineHyperlink}">
+                    Overline
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Overline-->
+
+
+        <!--#region Subtitle1-->
+
+        <CheckBox
+            x:Name="Subtitle1Enabled"
+            Grid.Row="6"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Subtitle1Visible"
+            Grid.Row="6"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="6"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Subtitle1Enabled, Path=IsChecked}"
+                Style="{StaticResource Subtitle1TextBlock}"
+                Text="Subtitle1"
+                Visibility="{Binding ElementName=Subtitle1Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Subtitle1Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Subtitle1Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Subtitle1Hyperlink}">
+                    Subtitle1
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Subtitle1-->
+
+
+        <!--#region Subtitle2-->
+
+        <CheckBox
+            x:Name="Subtitle2Enabled"
+            Grid.Row="7"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Subtitle2Visible"
+            Grid.Row="7"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="7"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Subtitle2Enabled, Path=IsChecked}"
+                Style="{StaticResource Subtitle2TextBlock}"
+                Text="Subtitle2"
+                Visibility="{Binding ElementName=Subtitle2Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Subtitle2Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Subtitle2Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Subtitle2Hyperlink}">
+                    Subtitle2
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Subtitle2-->
+
+
+        <!--#region Headline6-->
+
+        <CheckBox
+            x:Name="Headline6Enabled"
+            Grid.Row="8"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline6Visible"
+            Grid.Row="8"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="8"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline6Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline6TextBlock}"
+                Text="Headline6"
+                Visibility="{Binding ElementName=Headline6Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline6Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline6Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline6Hyperlink}">
+                    Headline6
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline6-->
+
+
+        <!--#region Headline5-->
+
+        <CheckBox
+            x:Name="Headline5Enabled"
+            Grid.Row="9"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline5Visible"
+            Grid.Row="9"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="9"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline5Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline5TextBlock}"
+                Text="Headline5"
+                Visibility="{Binding ElementName=Headline5Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline5Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline5Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline5Hyperlink}">
+                    Headline5
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline5-->
+
+
+        <!--#region Headline4-->
+
+        <CheckBox
+            x:Name="Headline4Enabled"
+            Grid.Row="10"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline4Visible"
+            Grid.Row="10"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="10"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline4Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline4TextBlock}"
+                Text="Headline4"
+                Visibility="{Binding ElementName=Headline4Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline4Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline4Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline4Hyperlink}">
+                    Headline4
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline4-->
+
+
+        <!--#region Headline3-->
+
+        <CheckBox
+            x:Name="Headline3Enabled"
+            Grid.Row="11"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline3Visible"
+            Grid.Row="11"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="11"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline3Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline3TextBlock}"
+                Text="Headline3"
+                Visibility="{Binding ElementName=Headline3Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline3Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline3Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline3Hyperlink}">
+                    Headline3
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline3-->
+
+
+        <!--#region Headline2-->
+
+        <CheckBox
+            x:Name="Headline2Enabled"
+            Grid.Row="12"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline2Visible"
+            Grid.Row="12"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="12"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline2Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline2TextBlock}"
+                Text="Headline2"
+                Visibility="{Binding ElementName=Headline2Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline2Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline2Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline2Hyperlink}">
+                    Headline2
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline2-->
+
+
+        <!--#region Headline1-->
+
+        <CheckBox
+            x:Name="Headline1Enabled"
+            Grid.Row="13"
+            Grid.Column="0"
+            HorizontalAlignment="Center"
+            IsChecked="True" />
+        <CheckBox
+            x:Name="Headline1Visible"
+            Grid.Row="13"
+            Grid.Column="2"
+            HorizontalAlignment="Center" />
+
+        <Grid
+            Grid.Row="13"
+            Grid.Column="4"
+            Margin="5">
+            <TextBlock
+                IsEnabled="{Binding ElementName=Headline1Enabled, Path=IsChecked}"
+                Style="{StaticResource Headline1TextBlock}"
+                Text="Headline1"
+                Visibility="{Binding ElementName=Headline1Visible, Path=IsChecked, Converter={x:Static converters:InvertedBooleanToVisibilityConverter.Instance}}" />
+            <TextBlock IsEnabled="{Binding ElementName=Headline1Enabled, Path=IsChecked}" Visibility="{Binding ElementName=Headline1Visible, Path=IsChecked, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
+                <Hyperlink Style="{StaticResource Headline1Hyperlink}">
+                    Headline1
+                </Hyperlink>
+            </TextBlock>
+        </Grid>
+
+        <!--#endregion Headline1-->
+    </Grid>
+</UserControl>

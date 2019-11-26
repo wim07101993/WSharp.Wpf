@@ -42,7 +42,7 @@
 
     <Style x:Key="Card" TargetType="{x:Type controls:ClippedContentControl}">
         <Setter Property="Template" Value="{StaticResource CardTemplate}" />
-        <Setter Property="Background" Value="{DynamicResource MaterialDesignCardBackground}" />
+        <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
         <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth2" />
         <Setter Property="Focusable" Value="False" />
     </Style>

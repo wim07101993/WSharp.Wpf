@@ -4,35 +4,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dragablz="http://dragablz.net/winfx/xaml/dragablz"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="clr-namespace:WSharp.Wpf.Demo.Views"
     Title="WSharp WPF Demo application"
-    Background="{DynamicResource MaterialDesignPaper}"
-    FontFamily="{DynamicResource MaterialDesignFont}"
+    Background="{DynamicResource PaperBrush}"
+    FontFamily="Roboto"
     TextElement.FontSize="13"
     TextElement.FontWeight="Regular"
-    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    TextElement.Foreground="{DynamicResource BodyBrush}"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto"
     mc:Ignorable="d">
-    <materialDesign:DialogHost>
-        <dragablz:TabablzControl>
-            <TabItem Header="Start">
-                <TextBlock
-                    Margin="50"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Style="{StaticResource MaterialDesignDisplay2TextBlock}"
-                    Text="This is the demo application for the WSharp WPF library for WSharp.Wpf"
-                    TextWrapping="Wrap" />
-            </TabItem>
-            <TabItem Header="Fields">
-                <views:Fields />
-            </TabItem>
-            <TabItem Header="Logging">
-                <views:Logging DataContext="{Binding LoggingViewModel}" />
-            </TabItem>
-        </dragablz:TabablzControl>
-    </materialDesign:DialogHost>
+    <dragablz:TabablzControl>
+        <TabItem Header="Start">
+            <TextBlock
+                Margin="50"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Style="{StaticResource Body1TextBlock}"
+                Text="This is the demo application for the WSharp WPF library for WSharp.Wpf"
+                TextWrapping="Wrap" />
+        </TabItem>
+        <TabItem Header="Fields">
+            <views:Fields />
+        </TabItem>
+        <TabItem Header="Text">
+            <views:Texts />
+        </TabItem>
+        <TabItem Header="Logging">
+            <views:Logging DataContext="{Binding LoggingViewModel}" />
+        </TabItem>
+    </dragablz:TabablzControl>
 </Window>

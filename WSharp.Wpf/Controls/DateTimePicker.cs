@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace WSharp.Wpf.Controls
 {
-    public class DateTimePicker : AControl
+    public class DateTimePicker : Control
     {
         #region DEPENDENCY PROPERTIES
 

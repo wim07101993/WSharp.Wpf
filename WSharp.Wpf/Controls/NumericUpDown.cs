@@ -19,7 +19,7 @@ namespace WSharp.Wpf.Controls
     [TemplatePart(Name = ElementNumericUp, Type = typeof(RepeatButton))]
     [TemplatePart(Name = ElementNumericDown, Type = typeof(RepeatButton))]
     [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
-    public class NumericUpDown : AControl
+    public class NumericUpDown : Control
     {
         #region ROUTED EVENTS
 

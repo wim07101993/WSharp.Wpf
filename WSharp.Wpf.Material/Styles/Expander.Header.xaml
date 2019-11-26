@@ -1,0 +1,160 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander.ToggleButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Padding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ExpanderHelper.RightHeaderPadding)}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <ToggleButton
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                RenderTransformOrigin="0.5,0.5"
+                                Style="{StaticResource ExpanderToggleButton}">
+                                <ToggleButton.RenderTransform>
+                                    <RotateTransform Angle="-90" />
+                                </ToggleButton.RenderTransform>
+                            </ToggleButton>
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Margin="0,16,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ExpanderLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Padding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ExpanderHelper.LeftHeaderPadding)}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <ToggleButton
+                                Grid.Row="0"
+                                HorizontalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                RenderTransformOrigin="0.5,0.5"
+                                Style="{StaticResource ExpanderToggleButton}">
+                                <ToggleButton.RenderTransform>
+                                    <RotateTransform Angle="90" />
+                                </ToggleButton.RenderTransform>
+                            </ToggleButton>
+                            <ContentPresenter
+                                Grid.Row="1"
+                                Margin="0,16,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Padding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ExpanderHelper.DownHeaderPadding)}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                            <ToggleButton
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                Style="{StaticResource ExpanderToggleButton}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ExpanderUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Padding="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ExpanderHelper.UpHeaderPadding)}" Background="{TemplateBinding Background}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter
+                                Margin="0,0,16,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding Content}"
+                                ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+                            <ToggleButton
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding Path=IsChecked, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                RenderTransformOrigin="0.5,0.5"
+                                Style="{StaticResource ExpanderToggleButton}">
+                                <ToggleButton.RenderTransform>
+                                    <RotateTransform Angle="-180" />
+                                </ToggleButton.RenderTransform>
+                            </ToggleButton>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

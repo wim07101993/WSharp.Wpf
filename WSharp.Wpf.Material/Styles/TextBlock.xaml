@@ -4,9 +4,9 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="TextBlock" TargetType="{x:Type TextBlock}">
-        <Setter Property="Padding" Value="0,4" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="Foreground" Value="{DynamicResource BodyBrush}" />
     </Style>
 
     <Style

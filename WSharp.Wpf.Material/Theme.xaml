@@ -7,16 +7,20 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Shadows.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Card.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Divider.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Hyperlink.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource Card}" TargetType="{x:Type controls:ClippedContentControl}" />
     <Style BasedOn="{StaticResource Card}" TargetType="{x:Type material:Card}" />
+    <Style BasedOn="{StaticResource Divider}" TargetType="{x:Type controls:Divider}" />
 
-    <Style BasedOn="{StaticResource Body2Hyperlink}" TargetType="{x:Type Hyperlink}" />
-    <Style BasedOn="{StaticResource Body2TextBlock}" TargetType="{x:Type TextBlock}" />
+    <Style BasedOn="{StaticResource Hyperlink}" TargetType="{x:Type Hyperlink}" />
+    <Style BasedOn="{StaticResource TextBlock}" TargetType="{x:Type TextBlock}" />
+    <Style BasedOn="{StaticResource Expander}" TargetType="{x:Type Expander}" />
 
 
     <!--  This is the current way to setup your app's initial color theme  -->

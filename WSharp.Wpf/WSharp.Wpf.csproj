@@ -82,10 +82,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\AControl.cs" />
     <Compile Include="Controls\ButtonsAlignment.cs" />
     <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\DateTimePicker.cs" />
+    <Compile Include="Controls\Divider.cs" />
+    <Compile Include="Controls\Icon.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
     <Compile Include="Controls\NumericInput.cs" />
@@ -97,6 +98,9 @@
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ListToStringConverter.cs" />
+    <Compile Include="Converters\MathConverter.cs" />
+    <Compile Include="Converters\EMathOperation.cs" />
+    <Compile Include="Converters\MathMultipleConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndConverter.cs" />
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
@@ -110,6 +114,7 @@
     <Compile Include="EShadowEdge.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
+    <Compile Include="Helpers\ExpanderHelper.cs" />
     <Compile Include="Helpers\ShadowHelper.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -140,6 +145,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Material.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

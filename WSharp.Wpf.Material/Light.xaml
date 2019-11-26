@@ -10,119 +10,119 @@
         Color="{StaticResource ValidationErrorColor}" />
 
     <SolidColorBrush
-        x:Key="Background"
+        x:Key="BackgroundBrush"
         po:Freeze="True"
         Color="#FFFFFFFF" />
     <SolidColorBrush
-        x:Key="Paper"
+        x:Key="PaperBrush"
         po:Freeze="True"
         Color="#FFfafafa" />
     <SolidColorBrush
-        x:Key="CardBackground"
+        x:Key="CardBackgroundBrush"
         po:Freeze="True"
         Color="#FFFFFFFF" />
     <SolidColorBrush
-        x:Key="ToolBarBackground"
+        x:Key="ToolBarBackgroundBrush"
         po:Freeze="True"
         Color="#FFF5F5F5" />
     <SolidColorBrush
-        x:Key="Body"
+        x:Key="BodyBrush"
         po:Freeze="True"
         Color="#DD000000" />
     <SolidColorBrush
-        x:Key="BodyLight"
+        x:Key="BodyLightBrush"
         po:Freeze="True"
         Color="#89000000" />
     <SolidColorBrush
-        x:Key="ColumnHeader"
+        x:Key="ColumnHeaderBrush"
         po:Freeze="True"
         Color="#BC000000" />
     <!--  74%  -->
 
     <SolidColorBrush
-        x:Key="CheckBoxOff"
+        x:Key="CheckBoxOffBrush"
         po:Freeze="True"
         Color="#89000000" />
     <SolidColorBrush
-        x:Key="CheckBoxDisabled"
+        x:Key="CheckBoxDisabledBrush"
         po:Freeze="True"
         Color="#FFBDBDBD" />
 
     <SolidColorBrush
-        x:Key="TextBoxBorder"
+        x:Key="TextBoxBorderBrush"
         po:Freeze="True"
         Color="#89000000" />
     <SolidColorBrush
-        x:Key="Divider"
+        x:Key="DividerBrushBrush"
         po:Freeze="True"
         Color="#1F000000" />
     <!--  12%  -->
     <SolidColorBrush
-        x:Key="Selection"
+        x:Key="SelectionBrush"
         po:Freeze="True"
         Color="#FFDeDeDe" />
 
     <SolidColorBrush
-        x:Key="ToolForeground"
+        x:Key="ToolForegroundBrush"
         po:Freeze="true"
         Color="#616161" />
     <SolidColorBrush
-        x:Key="ToolBackground"
+        x:Key="ToolBackgroundBrush"
         po:Freeze="true"
         Color="#e0e0e0" />
 
     <SolidColorBrush
-        x:Key="FlatButtonClick"
+        x:Key="FlatButtonClickBrush"
         po:Freeze="True"
         Color="#FFDeDeDe" />
     <SolidColorBrush
-        x:Key="FlatButtonRipple"
+        x:Key="FlatButtonRippleBrush"
         po:Freeze="True"
         Color="#FFB6B6B6" />
 
     <SolidColorBrush
-        x:Key="ToolTipBackground"
+        x:Key="ToolTipBackgroundBrush"
         po:Freeze="True"
         Color="#757575" />
     <SolidColorBrush
-        x:Key="ChipBackground"
+        x:Key="ChipBackgroundBrush"
         po:Freeze="True"
         Color="#12000000" />
     <SolidColorBrush
-        x:Key="SnackbarBackground"
+        x:Key="SnackbarBackgroundBrush"
         po:Freeze="True"
         Color="#FF323232" />
     <SolidColorBrush
-        x:Key="SnackbarMouseOver"
+        x:Key="SnackbarMouseOverBrush"
         po:Freeze="True"
         Color="#FF464642" />
     <SolidColorBrush
-        x:Key="SnackbarRipple"
+        x:Key="SnackbarRippleBrush"
         po:Freeze="True"
         Color="#FFB6B6B6" />
 
     <SolidColorBrush
-        x:Key="TextFieldBoxBackground"
+        x:Key="TextFieldBoxBackgroundBrush"
         po:Freeze="True"
         Color="#0F000000" />
     <!--  6% black  -->
     <SolidColorBrush
-        x:Key="TextFieldBoxHoverBackground"
+        x:Key="TextFieldBoxHoverBackgroundBrush"
         po:Freeze="True"
         Color="#14000000" />
     <!--  8% black  -->
     <SolidColorBrush
-        x:Key="TextFieldBoxDisabledBackground"
+        x:Key="TextFieldBoxDisabledBackgroundBrush"
         po:Freeze="True"
         Color="#08000000" />
     <!--  3% black  -->
     <SolidColorBrush
-        x:Key="TextAreaBorder"
+        x:Key="TextAreaBorderBrush"
         po:Freeze="True"
         Color="#BC000000" />
     <!--  74% black  -->
     <SolidColorBrush
-        x:Key="TextAreaInactiveBorder"
+        x:Key="TextAreaInactiveBorderBrush"
         po:Freeze="True"
         Color="#0F000000" />
     <!--  6% black  -->
