@@ -1,0 +1,9 @@
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.Pickers"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf">
+    <StackPanel Margin="10">
+        <controls:TimePicker />
+    </StackPanel>
+</UserControl>

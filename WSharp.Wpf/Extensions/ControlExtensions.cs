@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace WSharp.Wpf.Extensions
 {
@@ -27,6 +29,34 @@ namespace WSharp.Wpf.Extensions
                 throw new ArgumentNullException(nameof(childName));
 
             return control.Template.FindName(childName, control) as T;
+        }
+
+        public static BindingBase CreateBinding(this Control control, 
+            DependencyProperty property, 
+            object owner = null, 
+            IValueConverter converter = null, 
+            object converterParameter = null)
+        {
+            return new Binding(property.Name)
+            {
+                Source = owner ?? control,
+                Converter = converter,
+                ConverterParameter = converterParameter
+            };
+        }
+
+        public static BindingBase CreateBinding(this Control control,
+            string propertyName,
+            object owner = null,
+            IValueConverter converter = null,
+            object converterParameter = null)
+        {
+            return new Binding(propertyName)
+            {
+                Source = owner ?? control,
+                Converter = converter,
+                ConverterParameter = converterParameter
+            };
         }
     }
 }

@@ -1,0 +1,96 @@
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.Expanders"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <controls:ClippedContentControl
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Margin="24"
+            HorizontalAlignment="Left">
+            <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+                <StackPanel Orientation="Horizontal">
+                    <Expander ExpandDirection="Right">
+                        <Expander.Header>
+                            <TextBlock RenderTransformOrigin=".5,.5" Text="It's">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </Expander.Header>
+                        <TextBlock Style="{StaticResource Headline5TextBlock}" Text="It's" />
+                    </Expander>
+                    <Expander ExpandDirection="Left">
+                        <Expander.Header>
+                            <TextBlock RenderTransformOrigin=".5,.5" Text="Possible">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </Expander.Header>
+                        <TextBlock Style="{StaticResource Headline5TextBlock}" Text="Possible" />
+                    </Expander>
+                    <Expander ExpandDirection="Right">
+                        <Expander.Header>
+                            <TextBlock RenderTransformOrigin=".5,.5" Text="To change">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </Expander.Header>
+                        <TextBlock Style="{StaticResource Headline4TextBlock}" Text="To change" />
+                    </Expander>
+                    <Expander ExpandDirection="Left">
+                        <Expander.Header>
+                            <TextBlock RenderTransformOrigin=".5,.5" Text="The orientation">
+                                <TextBlock.LayoutTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.LayoutTransform>
+                            </TextBlock>
+                        </Expander.Header>
+                        <TextBlock Style="{StaticResource Headline4TextBlock}" Text="The orientation" />
+                    </Expander>
+                </StackPanel>
+            </ScrollViewer>
+        </controls:ClippedContentControl>
+
+
+        <controls:ClippedContentControl
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="24">
+            <StackPanel>
+                <Expander Header="Expand me">
+                    <TextBlock Style="{StaticResource Headline4TextBlock}" Text="You did it!!!" />
+                </Expander>
+                <Expander Header="And me too">
+                    <TextBlock Style="{StaticResource Headline2TextBlock}" Text="YOU ROCK!!!" />
+                </Expander>
+                <Expander Header="Don't expand me">
+                    <TextBlock Style="{StaticResource Headline6TextBlock}" Text="Why did you have to do that?" />
+                </Expander>
+            </StackPanel>
+        </controls:ClippedContentControl>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <Expander Content="These expanders are not placed within a card. Therefore they do not have the fancy shadow effect." Header="No card" />
+            <Expander
+                helpers:ExpanderHelper.DownHeaderPadding="36,12,24,12"
+                Content="It is possible to add a custom padding to an expander"
+                Header="Padding" />
+        </StackPanel>
+    </Grid>
+</UserControl>

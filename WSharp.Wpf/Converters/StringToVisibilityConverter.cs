@@ -15,7 +15,6 @@ namespace WSharp.Wpf.Converters
                 ? Visibility.Visible
                 : Visibility.Collapsed;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => DependencyProperty.UnsetValue;
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
     }
 }

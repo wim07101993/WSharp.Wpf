@@ -5,16 +5,16 @@ using System.Windows.Data;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ObjectToVisibilityConverter : IValueConverter
+    public class TextFieldLabelVisibilityConverter : IValueConverter
     {
-        private static ObjectToVisibilityConverter _instance;
-        public static ObjectToVisibilityConverter Instance => _instance ?? (_instance = new ObjectToVisibilityConverter());
+        public Visibility IsEmptyValue { get; set; } = Visibility.Visible;
+        public Visibility IsNotEmptyValue { get; set; } = Visibility.Hidden;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value == null
-                ? Visibility.Collapsed
-                : Visibility.Visible;
+            return string.IsNullOrEmpty((value ?? "").ToString()) 
+                ? IsEmptyValue 
+                : IsNotEmptyValue;
         }
 
         object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;

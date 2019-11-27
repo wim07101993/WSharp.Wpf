@@ -19,7 +19,7 @@ namespace WSharp.Wpf.Controls
     [TemplatePart(Name = ElementNumericUp, Type = typeof(RepeatButton))]
     [TemplatePart(Name = ElementNumericDown, Type = typeof(RepeatButton))]
     [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
-    public class NumericUpDown : Control
+    public class NumericUpDown : ValueControl<double?>
     {
         #region ROUTED EVENTS
 
@@ -51,12 +51,6 @@ namespace WSharp.Wpf.Controls
             nameof(MinimumReached),
             RoutingStrategy.Bubble,
             typeof(RoutedEventHandler),
-            typeof(NumericUpDown));
-
-        public static readonly RoutedEvent ValueChangedEvent = EventManager.RegisterRoutedEvent(
-            nameof(ValueChanged),
-            RoutingStrategy.Bubble,
-            typeof(RoutedPropertyChangedEventHandler<double?>),
             typeof(NumericUpDown));
 
         #endregion ROUTED EVENTS
@@ -95,12 +89,6 @@ namespace WSharp.Wpf.Controls
             typeof(bool),
             typeof(NumericUpDown),
             new FrameworkPropertyMetadata(true));
-
-        public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
-            nameof(Value),
-            typeof(double?),
-            typeof(NumericUpDown),
-            new FrameworkPropertyMetadata(default(double?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged, CoerceValue));
 
         public static readonly DependencyProperty ButtonsAlignmentProperty = DependencyProperty.Register(
            nameof(ButtonsAlignment),
@@ -412,15 +400,6 @@ namespace WSharp.Wpf.Controls
             set => SetValue(TextAlignmentProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(null)]
-        public double? Value
-        {
-            get => (double?)GetValue(ValueProperty);
-            set => SetValue(ValueProperty, value);
-        }
-
         [Category("Common")]
         [DefaultValue(NumericInput.All)]
         public NumericInput NumericInputMode
@@ -567,14 +546,6 @@ namespace WSharp.Wpf.Controls
                 numericUpDown.SetCurrentValue(NumericInputModeProperty, numericUpDown.NumericInputMode | NumericInput.Decimal);
         }
 
-        private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(d is NumericUpDown numericUpDown))
-                return;
-
-            numericUpDown.OnValueChanged((double?)e.OldValue, (double?)e.NewValue);
-        }
-
         private static void OnNumericInputModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (!(d is NumericUpDown numericUpDown) ||
@@ -611,23 +582,19 @@ namespace WSharp.Wpf.Controls
             return val < minimum ? minimum : val;
         }
 
-        private static object CoerceValue(DependencyObject d, object value)
+        public override double? CoerceValue(double? baseValue)
         {
-            if (value == null)
+            if (baseValue == null)
                 return null;
 
-            var numericUpDown = (NumericUpDown)d;
-            double val = ((double?)value).Value;
+            double val = baseValue.Value;
+            if (!NumericInputMode.HasFlag(NumericInput.Decimal))
+                val = Math.Truncate(val);
 
-            if (!numericUpDown.NumericInputMode.HasFlag(NumericInput.Decimal))
-                val = System.Math.Truncate(val);
-
-            if (val < numericUpDown.Minimum)
-                return numericUpDown.Minimum;
-
-            if (val > numericUpDown.Maximum)
-                return numericUpDown.Maximum;
-
+            if (val < Minimum)
+                return Minimum;
+            if (val > Maximum)
+                return Maximum;
             return val;
         }
 
@@ -853,7 +820,7 @@ namespace WSharp.Wpf.Controls
         /// <param name="newValue">
         ///     New value of the <see cref="Value" /> property
         /// </param>
-        protected virtual void OnValueChanged(double? oldValue, double? newValue)
+        protected override void OnValueChanged(double? oldValue, double? newValue)
         {
             if (!_manualChange)
             {
@@ -863,7 +830,7 @@ namespace WSharp.Wpf.Controls
                         _valueTextBox.Text = null;
 
                     if (oldValue != newValue)
-                        RaiseEvent(new RoutedPropertyChangedEventArgs<double?>(oldValue, newValue, ValueChangedEvent));
+                        RaiseValueChanged(oldValue, newValue);
 
                     return;
                 }
@@ -901,7 +868,7 @@ namespace WSharp.Wpf.Controls
             }
 
             if (oldValue != newValue)
-                RaiseEvent(new RoutedPropertyChangedEventArgs<double?>(oldValue, newValue, ValueChangedEvent));
+                RaiseValueChanged(oldValue, newValue);
         }
 
         private static bool ValidateDelay(object value) => Convert.ToInt32(value) >= 0;
@@ -988,8 +955,8 @@ namespace WSharp.Wpf.Controls
                 return;
 
             NumericUpDownChangedRoutedEventArgs routedEvent = interval > 0 ?
-                new NumericUpDownChangedRoutedEventArgs(ValueIncrementedEvent, interval) :
-                new NumericUpDownChangedRoutedEventArgs(ValueDecrementedEvent, interval);
+                new NumericUpDownChangedRoutedEventArgs(interval, ValueIncrementedEvent) :
+                new NumericUpDownChangedRoutedEventArgs(interval, ValueDecrementedEvent);
 
             RaiseEvent(routedEvent);
 
@@ -1003,7 +970,7 @@ namespace WSharp.Wpf.Controls
         private void ChangeValueBy(double difference)
         {
             var newValue = Value.GetValueOrDefault() + difference;
-            SetCurrentValue(ValueProperty, CoerceValue(this, newValue));
+            SetCurrentValue(ValueProperty, CoerceValue(newValue));
         }
 
         private void EnableDisableDown()
@@ -1143,12 +1110,6 @@ namespace WSharp.Wpf.Controls
 
 
         #region EVENTS
-
-        public event RoutedPropertyChangedEventHandler<double?> ValueChanged
-        {
-            add => AddHandler(ValueChangedEvent, value);
-            remove => RemoveHandler(ValueChangedEvent, value);
-        }
 
         /// <summary>
         ///     Event fired from this NumberBox when its value has reached the maximum value

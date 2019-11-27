@@ -91,9 +91,19 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Views\Expanders.xaml.cs">
+      <DependentUpon>Expanders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pickers.xaml.cs">
+      <DependentUpon>Pickers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Texts.xaml.cs">
       <DependentUpon>Texts.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Expanders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Fields.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -122,6 +132,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Pickers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Texts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

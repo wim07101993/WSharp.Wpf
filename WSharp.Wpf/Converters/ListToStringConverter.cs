@@ -3,7 +3,6 @@ using System.Collections;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows;
 using System.Windows.Data;
 
 
@@ -31,7 +30,6 @@ namespace WSharp.Wpf.Converters
             return builder.ToString();
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => DependencyProperty.UnsetValue;
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
     }
 }

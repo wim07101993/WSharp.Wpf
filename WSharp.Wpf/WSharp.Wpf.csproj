@@ -80,23 +80,46 @@
     <Reference Include="WSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WSharp.1.0.0\lib\netstandard2.0\WSharp.dll</HintPath>
     </Reference>
+    <Reference Include="WSharp.Utilities">
+      <HintPath>..\packages\WSharp.Utilities\WSharp.Utilities.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ButtonsAlignment.cs" />
     <Compile Include="Controls\ClippedContentControl.cs" />
+    <Compile Include="Controls\Clock.cs" />
+    <Compile Include="Controls\ClockChoiceMadeEventArgs.cs" />
+    <Compile Include="Controls\ClockChoiceMadeEventHandler.cs" />
+    <Compile Include="Controls\ClockItemButton.cs" />
     <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\Divider.cs" />
+    <Compile Include="Controls\EClockDisplayAutomation.cs" />
+    <Compile Include="Controls\EClockDisplayMode.cs" />
+    <Compile Include="LabelProxy\ALabelProxy.cs" />
+    <Compile Include="LabelProxy\ATextBoxBaseLabelProxy.cs" />
+    <Compile Include="LabelProxy\LabelProxyProvider.cs" />
+    <Compile Include="LabelProxy\ComboBoxLabelProxy.cs" />
+    <Compile Include="LabelProxy\PasswordBoxLabelProxy.cs" />
+    <Compile Include="LabelProxy\RichTextBoxLabelProxy.cs" />
+    <Compile Include="LabelProxy\TextBoxLabelProxy.cs" />
     <Compile Include="Controls\Icon.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
+    <Compile Include="Controls\NullableDateTimeToDateTimeConverter.cs" />
     <Compile Include="Controls\NumericInput.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Controls\SmartLabel.cs" />
+    <Compile Include="Controls\TimePicker.cs" />
+    <Compile Include="Controls\ValueControl.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\ClockItemIsCheckedConverter.cs" />
+    <Compile Include="Converters\ClockLineConverter.cs" />
     <Compile Include="Converters\EditorBrowsableStateToBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\LabelProxyConverter.cs" />
     <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="Converters\EMathOperation.cs" />
@@ -105,8 +128,10 @@
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\ShadowConverter.cs" />
     <Compile Include="Converters\ShadowEdgeConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\TextFieldLabelVisibilityConverter.cs" />
     <Compile Include="Converters\ToJsonConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Converters\TraceEventTypeToStringConverter.cs" />
@@ -114,9 +139,14 @@
     <Compile Include="EShadowEdge.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
+    <Compile Include="Helpers\CustomPopupPlacementCallbackHelper.cs" />
     <Compile Include="Helpers\ExpanderHelper.cs" />
+    <Compile Include="Helpers\LabelHelper.cs" />
     <Compile Include="Helpers\ShadowHelper.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
+    <Compile Include="Helpers\TextFieldHelper.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="ILabelProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -132,6 +162,8 @@
     </Compile>
     <Compile Include="ShadowInfo.cs" />
     <Compile Include="ShadowLocalInfo.cs" />
+    <Compile Include="Helpers\TransitionHelper.cs" />
+    <Compile Include="ToRemove.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -143,7 +175,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Transitions\" />
+  </ItemGroup>
   <ItemGroup>
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>

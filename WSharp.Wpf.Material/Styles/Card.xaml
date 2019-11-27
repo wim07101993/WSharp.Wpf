@@ -10,18 +10,18 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="CardTemplate" TargetType="{x:Type material:Card}">
+    <ControlTemplate x:Key="CardTemplate" TargetType="{x:Type controls:ClippedContentControl}">
         <Grid Background="Transparent">
             <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(helpers:ShadowHelper.CacheMode)}">
                 <AdornerDecorator.OpacityMask>
-                    <MultiBinding Converter="{StaticResource ShadowEdgeConverter}">
+                    <MultiBinding Converter="{x:Static converters:ShadowEdgeConverter.Instance}">
                         <Binding Path="ActualWidth" RelativeSource="{RelativeSource TemplatedParent}" />
                         <Binding Path="ActualHeight" RelativeSource="{RelativeSource TemplatedParent}" />
                         <Binding Path="(helpers:ShadowHelper.ShadowDepth)" RelativeSource="{RelativeSource TemplatedParent}" />
                         <Binding Path="(helpers:ShadowHelper.ShadowEdges)" RelativeSource="{RelativeSource TemplatedParent}" />
                     </MultiBinding>
                 </AdornerDecorator.OpacityMask>
-                <Border CornerRadius="{TemplateBinding UniformCornerRadius}" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ShadowHelper.ShadowDepth), Converter={x:Static converters:ShadowEdgeConverter.Instance}}">
+                <Border CornerRadius="{TemplateBinding UniformCornerRadius}" Effect="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(helpers:ShadowHelper.ShadowDepth), Converter={x:Static converters:ShadowConverter.Instance}}">
                     <Border
                         x:Name="PART_ClipBorder"
                         Padding="{TemplateBinding Padding}"

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
 using System.Windows.Data;
 
 namespace WSharp.Wpf.Converters
@@ -24,7 +23,6 @@ namespace WSharp.Wpf.Converters
             return string.Join(" ", str);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => DependencyProperty.UnsetValue;
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
     }
 }
