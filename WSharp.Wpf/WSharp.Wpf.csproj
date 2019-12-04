@@ -97,6 +97,9 @@
     <Compile Include="Controls\Divider.cs" />
     <Compile Include="Controls\EClockDisplayAutomation.cs" />
     <Compile Include="Controls\EClockDisplayMode.cs" />
+    <Compile Include="Controls\Underline.cs" />
+    <Compile Include="Converters\DoublesToPositionConverter.cs" />
+    <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
     <Compile Include="LabelProxy\ATextBoxBaseLabelProxy.cs" />
     <Compile Include="LabelProxy\LabelProxyProvider.cs" />
@@ -162,6 +165,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ScaleHost.cs" />
     <Compile Include="ShadowInfo.cs" />
     <Compile Include="ShadowLocalInfo.cs" />
     <Compile Include="Helpers\TransitionHelper.cs" />

@@ -12,10 +12,13 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/LogEntry.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/LogsView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/SmartLabel.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TimePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Underline.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Hyperlink.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -24,10 +27,13 @@
     <Style BasedOn="{StaticResource Clock}" TargetType="{x:Type controls:Clock}" />
     <Style BasedOn="{StaticResource Divider}" TargetType="{x:Type controls:Divider}" />
     <Style BasedOn="{StaticResource Icon}" TargetType="{x:Type controls:Icon}" />
+    <Style BasedOn="{StaticResource SmartLabel}" TargetType="{x:Type controls:SmartLabel}" />
     <Style BasedOn="{StaticResource TimePicker}" TargetType="{x:Type controls:TimePicker}" />
+    <Style BasedOn="{StaticResource Underline}" TargetType="{x:Type controls:Underline}" />
 
     <Style BasedOn="{StaticResource Hyperlink}" TargetType="{x:Type Hyperlink}" />
     <Style BasedOn="{StaticResource TextBlock}" TargetType="{x:Type TextBlock}" />
+    <Style BasedOn="{StaticResource TextBox}" TargetType="{x:Type TextBox}" />
     <Style BasedOn="{StaticResource Expander}" TargetType="{x:Type Expander}" />
 
 
