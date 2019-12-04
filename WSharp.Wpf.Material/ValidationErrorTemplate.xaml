@@ -4,7 +4,7 @@
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
 
-    <ControlTemplate x:Key="MaterialDesignValidationErrorTemplate">
+    <ControlTemplate x:Key="ValidationErrorTemplate">
         <ControlTemplate.Resources>
             <DataTemplate DataType="{x:Type ValidationError}">
                 <TextBlock
@@ -96,8 +96,8 @@
             </MultiDataTrigger>
 
             <DataTrigger Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(helpers:ValidationHelper.Background)}" Value="{x:Null}">
-                <Setter TargetName="PopupBorder" Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
-                <Setter TargetName="DefaultErrorViewer" Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
+                <Setter TargetName="PopupBorder" Property="Background" Value="{DynamicResource Paper}" />
+                <Setter TargetName="DefaultErrorViewer" Property="Background" Value="{DynamicResource Paper}" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

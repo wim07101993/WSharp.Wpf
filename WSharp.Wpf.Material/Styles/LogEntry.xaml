@@ -1,9 +1,9 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:WSharp.Wpf.Controls"
-    xmlns:converters="clr-namespace:WSharp.Wpf.Converters"
-    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
+    xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
 
     <Style TargetType="{x:Type controls:LogEntry}">
         <Style.Setters>
@@ -12,14 +12,14 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type controls:LogEntry}">
                         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                            <materialDesign:Card Margin="10" Background="{DynamicResource BackgroundBrush}">
+                            <material:Card Margin="10" Background="{DynamicResource BackgroundBrush}">
                                 <StackPanel TextBlock.Foreground="{DynamicResource BodyBrush}">
 
                                     <!--  HEADER  -->
                                     <Expander HorizontalAlignment="Stretch" IsExpanded="True">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                <TextBlock Style="{StaticResource TitleTextBlock}">
                                                     <Run Text="Header" />
                                                     <Run Text="   " />
                                                 </TextBlock>
@@ -49,7 +49,7 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Margin="0,0,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="Title"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -62,7 +62,7 @@
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="Id"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -75,7 +75,7 @@
                                                 Grid.Row="2"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="Source"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -88,7 +88,7 @@
                                                 Grid.Row="3"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="Tag"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -101,7 +101,7 @@
                                                 Grid.Row="4"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="EventType"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -124,7 +124,7 @@
                                     <Expander HorizontalAlignment="Stretch" IsExpanded="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Path=Value.Payload, Converter={x:Static converters:ObjectToBooleanConverter.Instance}}">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                <TextBlock Style="{StaticResource TitleTextBlock}">
                                                     <Run Text="Body" />
                                                     <Run Text="   " />
                                                 </TextBlock>
@@ -158,7 +158,7 @@
                                     <Expander IsExpanded="False">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource MaterialDesignTitleTextBlock}">
+                                                <TextBlock Style="{StaticResource TitleTextBlock}">
                                                     <Run Text="Footer" />
                                                     <Run Text="   " />
                                                 </TextBlock>
@@ -188,7 +188,7 @@
                                                 Grid.Row="0"
                                                 Grid.Column="0"
                                                 Margin="0,0,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="OperationStack"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -201,7 +201,7 @@
                                                 Grid.Row="1"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="TimeStamp"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -214,7 +214,7 @@
                                                 Grid.Row="2"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="ProcessId"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -227,7 +227,7 @@
                                                 Grid.Row="3"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="ThreadId"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -240,7 +240,7 @@
                                                 Grid.Row="4"
                                                 Grid.Column="0"
                                                 Margin="0,10,0,10"
-                                                Style="{StaticResource MaterialDesignBody2TextBlock}"
+                                                Style="{StaticResource Body2TextBlock}"
                                                 Text="CallStack"
                                                 TextWrapping="Wrap" />
                                             <TextBlock
@@ -253,7 +253,7 @@
                                     </Expander>
 
                                 </StackPanel>
-                            </materialDesign:Card>
+                            </material:Card>
                         </ScrollViewer>
                     </ControlTemplate>
                 </Setter.Value>
