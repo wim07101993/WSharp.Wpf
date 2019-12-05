@@ -12,7 +12,8 @@ namespace WSharp.Wpf.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var time = (DateTime)value;
+            if (!(value is DateTime time))
+                return Binding.DoNothing;
 
             return DisplayMode == EClockDisplayMode.Hours
                 ? ((time.Hour > 13) ? time.Hour - 12 : time.Hour) * (360 / 12)
@@ -21,7 +22,7 @@ namespace WSharp.Wpf.Converters
                     : (time.Second == 0 ? 60 : time.Second) * (360 / 60);
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => throw new NotImplementedException();
 
         public override object ProvideValue(IServiceProvider serviceProvider) => this;
     }

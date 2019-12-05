@@ -10,7 +10,6 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/ValidationErrorTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <converters:TextFieldLabelVisibilityConverter x:Key="TextFieldLabelVisibilityConverter" />
     <converters:MathConverter x:Key="DivisionMathConverter" Operation="Divide" />
 
     <Style x:Key="TimePicker" TargetType="{x:Type controls:TimePicker}">

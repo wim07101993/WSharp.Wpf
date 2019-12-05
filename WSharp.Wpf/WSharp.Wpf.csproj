@@ -98,6 +98,12 @@
     <Compile Include="Controls\EClockDisplayAutomation.cs" />
     <Compile Include="Controls\EClockDisplayMode.cs" />
     <Compile Include="Controls\Underline.cs" />
+    <Compile Include="Converters\Bases\ABooleanConverter.cs" />
+    <Compile Include="Converters\Bases\AMultiBooleanAndConverter.cs" />
+    <Compile Include="Converters\Bases\ATypedMultiValueConverter.cs" />
+    <Compile Include="Converters\Bases\AMultiBooleanOrConverter.cs" />
+    <Compile Include="Converters\Bases\ATypedValueConverter.cs" />
+    <Compile Include="Converters\Bases\AStringNullOrEmptyConverter.cs" />
     <Compile Include="Converters\DoublesToPositionConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
@@ -128,7 +134,7 @@
     <Compile Include="Converters\ListToStringConverter.cs" />
     <Compile Include="Converters\MathConverter.cs" />
     <Compile Include="Converters\EMathOperation.cs" />
-    <Compile Include="Converters\MathMultipleConverter.cs" />
+    <Compile Include="Converters\MathMultiConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndConverter.cs" />
     <Compile Include="Converters\NewLineRemover.cs" />
     <Compile Include="Converters\ObjectToBooleanConverter.cs" />
@@ -136,7 +142,6 @@
     <Compile Include="Converters\ShadowConverter.cs" />
     <Compile Include="Converters\ShadowEdgeConverter.cs" />
     <Compile Include="Converters\StringToVisibilityConverter.cs" />
-    <Compile Include="Converters\TextFieldLabelVisibilityConverter.cs" />
     <Compile Include="Converters\ToJsonConverter.cs" />
     <Compile Include="Converters\ToStringConverter.cs" />
     <Compile Include="Converters\TraceEventTypeToStringConverter.cs" />

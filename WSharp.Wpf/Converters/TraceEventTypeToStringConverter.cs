@@ -2,11 +2,11 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Controls;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class TraceEventTypeToStringConverter : IValueConverter
+    public class TraceEventTypeToStringConverter : ATypedValueConverter<TraceEventType, string>
     {
         private const TraceEventType AllEventTypes =
 #pragma warning disable RECS0016 // Bitwise operation on enum which has no [Flags] attribute
@@ -25,26 +25,35 @@ namespace WSharp.Wpf.Converters
         private static TraceEventTypeToStringConverter _instance;
         public static TraceEventTypeToStringConverter Instance => _instance ?? (_instance = new TraceEventTypeToStringConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool TInToTOut(TraceEventType tin, object parameter, CultureInfo culture, out string tout)
         {
-            if (!(value is TraceEventType traceEventType))
-                return null;
+            tout = tin == AllEventTypes 
+                ? "Everything" 
+                : tin.ToString();
 
-            if (traceEventType == AllEventTypes)
-                return "Everything";
-
-            return traceEventType.ToString();
+            return true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTOut(object value, CultureInfo culture, out string typedValue)
         {
-            var str = (value as ComboBoxItem).Content as string ?? value as string;
-            if (string.IsNullOrWhiteSpace(str))
-                return AllEventTypes;
+            if (base.ValidateTOut(value, culture, out typedValue))
+                return true;
 
-            return Enum.TryParse<TraceEventType>(str, true, out var eventType)
-                ? eventType
-                : AllEventTypes;
+            typedValue = value is ComboBoxItem comboBoxItem 
+                ? comboBoxItem.Content as string ?? comboBoxItem.Content?.ToString() 
+                : value?.ToString();
+
+            return true;
+        }
+
+        protected override bool TOutToTIn(string tout, object parameter, CultureInfo culture, out TraceEventType tin)
+        {
+            if (string.IsNullOrWhiteSpace(tout))
+                tin = AllEventTypes;
+            else if (!Enum.TryParse(tout, true, out tin))
+                tin = AllEventTypes;
+
+            return true;
         }
     }
 }

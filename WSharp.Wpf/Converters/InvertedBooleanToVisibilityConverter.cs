@@ -1,21 +1,14 @@
-﻿using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class InvertedBooleanToVisibilityConverter : IValueConverter
+    public class InvertedBooleanToVisibilityConverter : ABooleanConverter<Visibility>
     {
         private static InvertedBooleanToVisibilityConverter _instance;
         public static InvertedBooleanToVisibilityConverter Instance => _instance ?? (_instance = new InvertedBooleanToVisibilityConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is bool b && b
-                ? Visibility.Collapsed
-                : Visibility.Visible;
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is Visibility v && v == Visibility.Collapsed;
+        public override Visibility TrueValue { get; } = Visibility.Collapsed;
+        public override Visibility FalseValue { get; } = Visibility.Visible;
     }
 }

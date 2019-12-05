@@ -1,18 +1,19 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows.Controls;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class LabelProxyConverter : IValueConverter
+    public class LabelProxyConverter : ATypedValueConverter<Control, ILabelProxy>
     {
         private static LabelProxyConverter _instance;
 
         public static LabelProxyConverter Instance => _instance ?? (_instance = new LabelProxyConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => LabelProxyProvider.Get(value as Control);
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        protected override bool TInToTOut(Control tin, object parameter, CultureInfo culture, out ILabelProxy tout)
+        {
+            tout = LabelProxyProvider.Get(tin);
+            return true;
+        }
     }
 }

@@ -1,46 +1,54 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Effects;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ShadowEdgeConverter : IMultiValueConverter
+    public class ShadowEdgeConverter : ATypedMultiValueConverter<object, Brush>
     {
         private static ShadowEdgeConverter _instance;
         public static ShadowEdgeConverter Instance => _instance ?? (_instance = new ShadowEdgeConverter());
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+
+        protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<object> typedValues)
         {
-            if (values?.Length != 4 ||
-                !(values[0] is double width) || !(values[1] is double height) ||
-                !(values[2] is EShadowDepth) || !(values[3] is EShadowEdges edges))
-                return Binding.DoNothing;
+            typedValues = values;
+            return values.Length == 4 && 
+                values[0] is double width && !double.IsNaN(width) && !double.IsInfinity(width) &&
+                values[1] is double height && !double.IsNaN(height) && !double.IsInfinity(height) &&
+                values[2] is EShadowDepth && values[3] is EShadowEdges;
+        }
 
-            if (double.IsNaN(width) || double.IsInfinity(width) || double.IsNaN(height) || double.IsInfinity(height))
-                return Binding.DoNothing;
+        protected override bool TInToTOut(IList<object> tins, object parameter, CultureInfo culture, out Brush tout)
+        {
+            var width = (double)tins[0];
+            var height = (double)tins[1];
+            var depth = (EShadowDepth)tins[2];
+            var edges = (EShadowEdges)tins[3];
 
-            DropShadowEffect dropShadow = ShadowInfo.GetDropShadow((EShadowDepth)values[2]);
-            if (dropShadow == null)
-                return Binding.DoNothing;
+            var shadow = ShadowInfo.GetDropShadow(depth);
+            if (shadow == null)
+            {
+                tout = default;
+                return false;
+            }
 
-            var blurRadius = dropShadow.BlurRadius;
-
+            var radius = shadow.BlurRadius;
             var rect = new Rect(0, 0, width, height);
 
             if (edges.HasFlag(EShadowEdges.Left))
-                rect = new Rect(rect.X - blurRadius, rect.Y, rect.Width + blurRadius, rect.Height);
+                rect = new Rect(rect.X - radius, rect.Y, rect.Width + radius, rect.Height);
             if (edges.HasFlag(EShadowEdges.Top))
-                rect = new Rect(rect.X, rect.Y - blurRadius, rect.Width, rect.Height + blurRadius);
+                rect = new Rect(rect.X, rect.Y - radius, rect.Width, rect.Height + radius);
             if (edges.HasFlag(EShadowEdges.Right))
-                rect = new Rect(rect.X, rect.Y, rect.Width + blurRadius, rect.Height);
+                rect = new Rect(rect.X, rect.Y, rect.Width + radius, rect.Height);
             if (edges.HasFlag(EShadowEdges.Bottom))
-                rect = new Rect(rect.X, rect.Y, rect.Width, rect.Height + blurRadius);
+                rect = new Rect(rect.X, rect.Y, rect.Width, rect.Height + radius);
 
             var size = new GeometryDrawing(new SolidColorBrush(Colors.White), new Pen(), new RectangleGeometry(rect));
-            return new DrawingBrush(size)
+            tout = new DrawingBrush(size)
             {
                 Stretch = Stretch.None,
                 TileMode = TileMode.None,
@@ -49,8 +57,7 @@ namespace WSharp.Wpf.Converters
                 Viewbox = rect,
                 ViewboxUnits = BrushMappingMode.Absolute
             };
+            return true;
         }
-
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
     }
 }

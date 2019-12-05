@@ -1,28 +1,27 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class DoublesToPositionConverter : IMultiValueConverter
+    public class DoublesToPositionConverter : ATypedMultiValueConverter<double, double>
     {
         private static DoublesToPositionConverter _instance;
         public static DoublesToPositionConverter Instance => _instance ?? (_instance = new DoublesToPositionConverter());
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<double> typedValues)
         {
-            if (values == null || values.Length != 3 || values.Any(v => v == null))
-                return Binding.DoNothing;
-
-            if (!double.TryParse(values[0].ToString(), out var positionAsScaleFactor) || 
-                !double.TryParse(values[1].ToString(), out var lower) || 
-                !double.TryParse(values[2].ToString(), out var upper))
-                return Binding.DoNothing;
-
-            return upper + (lower - upper) * positionAsScaleFactor; ;
+            return base.ValidateTin(values, culture, out typedValues) && typedValues.Count == 3;
         }
 
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
+        protected override bool TInToTOut(IList<double> tins, object parameter, CultureInfo culture, out double tout)
+        {
+            var positionAsScaleFactor = tins[0];
+            var lower = tins[1];
+            var upper = tins[2];
+
+            tout = upper + (lower - upper) * positionAsScaleFactor;
+            return true;
+        }
     }
 }

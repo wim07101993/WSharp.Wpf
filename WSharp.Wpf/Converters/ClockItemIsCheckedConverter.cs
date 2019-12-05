@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
 using WSharp.Wpf.Controls;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    internal class ClockItemIsCheckedConverter : IValueConverter
+    public class ClockItemIsCheckedConverter : ATypedValueConverter<DateTime, bool>
     {
         private readonly Func<DateTime> _currentTimeGetter;
         private readonly EClockDisplayMode _displayMode;
@@ -18,32 +18,51 @@ namespace WSharp.Wpf.Converters
             _is24Hours = is24Hours;
         }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool TInToTOut(DateTime tin, object parameter, CultureInfo culture, out bool tout)
         {
-            var dateTime = (DateTime)value;
-            var i = (int)parameter;
+            if (!(parameter is int i))
+            {
+                tout = default;
+                return false;
+            }
 
             int converted;
-            if (_displayMode == EClockDisplayMode.Hours)
-                converted = MassageHour(dateTime.Hour, _is24Hours);
-            else if (_displayMode == EClockDisplayMode.Minutes)
-                converted = MassageMinuteSecond(dateTime.Minute);
-            else
-                converted = MassageMinuteSecond(dateTime.Second);
-            return converted == i;
+            switch (_displayMode)
+            {
+                case EClockDisplayMode.Hours:
+                    converted = MassageHour(tin.Hour, _is24Hours);
+                    break;
+                case EClockDisplayMode.Minutes:
+                    converted = MassageMinuteSecond(tin.Minute);
+                    break;
+                default:
+                    converted = MassageMinuteSecond(tin.Second);
+                    break;
+            }
+
+            tout = converted == i;
+            return true;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool TOutToTIn(bool tout, object parameter, CultureInfo culture, out DateTime tin)
         {
-            if ((bool)value != true) return Binding.DoNothing;
+            if (!(parameter is int i))
+            {
+                tin = default;
+                return false;
+            }
 
             var currentTime = _currentTimeGetter();
 
-            return new DateTime(
-                currentTime.Year, currentTime.Month, currentTime.Day,
-                (_displayMode == EClockDisplayMode.Hours) ? ReverseMassageHour((int)parameter, currentTime, _is24Hours) : currentTime.Hour,
-                (_displayMode == EClockDisplayMode.Minutes) ? ReverseMassageMinuteSecond((int)parameter) : currentTime.Minute,
-                (_displayMode == EClockDisplayMode.Seconds) ? ReverseMassageMinuteSecond((int)parameter) : currentTime.Second);
+            tin = new DateTime(
+                currentTime.Year, 
+                currentTime.Month, 
+                currentTime.Day,
+                (_displayMode == EClockDisplayMode.Hours) ? ReverseMassageHour(i, currentTime, _is24Hours) : currentTime.Hour,
+                (_displayMode == EClockDisplayMode.Minutes) ? ReverseMassageMinuteSecond(i) : currentTime.Minute,
+                (_displayMode == EClockDisplayMode.Seconds) ? ReverseMassageMinuteSecond(i) : currentTime.Second);
+
+            return true;
         }
 
         private static int MassageHour(int val, bool is24Hours)
@@ -59,10 +78,7 @@ namespace WSharp.Wpf.Converters
             return val;
         }
 
-        private static int MassageMinuteSecond(int val)
-        {
-            return val == 0 ? 60 : val;
-        }
+        private static int MassageMinuteSecond(int val) => val == 0 ? 60 : val;
 
         private static int ReverseMassageHour(int val, DateTime currentTime, bool is24Hours)
         {
@@ -74,9 +90,6 @@ namespace WSharp.Wpf.Converters
                 : (val == 12 ? 12 : val + 12);
         }
 
-        private static int ReverseMassageMinuteSecond(int val)
-        {
-            return val == 60 ? 0 : val;
-        }
+        private static int ReverseMassageMinuteSecond(int val) => val == 60 ? 0 : val;
     }
 }

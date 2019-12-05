@@ -1,20 +1,16 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class StringToVisibilityConverter : IValueConverter
+    public class StringToVisibilityConverter : AStringNullOrEmptyConverter<Visibility>
     {
         private static StringToVisibilityConverter _instance;
         public static StringToVisibilityConverter Instance => _instance ?? (_instance = new StringToVisibilityConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is string s && !string.IsNullOrWhiteSpace(s)
-                ? Visibility.Visible
-                : Visibility.Collapsed;
+        public override Visibility NullOrEmptyValue { get; } = Visibility.Collapsed;
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        public override Visibility NotNullOrEmptyValue { get; } = Visibility.Visible;
     }
 }

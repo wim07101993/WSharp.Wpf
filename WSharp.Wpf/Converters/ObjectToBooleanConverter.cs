@@ -1,16 +1,23 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
+﻿using System.Globalization;
+using WSharp.Wpf.Converters.Bases;
+
 namespace WSharp.Wpf.Converters
 {
-    public class ObjectToBooleanConverter : IValueConverter
+    public class ObjectToBooleanConverter : ATypedValueConverter<object, bool>
     {
         private static ObjectToBooleanConverter _instance;
         public static ObjectToBooleanConverter Instance => _instance ?? (_instance = new ObjectToBooleanConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value != null;
+        protected override bool ValidateTIn(object value, CultureInfo culture, out object typedValue)
+        {
+            typedValue = value;
+            return true;
+        }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        protected override bool TInToTOut(object tin, object parameter, CultureInfo culture, out bool tout)
+        {
+            tout = tin != null;
+            return true;
+        }
     }
 }

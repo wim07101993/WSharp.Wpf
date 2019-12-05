@@ -1,35 +1,37 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows.Data;
-
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ListToStringConverter : IValueConverter
+    public class ListToStringConverter : ATypedValueConverter<IList<object>, string>
     {
         private static ListToStringConverter _instance;
         public static ListToStringConverter Instance => _instance ?? (_instance = new ListToStringConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTIn(object value, CultureInfo culture, out IList<object> typedValue)
         {
             if (!(value is IEnumerable enumerable))
-                return value.ToString();
+            {
+                typedValue = default;
+                return false;
+            }
 
-            var list = enumerable.Cast<object>().ToList();
-            if (list.Count <= 0)
-                return null;
-
-            var builder = new StringBuilder();
-            foreach (var item in list.Take(list.Count - 1))
-                builder.Append(item.ToString()).Append(", ");
-
-            builder.Append(list.Last().ToString());
-            return builder.ToString();
+            typedValue = enumerable.Cast<object>().ToList();
+            return typedValue.Count > 0;
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        protected override bool TInToTOut(IList<object> tin, object parameter, CultureInfo culture, out string tout)
+        {
+            tout = tin
+                .Take(tin.Count - 1)
+                .Aggregate(new StringBuilder(), (builder, o) => builder.Append($"{o ?? "null"}, "))
+                .Append(tin.Last().ToString())
+                .ToString();
+            return true;
+        }
     }
 }

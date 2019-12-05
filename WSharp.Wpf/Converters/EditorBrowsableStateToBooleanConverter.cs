@@ -1,21 +1,21 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Globalization;
 using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class EditorBrowsableStateToBooleanConverter : IValueConverter
+    public class EditorBrowsableStateToBooleanConverter : ATypedValueConverter<EditorBrowsableState, bool>
     {
         private static EditorBrowsableStateToBooleanConverter _instance;
         public static EditorBrowsableStateToBooleanConverter Instance => _instance ?? (_instance = new EditorBrowsableStateToBooleanConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is EditorBrowsableState state && state != EditorBrowsableState.Never;
+        public EditorBrowsableState BrosableStates { get; set; } = EditorBrowsableState.Advanced | EditorBrowsableState.Always;
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => value is bool b && b
-            ? EditorBrowsableState.Always
-            : EditorBrowsableState.Never;
+        protected override bool TInToTOut(EditorBrowsableState tin, object parameter, CultureInfo culture, out bool tout)
+        {
+            tout = (tin & BrosableStates) > 0;
+            return true;
+        }
     }
 }

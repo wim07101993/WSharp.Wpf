@@ -27,7 +27,8 @@ namespace WSharp.Wpf
         {
             var builder = Builders.FirstOrDefault(v => v.CanBuild(control));
 
-            if (builder == null) throw new NotImplementedException();
+            if (builder == null) 
+                throw new NotImplementedException();
 
             return builder.Build(control);
         }

@@ -1,39 +1,36 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
+﻿using System.Globalization;
 using System.Windows.Media.Effects;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ShadowConverter : IValueConverter
+    public class ShadowConverter : ATypedValueConverter<EShadowDepth, DropShadowEffect>
     {
         private static ShadowConverter _instance;
         public static ShadowConverter Instance => _instance ?? (_instance = new ShadowConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+
+        protected override bool TInToTOut(EShadowDepth tin, object parameter, CultureInfo culture, out DropShadowEffect tout)
         {
-            if (!(value is EShadowDepth)) 
-                return null;
-
-            return Clone(Convert((EShadowDepth)value));
+            tout = Clone(Convert(tin));
+            return true;
         }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
 
         public static DropShadowEffect Convert(EShadowDepth shadowDepth) => ShadowInfo.GetDropShadow(shadowDepth);
 
         private static DropShadowEffect Clone(DropShadowEffect dropShadowEffect)
         {
-            if (dropShadowEffect == null) return null;
-            return new DropShadowEffect()
-            {
-                BlurRadius = dropShadowEffect.BlurRadius,
-                Color = dropShadowEffect.Color,
-                Direction = dropShadowEffect.Direction,
-                Opacity = dropShadowEffect.Opacity,
-                RenderingBias = dropShadowEffect.RenderingBias,
-                ShadowDepth = dropShadowEffect.ShadowDepth
-            };
+            return dropShadowEffect == null
+                ? null
+                : new DropShadowEffect()
+                {
+                    BlurRadius = dropShadowEffect.BlurRadius,
+                    Color = dropShadowEffect.Color,
+                    Direction = dropShadowEffect.Direction,
+                    Opacity = dropShadowEffect.Opacity,
+                    RenderingBias = dropShadowEffect.RenderingBias,
+                    ShadowDepth = dropShadowEffect.ShadowDepth
+                };
         }
     }
 }

@@ -1,26 +1,15 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
-using System.Windows;
-using System.Windows.Data;
+﻿using System.Windows;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class MultiBooleanAndToVisibilityConverter : IMultiValueConverter
+    public class MultiBooleanAndToVisibilityConverter : AMultiBooleanAndConverter<Visibility>
     {
         private static MultiBooleanAndToVisibilityConverter _instance;
         public static MultiBooleanAndToVisibilityConverter Instance => _instance ?? (_instance = new MultiBooleanAndToVisibilityConverter());
 
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (values == null)
-                return false;
+        public override Visibility TrueValue { get; } = Visibility.Visible;
 
-            return values.All(x => x is bool b && b) 
-                ? Visibility.Visible
-                : Visibility.Collapsed;
-        }
-
-        object[] IMultiValueConverter.ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
+        public override Visibility FalseValue { get; } = Visibility.Collapsed;
     }
 }

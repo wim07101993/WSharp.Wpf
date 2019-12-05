@@ -8,7 +8,7 @@
 
     <SineEase x:Key="AnimationEasingFunction" EasingMode="EaseOut" />
     <system:Double x:Key="NoContentFloatingScale">1.0</system:Double>
-    <converters:MathMultipleConverter x:Key="TranslateConverter" Operation="Multiply" />
+    <converters:MathMultiConverter x:Key="TranslateConverter" Operation="Multiply" />
 
     <Style x:Key="SmartLabel" TargetType="{x:Type controls:SmartLabel}">
         <Setter Property="HorizontalAlignment" Value="Left" />

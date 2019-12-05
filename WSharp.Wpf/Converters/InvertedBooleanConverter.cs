@@ -1,18 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
+﻿using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class InvertedBooleanConverter : IValueConverter
+    public class InvertedBooleanConverter : ABooleanConverter<bool>
     {
         private static InvertedBooleanConverter _instance;
         public static InvertedBooleanConverter Instance => _instance ?? (_instance = new InvertedBooleanConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is bool b && !b;
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => value is bool b && !b;
+        public override bool TrueValue { get; } = false;
+        public override bool FalseValue { get; } = true;
     }
 }

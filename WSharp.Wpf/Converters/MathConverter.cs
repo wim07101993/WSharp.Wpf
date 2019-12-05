@@ -1,39 +1,55 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public sealed class MathConverter : IValueConverter
+    public sealed class MathConverter : ATypedValueConverter<double, double>
     {
         public EMathOperation Operation { get; set; }
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTIn(object value, CultureInfo culture, out double typedValue)
         {
             try
             {
-                var value1 = System.Convert.ToDouble(value, CultureInfo.InvariantCulture);
-                var value2 = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
-                switch (Operation)
-                {
-                    case EMathOperation.Add:
-                        return value1 + value2;
-                    case EMathOperation.Divide:
-                        return value1 / value2;
-                    case EMathOperation.Multiply:
-                        return value1 * value2;
-                    case EMathOperation.Subtract:
-                        return value1 - value2;
-                    default:
-                        return Binding.DoNothing;
-                }
+                typedValue = System.Convert.ToDouble(value, CultureInfo.InvariantCulture);
+                return true;
             }
-            catch (FormatException)
+            catch (Exception)
             {
-                return Binding.DoNothing;
+                typedValue = default;
+                return false;
             }
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        protected override bool TInToTOut(double tin, object parameter, CultureInfo culture, out double tout)
+        {
+            try
+            {
+                var param = System.Convert.ToDouble(parameter, CultureInfo.InvariantCulture);
+
+                switch (Operation)
+                {
+                    case EMathOperation.Add:
+                        tout = tin + param;
+                        return true;
+                    case EMathOperation.Divide:
+                        tout = tin / param;
+                        return true;
+                    case EMathOperation.Multiply:
+                        tout = tin * param;
+                        return true;
+                    case EMathOperation.Subtract:
+                        tout = tin - param;
+                        return true;
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            tout = default;
+            return false;
+        }
     }
 }

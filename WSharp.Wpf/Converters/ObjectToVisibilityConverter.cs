@@ -1,22 +1,27 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class ObjectToVisibilityConverter : IValueConverter
+    public class ObjectToVisibilityConverter : ATypedValueConverter<object, Visibility>
     {
         private static ObjectToVisibilityConverter _instance;
         public static ObjectToVisibilityConverter Instance => _instance ?? (_instance = new ObjectToVisibilityConverter());
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTIn(object value, CultureInfo culture, out object typedValue)
         {
-            return value == null
-                ? Visibility.Collapsed
-                : Visibility.Visible;
+            typedValue = value;
+            return true;
         }
 
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => Binding.DoNothing;
+        protected override bool TInToTOut(object tin, object parameter, CultureInfo culture, out Visibility tout)
+        {
+            tout = tin == null
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+
+            return true;
+        }
     }
 }
