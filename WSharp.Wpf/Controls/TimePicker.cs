@@ -293,7 +293,7 @@ namespace WSharp.Wpf.Controls
             _clock.AddHandler(Clock.ClockChoiceMadeEvent, new ClockChoiceMadeEventHandler(ClockChoiceMadeHandler));
             _clock.SetBinding(ForegroundProperty, this.CreateBinding(ForegroundProperty));
             _clock.SetBinding(StyleProperty, this.CreateBinding(ClockStyleProperty));
-            _clock.SetBinding(Clock.ValueProperty, this.CreateBinding(ValueProperty, new NullableDateTimeToDateTimeConverter()));
+            _clock.SetBinding(Clock.ValueProperty, this.CreateBinding(ValueProperty, converter: new NullableDateTimeToDateTimeConverter()));
             _clock.SetBinding(Clock.Is24HoursProperty, this.CreateBinding(Is24HoursProperty));
             _clockHostContentControl.SetBinding(StyleProperty, this.CreateBinding(ClockHostContentControlStyleProperty));
         }

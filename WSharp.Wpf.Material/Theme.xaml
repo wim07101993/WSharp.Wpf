@@ -20,6 +20,8 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource Card}" TargetType="{x:Type material:Card}" />
@@ -38,7 +40,7 @@
 
 
     <!--  This is the current way to setup your app's initial color theme  -->
-    <!--<ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
-    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-    <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
+    <!--<ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />-->
+    <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />-->
+    <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
 </ResourceDictionary>

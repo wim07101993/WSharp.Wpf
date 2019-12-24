@@ -39,6 +39,7 @@
                                             <Style.Setters>
                                                 <Setter Property="Margin" Value="10,0,10,10" />
                                                 <Setter Property="MinWidth" Value="100" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
                                             </Style.Setters>
                                         </Style>
                                         <Style TargetType="{x:Type DatePicker}">
@@ -77,7 +78,7 @@
                                     <ComboBox
                                         MinWidth="100"
                                         Margin="10,0,10,10"
-                                        helpers:LabelHelper.Label="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Strings.EventType}"
+                                        helpers:LabelHelper.Label="EventType"
                                         SelectedItem="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EventTypeFilter, Converter={x:Static converters:TraceEventTypeToStringConverter.Instance}}">
                                         <ComboBoxItem Content="Everything" />
                                         <ComboBoxItem Content="Critical" />
@@ -235,8 +236,9 @@
                                             <DataTemplate>
                                                 <TextBlock
                                                     MaxWidth="400"
-                                                    Text="{Binding Payload, Mode=OneWay, Converter={x:Static converters:ListToStringConverter.Instance}}"
-                                                    TextTrimming="CharacterEllipsis" />
+                                                    Text="{Binding Payload, Mode=OneWay, Converter={x:Static converters:ListToNoNewLineStringConverter.Instance}}"
+                                                    TextTrimming="CharacterEllipsis"
+                                                    TextWrapping="NoWrap" />
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

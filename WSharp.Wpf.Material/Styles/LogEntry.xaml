@@ -4,6 +4,9 @@
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
+    </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type controls:LogEntry}">
         <Style.Setters>
@@ -19,7 +22,7 @@
                                     <Expander HorizontalAlignment="Stretch" IsExpanded="True">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource TitleTextBlock}">
+                                                <TextBlock Style="{StaticResource Headline6TextBlock}">
                                                     <Run Text="Header" />
                                                     <Run Text="   " />
                                                 </TextBlock>
@@ -121,10 +124,13 @@
 
 
                                     <!--  BODY  -->
-                                    <Expander HorizontalAlignment="Stretch" IsExpanded="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Path=Value.Payload, Converter={x:Static converters:ObjectToBooleanConverter.Instance}}">
+                                    <Expander
+                                        HorizontalAlignment="Stretch"
+                                        IsExpanded="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay, Path=Value.Payload, Converter={x:Static converters:ObjectToBooleanConverter.Instance}}"
+                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Value.Body, Converter={x:Static converters:StringToVisibilityConverter.Instance}}">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource TitleTextBlock}">
+                                                <TextBlock Style="{StaticResource Headline6TextBlock}">
                                                     <Run Text="Body" />
                                                     <Run Text="   " />
                                                 </TextBlock>
@@ -158,7 +164,7 @@
                                     <Expander IsExpanded="False">
                                         <Expander.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Style="{StaticResource TitleTextBlock}">
+                                                <TextBlock Style="{StaticResource Headline6TextBlock}">
                                                     <Run Text="Footer" />
                                                     <Run Text="   " />
                                                 </TextBlock>
