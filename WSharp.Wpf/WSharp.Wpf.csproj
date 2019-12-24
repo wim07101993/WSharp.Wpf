@@ -106,6 +106,10 @@
     <Compile Include="Converters\Bases\ATypedValueConverter.cs" />
     <Compile Include="Converters\Bases\AStringNullOrEmptyConverter.cs" />
     <Compile Include="Converters\DoublesToPositionConverter.cs" />
+    <Compile Include="Converters\EnumToIntConverter.cs" />
+    <Compile Include="Converters\EnumStringCollectionConverter.cs" />
+    <Compile Include="Converters\ListToNoNewLineStringConverter.cs" />
+    <Compile Include="Converters\ListToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
     <Compile Include="LabelProxy\ATextBoxBaseLabelProxy.cs" />
