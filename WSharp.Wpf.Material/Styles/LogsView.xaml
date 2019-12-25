@@ -10,8 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
-    <Style TargetType="{x:Type controls:LogsView}">
+    <Style x:Key="LogsView" TargetType="{x:Type controls:LogsView}">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
@@ -39,19 +38,35 @@
                                             <Style.Setters>
                                                 <Setter Property="Margin" Value="10,0,10,10" />
                                                 <Setter Property="MinWidth" Value="100" />
-                                                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
+                                                <Setter Property="VerticalAlignment" Value="Bottom" />
                                             </Style.Setters>
                                         </Style>
                                         <Style TargetType="{x:Type DatePicker}">
                                             <Style.Setters>
                                                 <Setter Property="Margin" Value="10,0,10,10" />
                                                 <Setter Property="MinWidth" Value="100" />
+                                                <Setter Property="VerticalAlignment" Value="Bottom" />
                                             </Style.Setters>
                                         </Style>
-                                        <Style BasedOn="{StaticResource TimePicker}" TargetType="{x:Type controls:TimePicker}">
+                                        <Style TargetType="{x:Type controls:TimePicker}">
                                             <Style.Setters>
                                                 <Setter Property="Margin" Value="10,0,10,10" />
                                                 <Setter Property="MinWidth" Value="100" />
+                                                <Setter Property="VerticalAlignment" Value="Bottom" />
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Style.Setters>
+                                                <Setter Property="Margin" Value="10,0,10,10" />
+                                                <Setter Property="MinWidth" Value="100" />
+                                                <Setter Property="VerticalAlignment" Value="Bottom" />
+                                            </Style.Setters>
+                                        </Style>
+                                        <Style TargetType="{x:Type ComboBox}">
+                                            <Style.Setters>
+                                                <Setter Property="Margin" Value="10,0,10,10" />
+                                                <Setter Property="MinWidth" Value="100" />
+                                                <Setter Property="VerticalAlignment" Value="Bottom" />
                                             </Style.Setters>
                                         </Style>
                                     </WrapPanel.Resources>
@@ -76,10 +91,9 @@
 
                                     <!--  event type  -->
                                     <ComboBox
-                                        MinWidth="100"
-                                        Margin="10,0,10,10"
                                         helpers:LabelHelper.Label="EventType"
-                                        SelectedItem="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EventTypeFilter, Converter={x:Static converters:TraceEventTypeToStringConverter.Instance}}">
+                                        SelectedItem="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EventTypeFilter, Converter={x:Static converters:TraceEventTypeToStringConverter.Instance}}"
+                                        Visibility="{TemplateBinding EventTypeFilterVisibility}">
                                         <ComboBoxItem Content="Everything" />
                                         <ComboBoxItem Content="Critical" />
                                         <ComboBoxItem Content="Error" />
@@ -167,18 +181,10 @@
                                         Visibility="{TemplateBinding CallStackFilterVisibility}" />
 
                                     <!--  buttons  -->
-                                    <StackPanel Orientation="Horizontal">
-                                        <Button
-                                            x:Name="SearchButton"
-                                            Width="100"
-                                            Margin="10,0,10,10"
-                                            Content="Search" />
+                                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+                                        <Button x:Name="SearchButton" Content="Search" />
 
-                                        <Button
-                                            x:Name="ClearFilterButton"
-                                            Width="100"
-                                            Margin="10,0,10,10"
-                                            Content="Clear" />
+                                        <Button x:Name="ClearFilterButton" Content="Clear" />
                                     </StackPanel>
                                 </WrapPanel>
                             </Expander>

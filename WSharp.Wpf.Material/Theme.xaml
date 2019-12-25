@@ -29,6 +29,8 @@
     <Style BasedOn="{StaticResource Clock}" TargetType="{x:Type controls:Clock}" />
     <Style BasedOn="{StaticResource Divider}" TargetType="{x:Type controls:Divider}" />
     <Style BasedOn="{StaticResource Icon}" TargetType="{x:Type controls:Icon}" />
+    <Style BasedOn="{StaticResource LogEntry}" TargetType="{x:Type controls:LogEntry}" />
+    <Style BasedOn="{StaticResource LogsView}" TargetType="{x:Type controls:LogsView}" />
     <Style BasedOn="{StaticResource SmartLabel}" TargetType="{x:Type controls:SmartLabel}" />
     <Style BasedOn="{StaticResource TimePicker}" TargetType="{x:Type controls:TimePicker}" />
     <Style BasedOn="{StaticResource Underline}" TargetType="{x:Type controls:Underline}" />

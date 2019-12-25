@@ -4,11 +4,12 @@
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type controls:LogEntry}">
+    <Style x:Key="LogEntry" TargetType="{x:Type controls:LogEntry}">
         <Style.Setters>
             <Setter Property="MinWidth" Value="500" />
             <Setter Property="Template">

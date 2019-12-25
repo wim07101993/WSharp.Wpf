@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using MaterialDesignThemes.Wpf.Converters;
 
 namespace WSharp.Wpf.Controls
 {
