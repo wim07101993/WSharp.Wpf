@@ -7,7 +7,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <!--  Include the Dragablz Material Design style  -->
-                <ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml" />
+                <!--<ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml" />-->
 
                 <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
@@ -17,7 +17,7 @@
 
 
             <!--  tell Dragablz tab control to use the Material Design theme  -->
-            <Style BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" TargetType="{x:Type dragablz:TabablzControl}" />
+            <!--<Style BasedOn="{StaticResource MaterialDesignTabablzControlStyle}" TargetType="{x:Type dragablz:TabablzControl}" />-->
 
         </ResourceDictionary>
     </Application.Resources>

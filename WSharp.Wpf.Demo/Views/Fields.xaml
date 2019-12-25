@@ -8,17 +8,17 @@
     mc:Ignorable="d">
     <StackPanel Orientation="Vertical">
         <StackPanel Orientation="Horizontal">
-            <controls:NumericUpDown
-                Width="100"
-                Margin="10"
-                HorizontalAlignment="Left"
-                Value="10" />
             <TextBox
                 Width="100"
                 Margin="10"
                 HorizontalAlignment="Left"
                 Text="abc" />
             <controls:DateTimePicker MinWidth="100" Margin="10" />
+            <controls:NumericUpDown
+                Width="100"
+                Margin="10"
+                HorizontalAlignment="Left"
+                Value="10" />
         </StackPanel>
 
     </StackPanel>
