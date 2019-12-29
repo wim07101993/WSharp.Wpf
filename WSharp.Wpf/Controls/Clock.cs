@@ -548,6 +548,10 @@ namespace WSharp.Wpf.Controls
 
         #endregion METHODS
 
-        public event ClockChoiceMadeEventHandler ClockChoiceMade;
+        public event ClockChoiceMadeEventHandler ClockChoiceMade
+        {
+            add => AddHandler(ClockChoiceMadeEvent, value);
+            remove => RemoveHandler(ClockChoiceMadeEvent, value);
+        }
     }
 }

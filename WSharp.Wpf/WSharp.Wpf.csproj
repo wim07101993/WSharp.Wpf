@@ -85,6 +85,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ColorPicker.cs" />
+    <Compile Include="Controls\ColorZone.cs" />
+    <Compile Include="Controls\ComboBoxPopup.cs" />
+    <Compile Include="Controls\DialogClosingEventArgs.cs" />
+    <Compile Include="Controls\DialogClosingEventHandler.cs" />
+    <Compile Include="Controls\DialogHost.cs" />
+    <Compile Include="Controls\DialogOpenedEventArgs.cs" />
+    <Compile Include="Controls\DialogOpenedEventHandler.cs" />
+    <Compile Include="Controls\DialogSession.cs" />
     <Compile Include="Controls\EButtonsAlignment.cs" />
     <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\Clock.cs" />
@@ -95,6 +104,17 @@
     <Compile Include="Controls\Divider.cs" />
     <Compile Include="Controls\EClockDisplayAutomation.cs" />
     <Compile Include="Controls\EClockDisplayMode.cs" />
+    <Compile Include="Controls\EColorZoneMode.cs" />
+    <Compile Include="Controls\EComboBoxPopupPlacement.cs" />
+    <Compile Include="Controls\EDialogHostOpenDialogCommandDataContextSource.cs" />
+    <Compile Include="Controls\Screen.cs" />
+    <Compile Include="Controls\Snackbar.cs" />
+    <Compile Include="Controls\SnackbarMessage.cs" />
+    <Compile Include="Controls\SnackbarMessageEventArgs.cs" />
+    <Compile Include="Converters\SnackbarMessageTypeConverter.cs" />
+    <Compile Include="EBaseTheme.cs" />
+    <Compile Include="ISnackbarMessageQueue.cs" />
+    <Compile Include="SnackbarMessageQueue.cs" />
     <Compile Include="Controls\Underline.cs" />
     <Compile Include="Converters\Bases\ABooleanConverter.cs" />
     <Compile Include="Converters\Bases\AMultiBooleanAndConverter.cs" />
@@ -108,8 +128,11 @@
     <Compile Include="Converters\ListToNoNewLineStringConverter.cs" />
     <Compile Include="Converters\ListToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
+    <Compile Include="Extensions\DependencyObjectExtensions.cs" />
     <Compile Include="Helpers\ButtonHelper.cs" />
     <Compile Include="Helpers\ButtonProgressHelper.cs" />
+    <Compile Include="Helpers\DpiHelper.cs" />
+    <Compile Include="Helpers\TreeHelper.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
     <Compile Include="LabelProxy\ATextBoxBaseLabelProxy.cs" />
     <Compile Include="LabelProxy\LabelProxyProvider.cs" />
@@ -178,6 +201,7 @@
     <Compile Include="ShadowInfo.cs" />
     <Compile Include="ShadowLocalInfo.cs" />
     <Compile Include="Helpers\TransitionHelper.cs" />
+    <Compile Include="SnackbarMessageQueueItem.cs" />
     <Compile Include="ToRemove.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

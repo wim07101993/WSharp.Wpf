@@ -199,8 +199,22 @@ namespace WSharp.Wpf.Controls
 
         #endregion METHODS
 
-        public event DragDeltaEventHandler DragDelta;
-        public event DragStartedEventHandler DragStarted;
-        public event DragCompletedEventHandler DragCompleted;
+        public event DragDeltaEventHandler DragDelta
+        {
+            add => AddHandler(DragDeltaEvent, value);
+            remove => RemoveHandler(DragDeltaEvent, value);
+        }
+
+        public event DragStartedEventHandler DragStarted
+        {
+            add => AddHandler(DragStartedEvent, value);
+            remove => RemoveHandler(DragStartedEvent, value);
+        }
+
+        public event DragCompletedEventHandler DragCompleted
+        {
+            add => AddHandler(DragCompletedEvent, value);
+            remove => RemoveHandler(DragCompletedEvent, value);
+        }
     }
 }

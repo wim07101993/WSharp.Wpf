@@ -31,6 +31,18 @@ namespace WSharp.Wpf.Extensions
             return control.Template.FindName(childName, control) as T;
         }
 
+        public static bool TryGetTemplateChild<T>(this Control control, string childName, out T child)
+            where T : class
+        {
+            if (control == null)
+                throw new ArgumentNullException(nameof(control));
+            if (childName == null)
+                throw new ArgumentNullException(nameof(childName));
+
+            child = control.Template.FindName(childName, control) as T;
+            return child != null;
+        }
+
         public static BindingBase CreateBinding(this Control control, 
             DependencyProperty property, 
             object owner = null, 

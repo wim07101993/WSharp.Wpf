@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace WSharp.Wpf.Controls
@@ -56,6 +55,10 @@ namespace WSharp.Wpf.Controls
             return control.CoerceValue(t);
         }
 
-        public event RoutedPropertyChangedEventHandler<T> ValueChanged;
+        public event RoutedPropertyChangedEventHandler<T> ValueChanged
+        {
+            add => AddHandler(ValueChangedEvent, value);
+            remove => RemoveHandler(ValueChangedEvent, value);
+        }
     }
 }
