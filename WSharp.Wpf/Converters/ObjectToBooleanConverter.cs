@@ -1,12 +1,13 @@
 ﻿using System.Globalization;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class ObjectToBooleanConverter : ATypedValueConverter<object, bool>
     {
-        private static ObjectToBooleanConverter _instance;
-        public static ObjectToBooleanConverter Instance => _instance ?? (_instance = new ObjectToBooleanConverter());
+        private static ObjectToBooleanConverter instance;
+        public static ObjectToBooleanConverter Instance => instance ?? (instance = new ObjectToBooleanConverter());
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out object typedValue)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+
 using WSharp.Wpf.Controls;
 using WSharp.Wpf.Converters.Bases;
 
@@ -32,9 +33,11 @@ namespace WSharp.Wpf.Converters
                 case EClockDisplayMode.Hours:
                     converted = MassageHour(tin.Hour, _is24Hours);
                     break;
+
                 case EClockDisplayMode.Minutes:
                     converted = MassageMinuteSecond(tin.Minute);
                     break;
+
                 default:
                     converted = MassageMinuteSecond(tin.Second);
                     break;
@@ -55,8 +58,8 @@ namespace WSharp.Wpf.Converters
             var currentTime = _currentTimeGetter();
 
             tin = new DateTime(
-                currentTime.Year, 
-                currentTime.Month, 
+                currentTime.Year,
+                currentTime.Month,
                 currentTime.Day,
                 (_displayMode == EClockDisplayMode.Hours) ? ReverseMassageHour(i, currentTime, _is24Hours) : currentTime.Hour,
                 (_displayMode == EClockDisplayMode.Minutes) ? ReverseMassageMinuteSecond(i) : currentTime.Minute,
@@ -70,9 +73,9 @@ namespace WSharp.Wpf.Converters
             if (is24Hours)
                 return val == 0 ? 24 : val;
 
-            if (val == 0) 
+            if (val == 0)
                 return 12;
-            if (val > 12) 
+            if (val > 12)
                 return val - 12;
 
             return val;

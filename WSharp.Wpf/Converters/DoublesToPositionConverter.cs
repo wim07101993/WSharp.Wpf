@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class DoublesToPositionConverter : ATypedMultiValueConverter<double, double>
     {
-        private static DoublesToPositionConverter _instance;
-        public static DoublesToPositionConverter Instance => _instance ?? (_instance = new DoublesToPositionConverter());
+        private static DoublesToPositionConverter instance;
+        public static DoublesToPositionConverter Instance => instance ?? (instance = new DoublesToPositionConverter());
 
         protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<double> typedValues)
         {

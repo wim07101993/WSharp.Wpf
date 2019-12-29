@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Controls;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
@@ -20,15 +21,16 @@ namespace WSharp.Wpf.Converters
                     TraceEventType.Suspend |
                     TraceEventType.Resume |
                     TraceEventType.Transfer;
+
 #pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
 
-        private static TraceEventTypeToStringConverter _instance;
-        public static TraceEventTypeToStringConverter Instance => _instance ?? (_instance = new TraceEventTypeToStringConverter());
+        private static TraceEventTypeToStringConverter instance;
+        public static TraceEventTypeToStringConverter Instance => instance ?? (instance = new TraceEventTypeToStringConverter());
 
         protected override bool TInToTOut(TraceEventType tin, object parameter, CultureInfo culture, out string tout)
         {
-            tout = tin == AllEventTypes 
-                ? "Everything" 
+            tout = tin == AllEventTypes
+                ? "Everything"
                 : tin.ToString();
 
             return true;
@@ -39,8 +41,8 @@ namespace WSharp.Wpf.Converters
             if (base.ValidateTOut(value, culture, out typedValue))
                 return true;
 
-            typedValue = value is ComboBoxItem comboBoxItem 
-                ? comboBoxItem.Content as string ?? comboBoxItem.Content?.ToString() 
+            typedValue = value is ComboBoxItem comboBoxItem
+                ? comboBoxItem.Content as string ?? comboBoxItem.Content?.ToString()
                 : value?.ToString();
 
             return true;

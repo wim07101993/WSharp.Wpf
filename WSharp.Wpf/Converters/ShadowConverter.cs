@@ -1,14 +1,14 @@
 ﻿using System.Globalization;
 using System.Windows.Media.Effects;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class ShadowConverter : ATypedValueConverter<EShadowDepth, DropShadowEffect>
     {
-        private static ShadowConverter _instance;
-        public static ShadowConverter Instance => _instance ?? (_instance = new ShadowConverter());
-
+        private static ShadowConverter instance;
+        public static ShadowConverter Instance => instance ?? (instance = new ShadowConverter());
 
         protected override bool TInToTOut(EShadowDepth tin, object parameter, CultureInfo culture, out DropShadowEffect tout)
         {

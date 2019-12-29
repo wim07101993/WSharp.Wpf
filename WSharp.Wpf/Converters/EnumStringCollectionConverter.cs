@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Globalization;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class EnumStringCollectionConverter : ATypedValueConverter<Type, string[]>
     {
-        private static EnumStringCollectionConverter _instance;
-        public static EnumStringCollectionConverter Instance => _instance ?? (_instance = new EnumStringCollectionConverter());
+        private static EnumStringCollectionConverter instance;
+        public static EnumStringCollectionConverter Instance => instance ?? (instance = new EnumStringCollectionConverter());
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out Type typedValue)
         {

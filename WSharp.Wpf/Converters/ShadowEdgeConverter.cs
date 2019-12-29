@@ -2,20 +2,20 @@
 using System.Globalization;
 using System.Windows;
 using System.Windows.Media;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class ShadowEdgeConverter : ATypedMultiValueConverter<object, Brush>
     {
-        private static ShadowEdgeConverter _instance;
-        public static ShadowEdgeConverter Instance => _instance ?? (_instance = new ShadowEdgeConverter());
-
+        private static ShadowEdgeConverter instance;
+        public static ShadowEdgeConverter Instance => instance ?? (instance = new ShadowEdgeConverter());
 
         protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<object> typedValues)
         {
             typedValues = values;
-            return values.Length == 4 && 
+            return values.Length == 4 &&
                 values[0] is double width && !double.IsNaN(width) && !double.IsInfinity(width) &&
                 values[1] is double height && !double.IsNaN(height) && !double.IsInfinity(height) &&
                 values[2] is EShadowDepth && values[3] is EShadowEdges;

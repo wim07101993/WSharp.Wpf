@@ -4,14 +4,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class ListToNoNewLineStringConverter : ATypedValueConverter<IList<object>, string>
     {
-        private static ListToNoNewLineStringConverter _instance;
-        public static ListToNoNewLineStringConverter Instance => _instance ?? (_instance = new ListToNoNewLineStringConverter());
+        private static ListToNoNewLineStringConverter instance;
+        public static ListToNoNewLineStringConverter Instance => instance ?? (instance = new ListToNoNewLineStringConverter());
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out IList<object> typedValue)
         {

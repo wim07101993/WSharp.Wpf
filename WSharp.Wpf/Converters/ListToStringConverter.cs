@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+
 using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
     public class ListToStringConverter : ATypedValueConverter<IList<object>, string>
     {
-        private static ListToStringConverter _instance;
-        public static ListToStringConverter Instance => _instance ?? (_instance = new ListToStringConverter());
+        private static ListToStringConverter instance;
+        public static ListToStringConverter Instance => instance ?? (instance = new ListToStringConverter());
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out IList<object> typedValue)
         {
