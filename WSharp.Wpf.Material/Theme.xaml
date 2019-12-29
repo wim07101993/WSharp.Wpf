@@ -16,10 +16,12 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Underline.xaml" />
 
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander/Expander.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Hyperlink.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Slider/Discrete/Slider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Slider/Slider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Expander.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -35,10 +37,11 @@
     <Style BasedOn="{StaticResource TimePicker}" TargetType="{x:Type controls:TimePicker}" />
     <Style BasedOn="{StaticResource Underline}" TargetType="{x:Type controls:Underline}" />
 
+    <Style BasedOn="{StaticResource Expander}" TargetType="{x:Type Expander}" />
     <Style BasedOn="{StaticResource Hyperlink}" TargetType="{x:Type Hyperlink}" />
+    <Style BasedOn="{StaticResource Slider}" TargetType="{x:Type Slider}" />
     <Style BasedOn="{StaticResource TextBlock}" TargetType="{x:Type TextBlock}" />
     <Style BasedOn="{StaticResource TextBox}" TargetType="{x:Type TextBox}" />
-    <Style BasedOn="{StaticResource Expander}" TargetType="{x:Type Expander}" />
 
 
     <!--  This is the current way to setup your app's initial color theme  -->

@@ -1,8 +1,8 @@
 ﻿namespace WSharp.Wpf.Demo.Views
 {
-    public partial class Expanders 
+    public partial class Sliders 
     {
-        public Expanders()
+        public Sliders()
         {
             InitializeComponent();
         }

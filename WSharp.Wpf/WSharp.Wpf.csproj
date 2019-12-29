@@ -94,6 +94,7 @@
     <Compile Include="Controls\DialogOpenedEventArgs.cs" />
     <Compile Include="Controls\DialogOpenedEventHandler.cs" />
     <Compile Include="Controls\DialogSession.cs" />
+    <Compile Include="Controls\DrawerHost.cs" />
     <Compile Include="Controls\EButtonsAlignment.cs" />
     <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\Clock.cs" />
@@ -111,6 +112,8 @@
     <Compile Include="Controls\Snackbar.cs" />
     <Compile Include="Controls\SnackbarMessage.cs" />
     <Compile Include="Controls\SnackbarMessageEventArgs.cs" />
+    <Compile Include="Converters\HsbLinearGradientConverter.cs" />
+    <Compile Include="Converters\HsbToColorConverter.cs" />
     <Compile Include="Converters\SnackbarMessageTypeConverter.cs" />
     <Compile Include="EBaseTheme.cs" />
     <Compile Include="ISnackbarMessageQueue.cs" />

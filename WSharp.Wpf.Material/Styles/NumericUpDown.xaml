@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls">
 
-    <!--<Style x:Key="MaterialDesignSpinner" TargetType="{x:Type controls:NumericUpDown}">
+    <!--<Style x:Key="Spinner" TargetType="{x:Type controls:NumericUpDown}">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
         <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}" />
@@ -11,7 +11,7 @@
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Margin" Value="0,0,0,0" />
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource MaterialDesignValidationErrorTemplate}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
     -->
     <!--<Setter Property="Template">
             <Setter.Value>
@@ -60,7 +60,7 @@
                                         VerticalAlignment="Center"
                                         Delay="{TemplateBinding Delay}"
                                         IsTabStop="False"
-                                        Style="{StaticResource MaterialDesignFlatButton}">
+                                        Style="{StaticResource FlatButton}">
                                         <materialDesign:PackIcon Kind="Add" />
                                     </RepeatButton>
                                     <RepeatButton
@@ -72,7 +72,7 @@
                                         VerticalAlignment="Center"
                                         Delay="{TemplateBinding Delay}"
                                         IsTabStop="False"
-                                        Style="{StaticResource MaterialDesignFlatButton}">
+                                        Style="{StaticResource FlatButton}">
                                         <materialDesign:PackIcon Kind="Minus" />
                                     </RepeatButton>
                                 </StackPanel>

@@ -22,6 +22,7 @@
             Margin="24"
             HorizontalAlignment="Left">
             <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+
                 <StackPanel Orientation="Horizontal">
                     <Expander ExpandDirection="Right">
                         <Expander.Header>
@@ -67,7 +68,6 @@
             </ScrollViewer>
         </controls:ClippedContentControl>
 
-
         <controls:ClippedContentControl
             Grid.Row="0"
             Grid.Column="1"
@@ -91,6 +91,7 @@
                 helpers:ExpanderHelper.DownHeaderPadding="36,12,24,12"
                 Content="It is possible to add a custom padding to an expander"
                 Header="Padding" />
+            <Slider Width="400" Orientation="Horizontal" />
         </StackPanel>
     </Grid>
 </UserControl>

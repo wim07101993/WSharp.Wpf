@@ -12,7 +12,7 @@
 
     <Style x:Key="TextBoxBase" TargetType="{x:Type TextBoxBase}">
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorder}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="helpers:TextFieldHelper.TextBoxViewMargin" Value="1 0 1 0" />
         <Setter Property="Background" Value="Transparent" />
@@ -56,7 +56,7 @@
                         <Border
                             HorizontalAlignment="Stretch"
                             VerticalAlignment="Stretch"
-                            Background="{DynamicResource TextFieldBoxHoverBackground}"
+                            Background="{DynamicResource TextFieldBoxHoverBackgroundBrush}"
                             CornerRadius="{Binding Path=(helpers:TextFieldHelper.TextFieldCornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
                             RenderTransformOrigin="0.5,0.5"
                             Visibility="{Binding Path=(helpers:TextFieldHelper.RippleOnFocusEnabled), RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:BooleanToVisibilityConverter.Instance}}">
@@ -233,9 +233,9 @@
                             <Setter TargetName="border" Property="Margin" Value="0,12,0,0" />
                         </Trigger>
                         <Trigger Property="helpers:TextFieldHelper.HasFilledTextField" Value="True">
-                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxHoverBackground}" />
+                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxHoverBackgroundBrush}" />
                             <Setter Property="VerticalContentAlignment" Value="Top" />
-                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxBackground}" />
+                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxBackgroundBrush}" />
                             <Setter TargetName="textFieldBoxBorder" Property="Padding" Value="0,8,0,0" />
                             <Setter TargetName="textFieldGrid" Property="Margin" Value="16,0,16,0" />
                             <Setter TargetName="border" Property="BorderThickness" Value="0" />
@@ -261,7 +261,7 @@
                         <Trigger Property="helpers:TextFieldHelper.HasOutlinedTextField" Value="True">
                             <Setter Property="VerticalContentAlignment" Value="Top" />
                             <Setter TargetName="textFieldBoxBorder" Property="BorderThickness" Value="1" />
-                            <Setter TargetName="textFieldBoxBorder" Property="BorderBrush" Value="{DynamicResource TextAreaBorder}" />
+                            <Setter TargetName="textFieldBoxBorder" Property="BorderBrush" Value="{DynamicResource TextAreaBorderBrush}" />
                             <Setter TargetName="textFieldBoxBorder" Property="Padding" Value="0,8,0,0" />
                             <Setter TargetName="textFieldBoxBorder" Property="Margin" Value="-1" />
                             <Setter TargetName="textFieldGrid" Property="Margin" Value="16,0,16,0" />
@@ -303,7 +303,7 @@
                                 <Condition Property="IsEnabled" Value="false" />
                                 <Condition Property="helpers:TextFieldHelper.HasOutlinedTextField" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="textFieldBoxBorder" Property="BorderBrush" Value="{DynamicResource TextAreaInactiveBorder}" />
+                            <Setter TargetName="textFieldBoxBorder" Property="BorderBrush" Value="{DynamicResource TextAreaInactiveBorderBrush}" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -364,7 +364,7 @@
                                 <Condition Property="IsMouseOver" Value="True" />
                                 <Condition Property="helpers:TextFieldHelper.HasFilledTextField" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxHoverBackground}" />
+                            <Setter TargetName="textFieldBoxBorder" Property="Background" Value="{DynamicResource TextFieldBoxHoverBackgroundBrush}" />
                             <Setter TargetName="textFieldBoxBottomLine" Property="Height" Value="1" />
                         </MultiTrigger>
                         <MultiTrigger>

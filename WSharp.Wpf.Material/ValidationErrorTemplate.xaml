@@ -96,8 +96,8 @@
             </MultiDataTrigger>
 
             <DataTrigger Binding="{Binding ElementName=Placeholder, Path=AdornedElement.(helpers:ValidationHelper.Background)}" Value="{x:Null}">
-                <Setter TargetName="PopupBorder" Property="Background" Value="{DynamicResource Paper}" />
-                <Setter TargetName="DefaultErrorViewer" Property="Background" Value="{DynamicResource Paper}" />
+                <Setter TargetName="PopupBorder" Property="Background" Value="{DynamicResource PaperBrush}" />
+                <Setter TargetName="DefaultErrorViewer" Property="Background" Value="{DynamicResource PaperBrush}" />
             </DataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

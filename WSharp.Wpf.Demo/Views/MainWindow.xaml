@@ -11,6 +11,15 @@
     TextElement.Foreground="{DynamicResource BodyBrush}"
     TextOptions.TextFormattingMode="Ideal"
     TextOptions.TextRenderingMode="Auto">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <TabControl ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
         <TabItem Header="Start">
             <TextBlock
@@ -35,6 +44,9 @@
         </TabItem>
         <TabItem Header="Logging">
             <views:Logging DataContext="{Binding LoggingViewModel}" />
+        </TabItem>
+        <TabItem Header="Slider">
+            <views:Sliders />
         </TabItem>
     </TabControl>
 </Window>
