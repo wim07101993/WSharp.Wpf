@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+
 using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
@@ -11,53 +12,59 @@ namespace WSharp.Wpf.Controls
     {
         public const string ThumbPartName = "PART_Thumb";
 
+        private Thumb _thumb;
+
         public static readonly RoutedEvent DragDeltaEvent = EventManager.RegisterRoutedEvent(
-                "DragDelta",
+                nameof(DragDelta),
                 RoutingStrategy.Bubble,
                 typeof(DragDeltaEventHandler),
                 typeof(ClockItemButton));
 
         public static readonly RoutedEvent DragStartedEvent = EventManager.RegisterRoutedEvent(
-                "DragStarted",
+                nameof(DragStarted),
                 RoutingStrategy.Bubble,
                 typeof(DragStartedEventHandler),
                 typeof(ClockItemButton));
 
         public static readonly RoutedEvent DragCompletedEvent = EventManager.RegisterRoutedEvent(
-                "DragCompleted",
+                nameof(DragCompleted),
                 RoutingStrategy.Bubble,
                 typeof(DragCompletedEventHandler),
                 typeof(ClockItemButton));
 
+        #region DEPENDNECY PROPERTIES
+
         public static readonly DependencyProperty CentreXProperty = DependencyProperty.Register(
-            nameof(CentreX), 
-            typeof(double), 
-            typeof(ClockItemButton), 
+            nameof(CentreX),
+            typeof(double),
+            typeof(ClockItemButton),
             new PropertyMetadata(default(double)));
 
         public static readonly DependencyProperty CentreYProperty = DependencyProperty.Register(
-            nameof(CentreY), 
-            typeof(double), 
-            typeof(ClockItemButton), 
+            nameof(CentreY),
+            typeof(double),
+            typeof(ClockItemButton),
             new PropertyMetadata(default(double)));
 
-        private static readonly DependencyPropertyKey XPropertyKey = DependencyProperty.RegisterReadOnly(
-                nameof(X), 
-                typeof(double), 
+        private static readonly DependencyPropertyKey xPropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(X),
+                typeof(double),
                 typeof(ClockItemButton),
                 new PropertyMetadata(default(double)));
 
-        public static readonly DependencyProperty XProperty = XPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty XProperty = xPropertyKey.DependencyProperty;
 
-        private static readonly DependencyPropertyKey YPropertyKey = DependencyProperty.RegisterReadOnly(
-                nameof(Y), 
-                typeof(double), 
+        private static readonly DependencyPropertyKey yPropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(Y),
+                typeof(double),
                 typeof(ClockItemButton),
                 new PropertyMetadata(default(double)));
 
-        public static readonly DependencyProperty YProperty = YPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty YProperty = yPropertyKey.DependencyProperty;
 
-        private Thumb _thumb;
+        #endregion DEPENDNECY PROPERTIES
+
+        #region PROPERTIES
 
         public double CentreX
         {
@@ -74,14 +81,18 @@ namespace WSharp.Wpf.Controls
         public double X
         {
             get => (double)GetValue(XProperty);
-            private set => SetValue(XPropertyKey, value);
+            private set => SetValue(xPropertyKey, value);
         }
 
         public double Y
         {
             get => (double)GetValue(YProperty);
-            private set => SetValue(YPropertyKey, value);
+            private set => SetValue(yPropertyKey, value);
         }
+
+        #endregion PROPERTIES
+
+        #region METHDOS
 
         public override void OnApplyTemplate()
         {
@@ -151,9 +162,9 @@ namespace WSharp.Wpf.Controls
             }
         }
 
-        /// <summary> 
-        /// This override method is called when the control is clicked by mouse or keyboard
-        /// </summary> 
+        /// <summary>
+        ///     This override method is called when the control is clicked by mouse or keyboard
+        /// </summary>
         protected override void OnClick()
         {
             if (_thumb == null)
@@ -164,30 +175,32 @@ namespace WSharp.Wpf.Controls
         {
             //Get the absolute position of where the drag operation started
             OnDragStarted(
-                this, 
-                CentreX + dragStartedEventArgs.HorizontalOffset - Width / 2.0, 
-                CentreY + dragStartedEventArgs.VerticalOffset - Height / 2.0);
+                this,
+                CentreX + dragStartedEventArgs.HorizontalOffset - (Width / 2.0),
+                CentreY + dragStartedEventArgs.VerticalOffset - (Height / 2.0));
         }
 
         private void ThumbOnDragDelta(object sender, DragDeltaEventArgs dragDeltaEventArgs)
-        {
-            OnDragDelta(this, dragDeltaEventArgs.HorizontalChange, dragDeltaEventArgs.VerticalChange);
-        }
+            => OnDragDelta(this, dragDeltaEventArgs.HorizontalChange, dragDeltaEventArgs.VerticalChange);
 
         private void ThumbOnDragCompleted(object sender, DragCompletedEventArgs dragCompletedEventArgs)
-        {
-            OnDragCompleted(this, dragCompletedEventArgs.HorizontalChange, dragCompletedEventArgs.VerticalChange, dragCompletedEventArgs.Canceled);
-        }
+            => OnDragCompleted(this, dragCompletedEventArgs.HorizontalChange, dragCompletedEventArgs.VerticalChange, dragCompletedEventArgs.Canceled);
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            Dispatcher.BeginInvoke(new Action(() =>
-            {
-                X = CentreX - finalSize.Width / 2;
-                Y = CentreY - finalSize.Height / 2;
-            }));
+            _ = Dispatcher.BeginInvoke(new Action(() =>
+              {
+                  X = CentreX - (finalSize.Width / 2);
+                  Y = CentreY - (finalSize.Height / 2);
+              }));
 
             return base.ArrangeOverride(finalSize);
         }
+
+        #endregion METHODS
+
+        public event DragDeltaEventHandler DragDelta;
+        public event DragStartedEventHandler DragStarted;
+        public event DragCompletedEventHandler DragCompleted;
     }
 }

@@ -5,11 +5,13 @@ using System.Windows.Controls;
 
 namespace WSharp.Wpf.Controls
 {
-
     /// <summary>
-    /// A control that implement placeholder behavior. Can work as a simple placeholder either as a floating label, see <see cref="UseFloating"/> property.
-    /// <para/>
-    /// To set a target control you should set the LabelProxy property. Use the <see cref="LabelProxyFabricConverter.Instance"/> converter which converts a control into the ILabelProxy interface.
+    ///     A control that implement placeholder behavior. Can work as a simple placeholder either
+    ///     as a floating label, see <see cref="UseFloating"/> property.
+    ///     <para/>
+    ///     To set a target control you should set the LabelProxy property. Use the
+    ///     <see cref="LabelProxyFabricConverter.Instance"/> converter which converts a control into
+    ///     the ILabelProxy interface.
     /// </summary>
     [TemplateVisualState(GroupName = ContentStatesGroupName, Name = LabelRestingPositionName)]
     [TemplateVisualState(GroupName = ContentStatesGroupName, Name = LabelFloatingPositionName)]
@@ -29,49 +31,49 @@ namespace WSharp.Wpf.Controls
             new PropertyMetadata(default(ILabelProxy), LabelProxyPropertyChangedCallback));
 
         public static readonly DependencyProperty LabelProperty = DependencyProperty.Register(
-            nameof(Label), 
-            typeof(object), 
-            typeof(SmartLabel), 
+            nameof(Label),
+            typeof(object),
+            typeof(SmartLabel),
             new PropertyMetadata(null));
 
-        private static readonly DependencyPropertyKey IsContentNullOrEmptyPropertyKey = DependencyProperty.RegisterReadOnly(
-            nameof(IsContentNullOrEmpty), 
-            typeof(bool), 
+        private static readonly DependencyPropertyKey isContentNullOrEmptyPropertyKey = DependencyProperty.RegisterReadOnly(
+            nameof(IsContentNullOrEmpty),
+            typeof(bool),
             typeof(SmartLabel),
             new PropertyMetadata(default(bool)));
 
-        public static readonly DependencyProperty IsContentNullOrEmptyProperty = IsContentNullOrEmptyPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsContentNullOrEmptyProperty = isContentNullOrEmptyPropertyKey.DependencyProperty;
 
-        private static readonly DependencyPropertyKey IsLabelInFloatingPositionPropertyKey = DependencyProperty.RegisterReadOnly(
-                nameof(IsLabelInFloatingPosition), 
-                typeof(bool), 
+        private static readonly DependencyPropertyKey isLabelInFloatingPositionPropertyKey = DependencyProperty.RegisterReadOnly(
+                nameof(IsLabelInFloatingPosition),
+                typeof(bool),
                 typeof(SmartLabel),
                 new PropertyMetadata(default(bool)));
 
-        public static readonly DependencyProperty IsLabelInFloatingPositionProperty = IsLabelInFloatingPositionPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsLabelInFloatingPositionProperty = isLabelInFloatingPositionPropertyKey.DependencyProperty;
 
         public static readonly DependencyProperty UseFloatingProperty = DependencyProperty.Register(
-            nameof(UseFloating), 
-            typeof(bool), 
-            typeof(SmartLabel), 
+            nameof(UseFloating),
+            typeof(bool),
+            typeof(SmartLabel),
             new PropertyMetadata(false));
 
         public static readonly DependencyProperty FloatingScaleProperty = DependencyProperty.Register(
-            nameof(FloatingScale), 
-            typeof(double), 
-            typeof(SmartLabel), 
+            nameof(FloatingScale),
+            typeof(double),
+            typeof(SmartLabel),
             new PropertyMetadata(.74));
 
         public static readonly DependencyProperty FloatingOffsetProperty = DependencyProperty.Register(
-            nameof(FloatingOffset), 
-            typeof(Point), 
-            typeof(SmartLabel), 
+            nameof(FloatingOffset),
+            typeof(Point),
+            typeof(SmartLabel),
             new PropertyMetadata(new Point(1, -16)));
 
         public static readonly DependencyProperty LabelOpacityProperty = DependencyProperty.Register(
-            nameof(LabelOpacity), 
-            typeof(double), 
-            typeof(SmartLabel), 
+            nameof(LabelOpacity),
+            typeof(double),
+            typeof(SmartLabel),
             new PropertyMetadata(.46));
 
         #endregion dependency properties
@@ -88,6 +90,8 @@ namespace WSharp.Wpf.Controls
             VerticalAlignment = VerticalAlignment.Top;
         }
 
+        #region PROPERTIES
+
         public ILabelProxy LabelProxy
         {
             get => (ILabelProxy)GetValue(LabelProxyProperty);
@@ -103,13 +107,13 @@ namespace WSharp.Wpf.Controls
         public bool IsContentNullOrEmpty
         {
             get => (bool)GetValue(IsContentNullOrEmptyProperty);
-            private set => SetValue(IsContentNullOrEmptyPropertyKey, value);
+            private set => SetValue(isContentNullOrEmptyPropertyKey, value);
         }
 
         public bool IsLabelInFloatingPosition
         {
             get => (bool)GetValue(IsLabelInFloatingPositionProperty);
-            private set => SetValue(IsLabelInFloatingPositionPropertyKey, value);
+            private set => SetValue(isLabelInFloatingPositionPropertyKey, value);
         }
 
         public bool UseFloating
@@ -136,6 +140,8 @@ namespace WSharp.Wpf.Controls
             set => SetValue(LabelOpacityProperty, value);
         }
 
+        #endregion PROPERTIES
+
         private void LabelProxySetStateOnLoaded(object sender, EventArgs e)
         {
             RefreshState(false);
@@ -144,36 +150,35 @@ namespace WSharp.Wpf.Controls
 
         private void RefreshState(bool useTransitions)
         {
-            ILabelProxy proxy = LabelProxy;
+            var proxy = LabelProxy;
 
             if (proxy == null) return;
             if (!proxy.IsVisible) return;
 
             var action = new Action(() =>
             {
-                string state = string.Empty;
+                var state = string.Empty;
 
-                bool isEmpty = proxy.IsEmpty();
-                bool isFocused = proxy.IsFocused();
+                var isEmpty = proxy.IsEmpty();
+                var isFocused = proxy.IsFocused();
 
-                if (UseFloating)
-                    state = !isEmpty || isFocused ? LabelFloatingPositionName : LabelRestingPositionName;
-                else
-                    state = !isEmpty ? LabelFloatingPositionName : LabelRestingPositionName;
+                state = UseFloating
+                    ? !isEmpty || isFocused
+                        ? LabelFloatingPositionName
+                        : LabelRestingPositionName
+                    : !isEmpty
+                        ? LabelFloatingPositionName
+                        : LabelRestingPositionName;
 
                 IsLabelInFloatingPosition = state == LabelFloatingPositionName;
 
-                VisualStateManager.GoToState(this, state, useTransitions);
+                _ = VisualStateManager.GoToState(this, state, useTransitions);
             });
 
             if (DesignerProperties.GetIsInDesignMode(this))
-            {
                 action();
-            }
             else
-            {
-                Dispatcher.BeginInvoke(action);
-            }
+                _ = Dispatcher.BeginInvoke(action);
         }
 
         protected virtual void OnLabelProxyFocusedChanged(object sender, EventArgs e)
@@ -194,14 +199,11 @@ namespace WSharp.Wpf.Controls
                 LabelProxy.Loaded += LabelProxySetStateOnLoaded;
         }
 
-        protected virtual void OnLabelProxyIsVisibleChanged(object sender, EventArgs e)
-        {
-            RefreshState(false);
-        }
+        protected virtual void OnLabelProxyIsVisibleChanged(object sender, EventArgs e) => RefreshState(false);
 
         private static void LabelProxyPropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
         {
-            if (!(dependencyObject is SmartLabel smartLabel)) 
+            if (!(dependencyObject is SmartLabel smartLabel))
                 return;
 
             if (dependencyPropertyChangedEventArgs.OldValue is ILabelProxy labelProxy)
@@ -214,13 +216,14 @@ namespace WSharp.Wpf.Controls
             }
 
             labelProxy = dependencyPropertyChangedEventArgs.NewValue as ILabelProxy;
-            if (labelProxy == null) return;
-
-            labelProxy.IsVisibleChanged += smartLabel.OnLabelProxyIsVisibleChanged;
-            labelProxy.ContentChanged += smartLabel.OnLabelProxyContentChanged;
-            labelProxy.Loaded += smartLabel.OnLabelProxyContentChanged;
-            labelProxy.FocusedChanged += smartLabel.OnLabelProxyFocusedChanged;
-            smartLabel.RefreshState(false);
+            if (labelProxy != null)
+            {
+                labelProxy.IsVisibleChanged += smartLabel.OnLabelProxyIsVisibleChanged;
+                labelProxy.ContentChanged += smartLabel.OnLabelProxyContentChanged;
+                labelProxy.Loaded += smartLabel.OnLabelProxyContentChanged;
+                labelProxy.FocusedChanged += smartLabel.OnLabelProxyFocusedChanged;
+                smartLabel.RefreshState(false);
+            }
         }
     }
 }

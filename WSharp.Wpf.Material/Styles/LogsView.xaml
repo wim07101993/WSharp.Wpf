@@ -182,9 +182,9 @@
 
                                     <!--  buttons  -->
                                     <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
-                                        <Button x:Name="SearchButton" Content="Search" />
+                                        <Button x:Name="PART_SearchButton" Content="Search" />
 
-                                        <Button x:Name="ClearFilterButton" Content="Clear" />
+                                        <Button x:Name="PART_ClearFilterButton" Content="Clear" />
                                     </StackPanel>
                                 </WrapPanel>
                             </Expander>
@@ -204,37 +204,37 @@
                                 SelectionUnit="FullRow">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn
-                                        x:Name="IdColumn"
+                                        x:Name="PART_IdColumn"
                                         Binding="{Binding Id, Mode=OneWay}"
                                         Header="Id"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="TimeColumn"
+                                        x:Name="PART_TimeColumn"
                                         Binding="{Binding EventCache.DateTime, Mode=OneWay}"
                                         Header="Time"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="SourceColumn"
+                                        x:Name="PART_SourceColumn"
                                         Binding="{Binding Source, Mode=OneWay}"
                                         Header="Source"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="TagColumn"
+                                        x:Name="PART_TagColumn"
                                         Binding="{Binding Tag, Mode=OneWay}"
                                         Header="Tag"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="EventTypeColumn"
+                                        x:Name="PART_EventTypeColumn"
                                         Binding="{Binding EventType, Mode=OneWay}"
                                         Header="EventType"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="TitleColumn"
+                                        x:Name="PART_TitleColumn"
                                         Binding="{Binding Title, Mode=OneWay}"
                                         Header="Title"
                                         IsReadOnly="True" />
                                     <DataGridTemplateColumn
-                                        x:Name="PayloadColumn"
+                                        x:Name="PART_PayloadColumn"
                                         MaxWidth="400"
                                         Header="Payload"
                                         IsReadOnly="True">
@@ -249,7 +249,7 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTemplateColumn
-                                        x:Name="OperationStackColumn"
+                                        x:Name="PART_OperationStackColumn"
                                         MaxWidth="200"
                                         Header="OperationStack}"
                                         IsReadOnly="True">
@@ -263,22 +263,22 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTextColumn
-                                        x:Name="TimeStampColumn"
+                                        x:Name="PART_TimeStampColumn"
                                         Binding="{Binding EventCache.Timestamp, Mode=OneWay}"
                                         Header="TimeStamp"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="ProcessIdColumn"
+                                        x:Name="PART_ProcessIdColumn"
                                         Binding="{Binding EventCache.ProcessId, Mode=OneWay}"
                                         Header="ProcessId"
                                         IsReadOnly="True" />
                                     <DataGridTextColumn
-                                        x:Name="ThreadIdColumn"
+                                        x:Name="PART_ThreadIdColumn"
                                         Binding="{Binding EventCach.ThreadId, Mode=OneWay}"
                                         Header="ThreadId"
                                         IsReadOnly="True" />
                                     <DataGridTemplateColumn
-                                        x:Name="CallStackColumn"
+                                        x:Name="PART_CallStackColumn"
                                         MaxWidth="200"
                                         Header="CallStack"
                                         IsReadOnly="True">

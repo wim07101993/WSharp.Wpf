@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+
 using WSharp.Wpf.Extensions;
 using WSharp.Wpf.Helpers;
 
@@ -16,11 +17,36 @@ namespace WSharp.Wpf.Controls
     /// <summary>
     ///     Represents a Windows spin box (also known as an up-down control) that displays numeric values.
     /// </summary>
-    [TemplatePart(Name = ElementNumericUp, Type = typeof(RepeatButton))]
-    [TemplatePart(Name = ElementNumericDown, Type = typeof(RepeatButton))]
-    [TemplatePart(Name = ElementTextBox, Type = typeof(TextBox))]
+    [TemplatePart(Name = PartNumericUpButton, Type = typeof(RepeatButton))]
+    [TemplatePart(Name = PartNumericDownButton, Type = typeof(RepeatButton))]
+    [TemplatePart(Name = PartTextBox, Type = typeof(TextBox))]
     public class NumericUpDown : ValueControl<double?>
     {
+        #region FIELDS
+
+        private static readonly Regex regexStringFormatHexadecimal = new Regex(@"^(?<complexHEX>.*{\d:X\d+}.*)?(?<simpleHEX>X\d+)?$", RegexOptions.Compiled);
+        private static readonly Regex regexStringFormatNumber = new Regex(@"[-+]?(?<![0-9][.,])\b[0-9]+(?:[.,\s][0-9]+)*[.,]?[0-9]?(?:[eE][-+]?[0-9]+)?\b(?!\.[0-9])", RegexOptions.Compiled);
+
+        private const double DefaultInterval = 1d;
+        private const int DefaultDelay = 500;
+        private const string PartNumericDownButton = "PART_DownButton";
+        private const string PartNumericUpButton = "PART_UpButton";
+        private const string PartTextBox = "PART_TextBox";
+        private const string ScientificNotationChar = "E";
+        private const StringComparison StrComp = StringComparison.InvariantCultureIgnoreCase;
+
+        private Lazy<PropertyInfo> _handlesMouseWheelScrolling = new Lazy<PropertyInfo>();
+        private double _internalIntervalMultiplierForCalculation = DefaultInterval;
+        private double _internalLargeChange = DefaultInterval * 100;
+        private double _intervalValueSinceReset;
+        private bool _manualChange;
+        private RepeatButton _repeatDown;
+        private RepeatButton _repeatUp;
+        private TextBox _valueTextBox;
+        private ScrollViewer _scrollViewer;
+
+        #endregion FIELDS
+
         #region ROUTED EVENTS
 
         public static readonly RoutedEvent ValueIncrementedEvent = EventManager.RegisterRoutedEvent(
@@ -54,7 +80,6 @@ namespace WSharp.Wpf.Controls
             typeof(NumericUpDown));
 
         #endregion ROUTED EVENTS
-
 
         #region DEPENDENCY PROPERTIES
 
@@ -92,9 +117,9 @@ namespace WSharp.Wpf.Controls
 
         public static readonly DependencyProperty ButtonsAlignmentProperty = DependencyProperty.Register(
            nameof(ButtonsAlignment),
-           typeof(ButtonsAlignment),
+           typeof(EButtonsAlignment),
            typeof(NumericUpDown),
-           new FrameworkPropertyMetadata(ButtonsAlignment.Right, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
+           new FrameworkPropertyMetadata(EButtonsAlignment.Right, FrameworkPropertyMetadataOptions.AffectsArrange | FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         public static readonly DependencyProperty MinimumProperty = DependencyProperty.Register(
             nameof(Minimum),
@@ -170,35 +195,6 @@ namespace WSharp.Wpf.Controls
 
         #endregion DEPENDENCY PROPERTIES
 
-
-        #region FIELDS
-
-        private static readonly Regex RegexStringFormatHexadecimal = new Regex(@"^(?<complexHEX>.*{\d:X\d+}.*)?(?<simpleHEX>X\d+)?$", RegexOptions.Compiled);
-        private static readonly Regex RegexStringFormatNumber = new Regex(@"[-+]?(?<![0-9][.,])\b[0-9]+(?:[.,\s][0-9]+)*[.,]?[0-9]?(?:[eE][-+]?[0-9]+)?\b(?!\.[0-9])", RegexOptions.Compiled);
-
-        private const double DefaultInterval = 1d;
-        private const int DefaultDelay = 500;
-        private const string ElementNumericDown = "DownButton";
-        private const string ElementNumericUp = "UpButton";
-        private const string ElementTextBox = "TextBox";
-        private const string ScientificNotationChar = "E";
-        private const StringComparison StrComp = StringComparison.InvariantCultureIgnoreCase;
-
-        private Lazy<PropertyInfo> _handlesMouseWheelScrolling = new Lazy<PropertyInfo>();
-        private double _internalIntervalMultiplierForCalculation = DefaultInterval;
-        private double _internalLargeChange = DefaultInterval * 100;
-        private double _intervalValueSinceReset;
-        private bool _manualChange;
-        private RepeatButton _repeatDown;
-        private RepeatButton _repeatUp;
-        private TextBox _valueTextBox;
-        private ScrollViewer _scrollViewer;
-
-        #endregion FIELDS
-
-
-        #region CONSTRUCTOR
-
         static NumericUpDown()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericUpDown), new FrameworkPropertyMetadata(typeof(NumericUpDown)));
@@ -209,19 +205,13 @@ namespace WSharp.Wpf.Controls
             EventManager.RegisterClassHandler(typeof(NumericUpDown), GotFocusEvent, new RoutedEventHandler(OnGotFocus));
         }
 
-        #endregion CONSTRUCTOR
-
         #region PROPERTIES
 
         /// <summary>
-        ///     Gets or sets the amount of time, in milliseconds, the NumberBox waits while the up/down button is pressed
-        ///     before it starts increasing/decreasing the
-        ///     <see cref="Value" /> for the specified <see cref="Interval" /> . The value must be
-        ///     non-negative.
+        ///     Gets or sets the amount of time, in milliseconds, the NumberBox waits while the
+        ///     up/down button is pressed before it starts increasing/decreasing the
+        ///     <see cref="Value"/> for the specified <see cref="Interval"/> . The value must be non-negative.
         /// </summary>
-        [Bindable(true)]
-        [DefaultValue(DefaultDelay)]
-        [Category("Behavior")]
         public int Delay
         {
             get => (int)GetValue(DelayProperty);
@@ -229,11 +219,9 @@ namespace WSharp.Wpf.Controls
         }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether the user can use the arrow keys <see cref="Key.Up"/> and <see cref="Key.Down"/> to change values. 
+        ///     Gets or sets a value indicating whether the user can use the arrow keys
+        ///     <see cref="Key.Up"/> and <see cref="Key.Down"/> to change values.
         /// </summary>
-        [Bindable(true)]
-        [Category("Behavior")]
-        [DefaultValue(true)]
         public bool InterceptArrowKeys
         {
             get => (bool)GetValue(InterceptArrowKeysProperty);
@@ -243,8 +231,6 @@ namespace WSharp.Wpf.Controls
         /// <summary>
         ///     Gets or sets a value indicating whether the user can use the mouse wheel to change values.
         /// </summary>
-        [Category("Behavior")]
-        [DefaultValue(true)]
         public bool InterceptMouseWheel
         {
             get => (bool)GetValue(InterceptMouseWheelProperty);
@@ -252,13 +238,13 @@ namespace WSharp.Wpf.Controls
         }
 
         /// <summary>
-        ///     Gets or sets a value indicating whether the control must have the focus in order to change values using the mouse wheel.
-        /// <remarks>
-        ///     If the value is true then the value changes when the mouse wheel is over the control. If the value is false then the value changes only if the control has the focus. If <see cref="InterceptMouseWheel"/> is set to "false" then this property has no effect.
-        /// </remarks>
+        ///     Gets or sets a value indicating whether the control must have the focus in order to
+        ///     change values using the mouse wheel. <remarks> If the value is true then the value
+        ///     changes when the mouse wheel is over the control. If the value is false then the
+        ///     value changes only if the control has the focus. If
+        ///     <see cref="InterceptMouseWheel"/> is set to "false" then this property has no
+        ///     effect. </remarks>
         /// </summary>
-        [Category("Behavior")]
-        [DefaultValue(false)]
         public bool TrackMouseWheelWhenMouseOver
         {
             get => (bool)GetValue(TrackMouseWheelWhenMouseOverProperty);
@@ -268,8 +254,6 @@ namespace WSharp.Wpf.Controls
         /// <summary>
         ///     Gets or sets a value indicating whether the user can enter text in the control.
         /// </summary>
-        [Category("Behavior")]
-        [DefaultValue(true)]
         public bool InterceptManualEnter
         {
             get => (bool)GetValue(InterceptManualEnterProperty);
@@ -279,8 +263,6 @@ namespace WSharp.Wpf.Controls
         /// <summary>
         ///     Gets or sets a value indicating the culture to be used in string formatting operations.
         /// </summary>
-        [Category("Behavior")]
-        [DefaultValue(null)]
         public CultureInfo Culture
         {
             get => (CultureInfo)GetValue(CultureProperty);
@@ -291,126 +273,92 @@ namespace WSharp.Wpf.Controls
         ///     Gets or sets a value indicating whether the +/- button of the control is visible.
         /// </summary>
         /// <remarks>
-        ///     If the value is false then the <see cref="Value" /> of the control can be changed only if one of the following cases is satisfied:
+        ///     If the value is false then the <see cref="Value"/> of the control can be changed
+        ///     only if one of the following cases is satisfied:
         ///     <list type="bullet">
         ///         <item>
-        ///             <description><see cref="InterceptArrowKeys" /> is true.</description>
+        ///             <description><see cref="InterceptArrowKeys"/> is true.</description>
         ///         </item>
         ///         <item>
-        ///             <description><see cref="InterceptMouseWheel" /> is true.</description>
+        ///             <description><see cref="InterceptMouseWheel"/> is true.</description>
         ///         </item>
         ///         <item>
-        ///             <description><see cref="InterceptManualEnter" /> is true.</description>
+        ///             <description><see cref="InterceptManualEnter"/> is true.</description>
         ///         </item>
         ///     </list>
         /// </remarks>
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue(false)]
         public bool HideUpDownButtons
         {
             get => (bool)GetValue(HideUpDownButtonsProperty);
             set => SetValue(HideUpDownButtonsProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue(25d)]
         public double UpDownButtonsWidth
         {
             get => (double)GetValue(UpDownButtonsWidthProperty);
             set => SetValue(UpDownButtonsWidthProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue(20d)]
         public double UpDownButtonsHeight
         {
             get => (double)GetValue(UpDownButtonsHeightProperty);
             set => SetValue(UpDownButtonsHeightProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue(ButtonsAlignment.Right)]
-        public ButtonsAlignment ButtonsAlignment
+        public EButtonsAlignment ButtonsAlignment
         {
-            get => (ButtonsAlignment)GetValue(ButtonsAlignmentProperty);
+            get => (EButtonsAlignment)GetValue(ButtonsAlignmentProperty);
             set => SetValue(ButtonsAlignmentProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Behavior")]
-        [DefaultValue(DefaultInterval)]
         public double Interval
         {
             get => (double)GetValue(IntervalProperty);
             set => SetValue(IntervalProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Appearance")]
-        [DefaultValue(false)]
         public bool IsReadOnly
         {
             get => (bool)GetValue(IsReadOnlyProperty);
             set => SetValue(IsReadOnlyProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(double.MaxValue)]
         public double Maximum
         {
             get => (double)GetValue(MaximumProperty);
             set => SetValue(MaximumProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(double.MinValue)]
         public double Minimum
         {
             get => (double)GetValue(MinimumProperty);
             set => SetValue(MinimumProperty, value);
         }
 
-        [Category("Common")]
-        [DefaultValue(true)]
         public bool Speedup
         {
             get => (bool)GetValue(SpeedupProperty);
             set => SetValue(SpeedupProperty, value);
         }
 
-        [Category("Common")]
         public string StringFormat
         {
             get => (string)GetValue(StringFormatProperty);
             set => SetValue(StringFormatProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(TextAlignment.Right)]
         public TextAlignment TextAlignment
         {
             get => (TextAlignment)GetValue(TextAlignmentProperty);
             set => SetValue(TextAlignmentProperty, value);
         }
 
-        [Category("Common")]
-        [DefaultValue(NumericInput.All)]
         public NumericInput NumericInputMode
         {
             get => (NumericInput)GetValue(NumericInputModeProperty);
             set => SetValue(NumericInputModeProperty, value);
         }
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(false)]
         public bool SnapToMultipleOfInterval
         {
             get => (bool)GetValue(SnapToMultipleOfIntervalProperty);
@@ -421,18 +369,15 @@ namespace WSharp.Wpf.Controls
 
         #endregion PROPERTIES
 
-
         #region METHODS
 
         #region callbacks
 
-        /// <summary> 
-        ///     Called when this element or any below gets focus.
-        /// </summary>
+        /// <summary>Called when this element or any below gets focus.</summary>
         private static void OnGotFocus(object sender, RoutedEventArgs e)
         {
-            // When NumberBox gets logical focus, select the text inside us.
-            // If we're an editable NumberBox, forward focus to the TextBox element
+            // When NumberBox gets logical focus, select the text inside us. If we're an editable
+            // NumberBox, forward focus to the TextBox element
             if (e.Handled ||
                 !(sender is NumericUpDown numericUpDown))
                 return;
@@ -445,8 +390,7 @@ namespace WSharp.Wpf.Controls
 
             // MoveFocus takes a TraversalRequest as its argument.
             var request = new TraversalRequest((Keyboard.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift ? FocusNavigationDirection.Previous : FocusNavigationDirection.Next);
-            // Gets the element with keyboard focus.
-            // Change keyboard focus.
+            // Gets the element with keyboard focus. Change keyboard focus.
             if (Keyboard.FocusedElement is UIElement elementWithFocus)
                 elementWithFocus.MoveFocus(request);
             else
@@ -542,7 +486,7 @@ namespace WSharp.Wpf.Controls
 
             if (!numericUpDown.NumericInputMode.HasFlag(NumericInput.Decimal) &&
                 !string.IsNullOrEmpty(value) &&
-                RegexStringFormatHexadecimal.IsMatch(value))
+                regexStringFormatHexadecimal.IsMatch(value))
                 numericUpDown.SetCurrentValue(NumericInputModeProperty, numericUpDown.NumericInputMode | NumericInput.Decimal);
         }
 
@@ -569,7 +513,7 @@ namespace WSharp.Wpf.Controls
                 numericUpDown.Value = System.Math.Round(value / numericUpDown.Interval) * numericUpDown.Interval;
         }
 
-        #endregion callback
+        #endregion callbacks
 
         #region coercers
 
@@ -601,16 +545,16 @@ namespace WSharp.Wpf.Controls
         #endregion coercers
 
         /// <summary>
-        ///     When overridden in a derived class, is invoked whenever application code or internal processes call
-        ///     <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
+        ///     When overridden in a derived class, is invoked whenever application code or internal
+        ///     processes call <see cref="M:System.Windows.FrameworkElement.ApplyTemplate"/>.
         /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            _repeatUp = this.GetTemplateChild<RepeatButton>(ElementNumericUp);
-            _repeatDown = this.GetTemplateChild<RepeatButton>(ElementNumericDown);
-            _valueTextBox = this.GetTemplateChild<TextBox>(ElementTextBox);
+            _repeatUp = this.GetTemplateChild<RepeatButton>(PartNumericUpButton);
+            _repeatDown = this.GetTemplateChild<RepeatButton>(PartNumericDownButton);
+            _valueTextBox = this.GetTemplateChild<TextBox>(PartTextBox);
 
             ToggleReadOnlyMode(IsReadOnly | !InterceptManualEnter);
 
@@ -626,9 +570,11 @@ namespace WSharp.Wpf.Controls
         }
 
         private void OnRepeatUpPreviewMouseUp(object sender, MouseButtonEventArgs e) => ResetInternal();
+
         private void OnRepeatDownPreviewMouseUp(object sender, MouseButtonEventArgs e) => ResetInternal();
 
         private void OnRepeatDownClick(object sender, RoutedEventArgs e) => ChangeValueWithSpeedUp(false);
+
         private void OnRepeatUpClick(object sender, RoutedEventArgs e) => ChangeValueWithSpeedUp(true);
 
         private void ToggleReadOnlyMode(bool isReadOnly)
@@ -695,6 +641,7 @@ namespace WSharp.Wpf.Controls
                     ChangeValueWithSpeedUp(true);
                     e.Handled = true;
                     break;
+
                 case Key.Down:
                     ChangeValueWithSpeedUp(false);
                     e.Handled = true;
@@ -811,15 +758,9 @@ namespace WSharp.Wpf.Controls
         {
         }
 
-        /// <summary>
-        ///     Raises the <see cref="ValueChanged" /> routed event.
-        /// </summary>
-        /// <param name="oldValue">
-        ///     Old value of the <see cref="Value" /> property
-        /// </param>
-        /// <param name="newValue">
-        ///     New value of the <see cref="Value" /> property
-        /// </param>
+        /// <summary>Raises the <see cref="ValueChanged"/> routed event.</summary>
+        /// <param name="oldValue">Old value of the <see cref="Value"/> property</param>
+        /// <param name="newValue">New value of the <see cref="Value"/> property</param>
         protected override void OnValueChanged(double? oldValue, double? newValue)
         {
             if (!_manualChange)
@@ -893,7 +834,7 @@ namespace WSharp.Wpf.Controls
             if (string.IsNullOrWhiteSpace(format))
                 return newValue.Value.ToString(culture);
 
-            var match = RegexStringFormatHexadecimal.Match(format);
+            var match = regexStringFormatHexadecimal.Match(format);
             if (match.Success)
             {
                 // HEX DOES SUPPORT INT ONLY.
@@ -1035,7 +976,6 @@ namespace WSharp.Wpf.Controls
 
                     if (convertedValue > Maximum)
                         convertedValue = Maximum;
-
                     else if (convertedValue < Minimum)
                         convertedValue = Minimum;
 
@@ -1098,7 +1038,7 @@ namespace WSharp.Wpf.Controls
 
         private string GetAnyNumberFromText(string text)
         {
-            var matches = RegexStringFormatNumber.Matches(text);
+            var matches = regexStringFormatNumber.Matches(text);
 
             if (matches.Count > 0)
                 return matches[0].Value;
@@ -1106,8 +1046,7 @@ namespace WSharp.Wpf.Controls
             return text;
         }
 
-        #endregion methods
-
+        #endregion METHODS
 
         #region EVENTS
 

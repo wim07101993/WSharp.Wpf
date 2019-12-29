@@ -5,26 +5,81 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using WSharp.Wpf.Extensions;
-using WSharp.Logging;
+
 using WSharp.Extensions;
+using WSharp.Logging;
+using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
 {
-    [TemplatePart(Name = nameof(PartIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTimeColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartSourceColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTagColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartEventTypeColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTitleColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartPayloadColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartProcessIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartThreadIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartCallStackColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartSearchButton), Type = typeof(Button))]
-    [TemplatePart(Name = nameof(PartClearFilterButton), Type = typeof(Button))]
+    [TemplatePart(Name = PartIdColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartTimeColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartSourceColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartTagColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartEventTypeColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartTitleColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartPayloadColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartProcessIdColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartThreadIdColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartCallStackColumn, Type = typeof(DataGridColumn))]
+    [TemplatePart(Name = PartSearchButton, Type = typeof(Button))]
+    [TemplatePart(Name = PartClearFilterButton, Type = typeof(Button))]
     public class LogsView : Control
     {
+        #region FIELDS
+
+#pragma warning disable RECS0016 // Bitwise operation on enum which has no [Flags] attribute
+
+        private const TraceEventType NoEventTypeFilter =
+            TraceEventType.Critical |
+            TraceEventType.Error |
+            TraceEventType.Warning |
+            TraceEventType.Information |
+            TraceEventType.Verbose |
+            TraceEventType.Start |
+            TraceEventType.Stop |
+            TraceEventType.Suspend |
+            TraceEventType.Resume |
+            TraceEventType.Transfer;
+
+#pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
+
+        private const string PartIdColumn = "PART_IdColumn";
+        private const string PartTimeColumn = "PART_TimeColumn";
+        private const string PartSourceColumn = "PART_SourceColumn";
+        private const string PartTagColumn = "PART_TagColumn";
+        private const string PartEventTypeColumn = "PART_EventTypeColumn";
+        private const string PartTitleColumn = "PART_TitleColumn";
+        private const string PartPayloadColumn = "PART_PayloadColumn";
+        private const string PartOperationStackColumn = "PART_OperationStackColumn";
+        private const string PartTimeStampColumn = "PART_TimeStampColumn";
+        private const string PartProcessIdColumn = "PART_ProcessIdColumn";
+        private const string PartThreadIdColumn = "PART_ThreadIdColumn";
+        private const string PartCallStackColumn = "PART_CallStackColumn";
+        private const string PartSearchButton = "PART_SearchButton";
+        private const string PartClearFilterButton = "PART_ClearFilterButton";
+
+        private readonly Dictionary<string, DataGridColumn> _collumns = new Dictionary<string, DataGridColumn>
+        {
+            { PartIdColumn, null },
+            { PartTimeColumn, null },
+            { PartSourceColumn, null },
+            { PartTagColumn, null },
+            { PartEventTypeColumn, null },
+            { PartTitleColumn, null },
+            { PartPayloadColumn, null },
+            { PartOperationStackColumn, null },
+            { PartTimeStampColumn, null },
+            { PartProcessIdColumn, null },
+            { PartThreadIdColumn, null },
+            { PartCallStackColumn, null }
+        };
+
+        private Button _searchButton;
+        private Button _clearFilterButton;
+
+        #endregion FIELDS
+
         #region DEPENDENCY PROPERTIES
 
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
@@ -282,62 +337,6 @@ namespace WSharp.Wpf.Controls
 
         #endregion DEPENDENCY PROPERTIES
 
-
-        #region FIELDS
-
-#pragma warning disable RECS0016 // Bitwise operation on enum which has no [Flags] attribute
-        private const TraceEventType NoEventTypeFilter =
-            TraceEventType.Critical |
-            TraceEventType.Error |
-            TraceEventType.Warning |
-            TraceEventType.Information |
-            TraceEventType.Verbose |
-            TraceEventType.Start |
-            TraceEventType.Stop |
-            TraceEventType.Suspend |
-            TraceEventType.Resume |
-            TraceEventType.Transfer;
-#pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
-
-        private const string PartIdColumn = "IdColumn";
-        private const string PartTimeColumn = "TimeColumn";
-        private const string PartSourceColumn = "SourceColumn";
-        private const string PartTagColumn = "TagColumn";
-        private const string PartEventTypeColumn = "EventTypeColumn";
-        private const string PartTitleColumn = "TitleColumn";
-        private const string PartPayloadColumn = "PayloadColumn";
-        private const string PartOperationStackColumn = "OperationStackColumn";
-        private const string PartTimeStampColumn = "TimeStampColumn";
-        private const string PartProcessIdColumn = "ProcessIdColumn";
-        private const string PartThreadIdColumn = "ThreadIdColumn";
-        private const string PartCallStackColumn = "CallStackColumn";
-        private const string PartSearchButton = "SearchButton";
-        private const string PartClearFilterButton = "ClearFilterButton";
-
-        private readonly Dictionary<string, DataGridColumn> _collumns = new Dictionary<string, DataGridColumn>
-        {
-            { PartIdColumn, null },
-            { PartTimeColumn, null },
-            { PartSourceColumn, null },
-            { PartTagColumn, null },
-            { PartEventTypeColumn, null },
-            { PartTitleColumn, null },
-            { PartPayloadColumn, null },
-            { PartOperationStackColumn, null },
-            { PartTimeStampColumn, null },
-            { PartProcessIdColumn, null },
-            { PartThreadIdColumn, null },
-            { PartCallStackColumn, null }
-        };
-
-        private Button _searchButton;
-        private Button _clearFilterButton;
-
-        #endregion FIELDS
-
-
-        #region CONSTRUCTORS
-
         static LogsView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LogsView), new FrameworkPropertyMetadata(typeof(LogsView)));
@@ -346,9 +345,6 @@ namespace WSharp.Wpf.Controls
         public LogsView()
         {
         }
-
-        #endregion CONSTRUCTORS
-
 
         #region PROPERTIES
 
@@ -624,7 +620,6 @@ namespace WSharp.Wpf.Controls
 
         #endregion PROPERTIES
 
-
         #region METHODS
 
         public override void OnApplyTemplate()
@@ -675,7 +670,9 @@ namespace WSharp.Wpf.Controls
         #endregion callbacks
 
         private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => UpdateFilteredItemsSource();
+
         private void OnSearchButtonClick(object sender, RoutedEventArgs e) => UpdateFilteredItemsSource();
+
         private void OnClearFilterButtonClick(object sender, RoutedEventArgs e) => ClearFilter();
 
         public void ClearFilter()
@@ -699,6 +696,7 @@ namespace WSharp.Wpf.Controls
 
             FilteredItemsSource = ItemsSource;
         }
+
         public void UpdateFilteredItemsSource()
         {
             var itemsSource = ItemsSource;
@@ -741,6 +739,7 @@ namespace WSharp.Wpf.Controls
             var columnName = propertyName.Remove(propertyName.Length - l, l);
             _collumns[columnName].Visibility = visibility;
         }
+
         public void UpdateColumnVisibilities()
         {
             _collumns[PartIdColumn].Visibility = IdColumnVisibility;

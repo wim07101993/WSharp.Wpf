@@ -18,9 +18,6 @@ namespace WSharp.Wpf.Controls
             typeof(ValueControl<T>),
             new FrameworkPropertyMetadata(default(T), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged, CoerceValue));
 
-        [Bindable(true)]
-        [Category("Common")]
-        [DefaultValue(null)]
         public T Value
         {
             get => (T)GetValue(ValueProperty);

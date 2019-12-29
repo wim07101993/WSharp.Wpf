@@ -46,19 +46,16 @@ namespace WSharp.Wpf.Controls
             GotoVisualState(false);
         }
 
-        private void GotoVisualState(bool useTransitions)
-        {
-            VisualStateManager.GoToState(this, SelectStateName(), useTransitions);
-        }
+        private void GotoVisualState(bool useTransitions) => VisualStateManager.GoToState(this, SelectStateName(), useTransitions);
 
-        private string SelectStateName()
-        {
-            return IsActive ? ActiveStateName : InactiveStateName;
-        }
+        private string SelectStateName() => IsActive ? ActiveStateName : InactiveStateName;
 
-        private static void IsActivePropertyChangedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void IsActivePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
-            ((Underline)dependencyObject).GotoVisualState(!TransitionHelper.GetDisableTransitions(dependencyObject));
+            if (!(d is Underline underline))
+                return;
+
+           underline.GotoVisualState(!TransitionHelper.GetDisableTransitions(underline));
         }
     }
 }

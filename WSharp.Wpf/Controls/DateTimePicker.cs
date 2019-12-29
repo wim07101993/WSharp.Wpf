@@ -6,7 +6,7 @@ namespace WSharp.Wpf.Controls
 {
     public class DateTimePicker : Control
     {
-        #region DEPENDENCY PROPERTIES
+        private bool _isUpdatingValue;
 
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
             nameof(Value),
@@ -26,27 +26,10 @@ namespace WSharp.Wpf.Controls
           typeof(DateTimePicker),
             new PropertyMetadata(DateTime.Now, OnDateChanged));
 
-        #endregion DEPENDENCY PROPERTIES
-
-
-        #region FIELDS
-
-        private bool _isUpdatingValue;
-
-        #endregion FIELDS
-
-
-        #region CONSTRUCTORS
-
         static DateTimePicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DateTimePicker), new FrameworkPropertyMetadata(typeof(DateTimePicker)));
         }
-
-        #endregion CONSTRUCTORS
-
-
-        #region PROPERTIES
 
         public DateTime? Value
         {
@@ -65,11 +48,6 @@ namespace WSharp.Wpf.Controls
             get => (DateTime?)GetValue(DateProperty);
             set => SetValue(ValueProperty, value);
         }
-
-        #endregion PROPERTIES
-
-
-        #region METHDOS
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -137,7 +115,5 @@ namespace WSharp.Wpf.Controls
 
             dateTimePicker._isUpdatingValue = false;
         }
-
-        #endregion METHODS
     }
 }

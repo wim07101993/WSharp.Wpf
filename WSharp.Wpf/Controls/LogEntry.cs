@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+
 using WSharp.Logging;
 
 namespace WSharp.Wpf.Controls

@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
-using WSharp.Utilities.Math;
+
 using WSharp.Wpf.Converters;
 using WSharp.Wpf.Extensions;
 using WSharp.Wpf.Helpers;
@@ -18,10 +18,12 @@ namespace WSharp.Wpf.Controls
     [TemplatePart(Name = SecondsCanvasPartName, Type = typeof(Canvas))]
     [TemplatePart(Name = MinuteReadOutPartName, Type = typeof(TextBlock))]
     [TemplatePart(Name = HourReadOutPartName, Type = typeof(TextBlock))]
-    [TemplateVisualState(GroupName = "DisplayModeStates", Name = HoursVisualStateName)]
-    [TemplateVisualState(GroupName = "DisplayModeStates", Name = MinutesVisualStateName)]
+    [TemplateVisualState(GroupName = DisplayModeStates, Name = HoursVisualStateName)]
+    [TemplateVisualState(GroupName = DisplayModeStates, Name = MinutesVisualStateName)]
     public class Clock : ValueControl<DateTime>
     {
+        #region FIELDS
+
         public const string HoursCanvasPartName = "PART_HoursCanvas";
         public const string MinutesCanvasPartName = "PART_MinutesCanvas";
         public const string SecondsCanvasPartName = "PART_SecondsCanvas";
@@ -33,29 +35,39 @@ namespace WSharp.Wpf.Controls
         public const string MinutesVisualStateName = "Minutes";
         public const string SecondsVisualStateName = "Seconds";
 
+        public const string DisplayModeStates = "DisplayModeStates";
+
+        private Point _centreCanvas = new Point(0, 0);
+        private Point _currentStartPosition = new Point(0, 0);
+        private TextBlock _hourReadOutPartName;
+        private TextBlock _minuteReadOutPartName;
+        private TextBlock _secondReadOutPartName;
+
+        #endregion FIELDS
+
         public static readonly RoutedEvent ClockChoiceMadeEvent = EventManager.RegisterRoutedEvent(
-                "ClockChoiceMade",
+                nameof(ClockChoiceMade),
                 RoutingStrategy.Bubble,
                 typeof(ClockChoiceMadeEventHandler),
                 typeof(Clock));
 
-        #region dependency properties
+        #region DEPENDENCY PROPERTIES
 
-        private static readonly DependencyPropertyKey IsMidnightHourPropertyKey = DependencyProperty.RegisterReadOnly(
+        private static readonly DependencyPropertyKey isMidnightHourPropertyKey = DependencyProperty.RegisterReadOnly(
             nameof(IsMidnightHour),
             typeof(bool),
             typeof(Clock),
             new PropertyMetadata(default(bool)));
 
-        public static readonly DependencyProperty IsMidnightHourProperty = IsMidnightHourPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsMidnightHourProperty = isMidnightHourPropertyKey.DependencyProperty;
 
-        private static readonly DependencyPropertyKey IsMiddayHourPropertyKey = DependencyProperty.RegisterReadOnly(
+        private static readonly DependencyPropertyKey isMiddayHourPropertyKey = DependencyProperty.RegisterReadOnly(
                 nameof(IsMiddayHour),
                 typeof(bool),
                 typeof(Clock),
                 new PropertyMetadata(default(bool)));
 
-        public static readonly DependencyProperty IsMiddayHourProperty = IsMiddayHourPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsMiddayHourProperty = isMiddayHourPropertyKey.DependencyProperty;
 
         public static readonly DependencyProperty IsPostMeridiemProperty = DependencyProperty.Register(
             nameof(IsPostMeridiem),
@@ -105,21 +117,15 @@ namespace WSharp.Wpf.Controls
             typeof(Clock),
             new PropertyMetadata(default(double)));
 
-        private static readonly DependencyPropertyKey HourLineAnglePropertyKey = DependencyProperty.RegisterReadOnly(
-                nameof(HourLineAngle),
-                typeof(double),
-                typeof(Clock),
-                new PropertyMetadata(default(double)));
+        private static readonly DependencyPropertyKey hourLineAnglePropertyKey = DependencyProperty.RegisterReadOnly(
+            nameof(HourLineAngle),
+            typeof(double),
+            typeof(Clock),
+            new PropertyMetadata(default(double)));
 
-        public static readonly DependencyProperty HourLineAngleProperty = HourLineAnglePropertyKey.DependencyProperty;
+        public static readonly DependencyProperty HourLineAngleProperty = hourLineAnglePropertyKey.DependencyProperty;
 
-        #endregion dependency properties
-
-        private Point _centreCanvas = new Point(0, 0);
-        private Point _currentStartPosition = new Point(0, 0);
-        private TextBlock _hourReadOutPartName;
-        private TextBlock _minuteReadOutPartName;
-        private TextBlock _secondReadOutPartName;
+        #endregion DEPENDENCY PROPERTIES
 
         static Clock()
         {
@@ -133,16 +139,18 @@ namespace WSharp.Wpf.Controls
             AddHandler(ClockItemButton.DragCompletedEvent, new DragCompletedEventHandler(ClockItemDragCompletedHandler));
         }
 
+        #region PROPERTIES
+
         public bool IsMidnightHour
         {
             get => (bool)GetValue(IsMidnightHourProperty);
-            private set => SetValue(IsMidnightHourPropertyKey, value);
+            private set => SetValue(isMidnightHourPropertyKey, value);
         }
 
         public bool IsMiddayHour
         {
             get => (bool)GetValue(IsMiddayHourProperty);
-            private set => SetValue(IsMiddayHourPropertyKey, value);
+            private set => SetValue(isMiddayHourPropertyKey, value);
         }
 
         public bool IsPostMeridiem
@@ -196,8 +204,12 @@ namespace WSharp.Wpf.Controls
         public double HourLineAngle
         {
             get => (double)GetValue(HourLineAngleProperty);
-            private set => SetValue(HourLineAnglePropertyKey, value);
+            private set => SetValue(hourLineAnglePropertyKey, value);
         }
+
+        #endregion PROPERTIES
+
+        #region METHODS
 
         public override void OnApplyTemplate()
         {
@@ -251,7 +263,7 @@ namespace WSharp.Wpf.Controls
                     return;
             }
 
-            VisualStateManager.GoToState(this, stateName, useTransitions);
+            _ = VisualStateManager.GoToState(this, stateName, useTransitions);
         }
 
         private void SetFlags()
@@ -286,7 +298,7 @@ namespace WSharp.Wpf.Controls
 
         private void RemoveExistingButtons(Canvas canvas)
         {
-            for (int i = canvas.Children.Count - 1; i >= 0; i--)
+            for (var i = canvas.Children.Count - 1; i >= 0; i--)
             {
                 if (canvas.Children[i] is ClockItemButton)
                     canvas.Children.RemoveAt(i);
@@ -306,7 +318,7 @@ namespace WSharp.Wpf.Controls
             var radiansPerItem = anglePerItem * (Math.PI / 180);
 
             //nothing fancy with sizing/measuring...we are demanding a height
-            if (canvas.Width < 10.0 || Math.Abs(canvas.Height - canvas.Width) > 0.0) 
+            if (canvas.Width < 10.0 || Math.Abs(canvas.Height - canvas.Width) > 0.0)
                 return;
 
             _centreCanvas = new Point(canvas.Width / 2, canvas.Height / 2);
@@ -315,7 +327,7 @@ namespace WSharp.Wpf.Controls
             foreach (var i in range)
             {
                 var button = new ClockItemButton();
-                button.SetBinding(StyleProperty, this.CreateBinding(stylePropertySelector(i)));
+                _ = button.SetBinding(StyleProperty, this.CreateBinding(stylePropertySelector(i)));
 
                 var adjacent = Math.Cos(i * radiansPerItem) * hypotenuseRadius;
                 var opposite = Math.Sin(i * radiansPerItem) * hypotenuseRadius;
@@ -323,17 +335,16 @@ namespace WSharp.Wpf.Controls
                 button.CentreX = _centreCanvas.X + opposite;
                 button.CentreY = _centreCanvas.Y - adjacent;
 
-                button.SetBinding(ToggleButton.IsCheckedProperty, this.CreateBinding("Value", converter: isCheckedConverter, converterParameter: i));
-                button.SetBinding(Canvas.LeftProperty, this.CreateBinding("X", button));
-                button.SetBinding(Canvas.TopProperty, this.CreateBinding("Y", button));
+                _ = button.SetBinding(ToggleButton.IsCheckedProperty, this.CreateBinding("Value", converter: isCheckedConverter, converterParameter: i));
+                _ = button.SetBinding(Canvas.LeftProperty, this.CreateBinding("X", button));
+                _ = button.SetBinding(Canvas.TopProperty, this.CreateBinding("Y", button));
 
-                button.Content = (i == 60 
-                    ? 0 
-                    : (i == 24 && clockDisplayMode == EClockDisplayMode.Hours 
-                        ? 0 
-                        : i))
-                    .ToString(format);
-                canvas.Children.Add(button);
+                var content = i == 60 || (i == 24 && clockDisplayMode == EClockDisplayMode.Hours)
+                    ? 0
+                    : i;
+                button.Content = content.ToString(format);
+
+                _ = canvas.Children.Add(button);
             }
         }
 
@@ -409,16 +420,17 @@ namespace WSharp.Wpf.Controls
                     break;
 
                 case EClockDisplayAutomation.Cycle:
-                    DisplayMode = DisplayMode == EClockDisplayMode.Hours ? EClockDisplayMode.Minutes : EClockDisplayMode.Hours;
+                    DisplayMode = DisplayMode == EClockDisplayMode.Hours
+                        ? EClockDisplayMode.Minutes
+                        : EClockDisplayMode.Hours;
                     break;
 
                 case EClockDisplayAutomation.CycleWithSeconds:
-                    if (DisplayMode == EClockDisplayMode.Hours)
-                        DisplayMode = EClockDisplayMode.Minutes;
-                    else if (DisplayMode == EClockDisplayMode.Minutes)
-                        DisplayMode = EClockDisplayMode.Seconds;
-                    else
-                        DisplayMode = EClockDisplayMode.Hours;
+                    DisplayMode = DisplayMode == EClockDisplayMode.Hours
+                        ? EClockDisplayMode.Minutes
+                        : DisplayMode == EClockDisplayMode.Minutes
+                        ? EClockDisplayMode.Seconds
+                        : EClockDisplayMode.Hours;
                     break;
 
                 case EClockDisplayAutomation.ToMinutesOnly:
@@ -439,9 +451,7 @@ namespace WSharp.Wpf.Controls
         }
 
         private void ClockItemDragStartedHandler(object sender, DragStartedEventArgs dragStartedEventArgs)
-        {
-            _currentStartPosition = new Point(dragStartedEventArgs.HorizontalOffset, dragStartedEventArgs.VerticalOffset);
-        }
+            => _currentStartPosition = new Point(dragStartedEventArgs.HorizontalOffset, dragStartedEventArgs.VerticalOffset);
 
         private void ClockItemDragDeltaHandler(object sender, DragDeltaEventArgs dragDeltaEventArgs)
         {
@@ -457,12 +467,12 @@ namespace WSharp.Wpf.Controls
             {
                 if (Is24Hours)
                 {
-                    var outerBoundary = _centreCanvas.X * ButtonRadiusInnerRatio +
-                                         (_centreCanvas.X * ButtonRadiusRatio - _centreCanvas.X * ButtonRadiusInnerRatio) / 2;
+                    var outerBoundary = (_centreCanvas.X * ButtonRadiusInnerRatio) +
+                                         (((_centreCanvas.X * ButtonRadiusRatio) - (_centreCanvas.X * ButtonRadiusInnerRatio)) / 2);
 
-                    var sqrt = Pythagoras.Solve(_centreCanvas.X - currentDragPosition.X, _centreCanvas.Y - currentDragPosition.Y);
+                    var sqrt = Pythagoras(_centreCanvas.X - currentDragPosition.X, _centreCanvas.Y - currentDragPosition.Y);
                     var localIsPostMerdiem = sqrt > outerBoundary;
-                    var hour = (int)Math.Round(6 * angle / Math.PI, MidpointRounding.AwayFromZero) % 12 + (localIsPostMerdiem ? 12 : 0);
+                    var hour = ((int)Math.Round(6 * angle / Math.PI, MidpointRounding.AwayFromZero) % 12) + (localIsPostMerdiem ? 12 : 0);
 
                     if (hour == 12)
                         hour = 0;
@@ -473,7 +483,7 @@ namespace WSharp.Wpf.Controls
                 }
                 else
                 {
-                    var hour = (int)Math.Round(6 * angle / Math.PI, MidpointRounding.AwayFromZero) % 12 + (IsPostMeridiem ? 12 : 0);
+                    var hour = ((int)Math.Round(6 * angle / Math.PI, MidpointRounding.AwayFromZero) % 12) + (IsPostMeridiem ? 12 : 0);
                     time = new DateTime(Value.Year, Value.Month, Value.Day, hour, Value.Minute, Value.Second);
                 }
             }
@@ -492,7 +502,9 @@ namespace WSharp.Wpf.Controls
 
         #region callbacks
 
-        private static void IsPostMeridiemPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static double Pythagoras(double x, double y) => Math.Sqrt((x * x) + (y * y));
+
+        private static void IsPostMeridiemPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             if (!(d is Clock clock))
                 return;
@@ -511,7 +523,7 @@ namespace WSharp.Wpf.Controls
             clock.GenerateButtons();
         }
 
-        private static void DisplayModePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs dependencyPropertyChangedEventArgs)
+        private static void DisplayModePropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs args)
         {
             if (!(d is Clock clock))
                 return;
@@ -533,5 +545,9 @@ namespace WSharp.Wpf.Controls
         }
 
         #endregion callbacks
+
+        #endregion METHODS
+
+        public event ClockChoiceMadeEventHandler ClockChoiceMade;
     }
 }

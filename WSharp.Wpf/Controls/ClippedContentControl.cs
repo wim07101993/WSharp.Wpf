@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+
 using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
@@ -11,6 +12,7 @@ namespace WSharp.Wpf.Controls
     public class ClippedContentControl : ContentControl
     {
         public const string ClipBorderPartName = "PART_ClipBorder";
+        protected Border partClipBorder;
 
         public static readonly DependencyProperty UniformCornerRadiusProperty = DependencyProperty.Register(
             nameof(UniformCornerRadius),
@@ -18,15 +20,13 @@ namespace WSharp.Wpf.Controls
             typeof(ClippedContentControl),
             new FrameworkPropertyMetadata(2.0, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
-        private static readonly DependencyPropertyKey ContentClipPropertyKey = DependencyProperty.RegisterReadOnly(
+        private static readonly DependencyPropertyKey contentClipPropertyKey = DependencyProperty.RegisterReadOnly(
             nameof(ContentClip),
             typeof(Geometry),
             typeof(ClippedContentControl),
             new PropertyMetadata(default(Geometry)));
 
-        public static readonly DependencyProperty ContentClipProperty = ContentClipPropertyKey.DependencyProperty;
-
-        protected Border partClipBorder;
+        public static readonly DependencyProperty ContentClipProperty = contentClipPropertyKey.DependencyProperty;
 
         static ClippedContentControl()
         {
@@ -42,7 +42,7 @@ namespace WSharp.Wpf.Controls
         public Geometry ContentClip
         {
             get => (Geometry)GetValue(ContentClipProperty);
-            private set => SetValue(ContentClipPropertyKey, value);
+            private set => SetValue(contentClipPropertyKey, value);
         }
 
         public override void OnApplyTemplate()

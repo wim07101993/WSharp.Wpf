@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+
 using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
@@ -8,6 +9,8 @@ namespace WSharp.Wpf.Controls
     public class Divider : Control
     {
         public const string BorderPartName = "PART_Border";
+
+        protected Border border;
 
         public static readonly DependencyProperty OrientationProperty = DependencyProperty.Register(
             nameof(Orientation),
@@ -20,8 +23,6 @@ namespace WSharp.Wpf.Controls
             typeof(double),
             typeof(Divider),
             new PropertyMetadata((double)1, OnThicknesChanged));
-
-        protected Border border;
 
         static Divider()
         {
@@ -51,15 +52,15 @@ namespace WSharp.Wpf.Controls
 
         public void UpdateBorder()
         {
-
             switch (Orientation)
             {
                 case Orientation.Horizontal:
                     if (border != null)
-                    border.BorderThickness = new Thickness(0, 0, 0, Thickness);
+                        border.BorderThickness = new Thickness(0, 0, 0, Thickness);
                     Height = Thickness;
                     Width = double.NaN;
                     break;
+
                 case Orientation.Vertical:
                     border.BorderThickness = new Thickness(0, 0, Thickness, 0);
                     Width = Thickness;

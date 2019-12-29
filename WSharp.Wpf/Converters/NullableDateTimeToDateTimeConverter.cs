@@ -2,12 +2,12 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace WSharp.Wpf.Controls
+namespace WSharp.Wpf.Converters
 {
     public class NullableDateTimeToDateTimeConverter : IValueConverter
     {
-        private static  NullableDateTimeToDateTimeConverter _instance;
-        public static NullableDateTimeToDateTimeConverter Instance => _instance ?? (_instance = new NullableDateTimeToDateTimeConverter());
+        private static NullableDateTimeToDateTimeConverter instance;
+        public static NullableDateTimeToDateTimeConverter Instance => instance ?? (instance = new NullableDateTimeToDateTimeConverter());
 
         public DateTime Default { get; set; } = DateTime.Now;
 

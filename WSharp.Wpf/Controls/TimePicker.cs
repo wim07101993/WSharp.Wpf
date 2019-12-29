@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 using WSharp.Extensions;
+using WSharp.Wpf.Converters;
 using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
@@ -19,6 +20,16 @@ namespace WSharp.Wpf.Controls
         public const string ButtonPartName = "PART_Button";
         public const string PopupPartName = "PART_Popup";
         public const string TextBoxPartName = "PART_TextBox";
+
+        private readonly ContentControl _clockHostContentControl;
+        private readonly Clock _clock;
+
+        private TextBox _textBox;
+        private Popup _popup;
+        private Button _dropDownButton;
+        private bool _disablePopupReopen;
+        private DateTime? _lastValidTime;
+        private bool _isManuallyMutatingText;
 
         #region dependency properties
 
@@ -71,16 +82,6 @@ namespace WSharp.Wpf.Controls
             new PropertyMetadata(default(bool), WithSecondsPropertyChanged));
 
         #endregion dependency properties
-
-        private readonly ContentControl _clockHostContentControl;
-        private readonly Clock _clock;
-
-        private TextBox _textBox;
-        private Popup _popup;
-        private Button _dropDownButton;
-        private bool _disablePopupReopen;
-        private DateTime? _lastValidTime;
-        private bool _isManuallyMutatingText;
 
         static TimePicker()
         {
@@ -244,13 +245,13 @@ namespace WSharp.Wpf.Controls
 
         private void ParseTime(string s, Action<DateTime> successContinuation)
         {
-            if (IsTimeValid(s, out DateTime time))
+            if (IsTimeValid(s, out var time))
                 successContinuation(time);
         }
 
         private bool IsTimeValid(string s, out DateTime time)
         {
-            CultureInfo culture = Language.GetSpecificCulture();
+            var culture = Language.GetSpecificCulture();
 
             return DateTime.TryParse(s,
                 culture,
@@ -264,26 +265,23 @@ namespace WSharp.Wpf.Controls
 
         private string DateTimeToString(DateTime datetime, DatePickerFormat format)
         {
-            CultureInfo culture = Language.GetSpecificCulture();
-            DateTimeFormatInfo dtfi = culture.GetDateFormat();
+            var culture = Language.GetSpecificCulture();
+            var dtfi = culture.GetDateFormat();
 
-            string hourFormatChar = Is24Hours ? "H" : "h";
+            var hourFormatChar = Is24Hours ? "H" : "h";
 
             var sb = new StringBuilder();
-            sb.Append(hourFormatChar);
+            _ = sb.Append(hourFormatChar);
             if (format == DatePickerFormat.Long)
-                sb.Append(hourFormatChar);
+                _ = sb.Append(hourFormatChar);
 
-            sb.Append(dtfi.TimeSeparator);
-            sb.Append("mm");
+            _ = sb.Append(dtfi.TimeSeparator).Append("mm");
+
             if (WithSeconds)
-            {
-                sb.Append(dtfi.TimeSeparator);
-                sb.Append("ss");
-            }
+                _ = sb.Append(dtfi.TimeSeparator).Append("ss");
 
             if (!Is24Hours && (!string.IsNullOrEmpty(dtfi.AMDesignator) || !string.IsNullOrEmpty(dtfi.PMDesignator)))
-                sb.Append(" tt");
+                _ = sb.Append(" tt");
 
             return datetime.ToString(sb.ToString(), culture);
         }
@@ -291,11 +289,11 @@ namespace WSharp.Wpf.Controls
         private void InitializeClock()
         {
             _clock.AddHandler(Clock.ClockChoiceMadeEvent, new ClockChoiceMadeEventHandler(ClockChoiceMadeHandler));
-            _clock.SetBinding(ForegroundProperty, this.CreateBinding(ForegroundProperty));
-            _clock.SetBinding(StyleProperty, this.CreateBinding(ClockStyleProperty));
-            _clock.SetBinding(Clock.ValueProperty, this.CreateBinding(ValueProperty, converter: new NullableDateTimeToDateTimeConverter()));
-            _clock.SetBinding(Clock.Is24HoursProperty, this.CreateBinding(Is24HoursProperty));
-            _clockHostContentControl.SetBinding(StyleProperty, this.CreateBinding(ClockHostContentControlStyleProperty));
+            _ = _clock.SetBinding(ForegroundProperty, this.CreateBinding(ForegroundProperty));
+            _ = _clock.SetBinding(StyleProperty, this.CreateBinding(ClockStyleProperty));
+            _ = _clock.SetBinding(Clock.ValueProperty, this.CreateBinding(ValueProperty, converter: new NullableDateTimeToDateTimeConverter()));
+            _ = _clock.SetBinding(Clock.Is24HoursProperty, this.CreateBinding(Is24HoursProperty));
+            _ = _clockHostContentControl.SetBinding(StyleProperty, this.CreateBinding(ClockHostContentControlStyleProperty));
         }
 
         private void TogglePopup()
@@ -324,16 +322,13 @@ namespace WSharp.Wpf.Controls
                 return;
             }
 
-            if (IsTimeValid(_textBox.Text, out DateTime time))
+            if (IsTimeValid(_textBox.Text, out var time))
                 SetCurrentValue(ValueProperty, time);
             else // Invalid time, jump back to previous good time
                 SetInvalidTime();
         }
 
-        private void TextBoxOnKeyDown(object sender, KeyEventArgs keyEventArgs)
-        {
-            keyEventArgs.Handled = ProcessKey(keyEventArgs) || keyEventArgs.Handled;
-        }
+        private void TextBoxOnKeyDown(object sender, KeyEventArgs keyEventArgs) => keyEventArgs.Handled = ProcessKey(keyEventArgs) || keyEventArgs.Handled;
 
         private bool ProcessKey(KeyEventArgs keyEventArgs)
         {
@@ -389,7 +384,7 @@ namespace WSharp.Wpf.Controls
                 SetCurrentValue(IsDropDownOpenProperty, false);
 
             if (_clock.IsKeyboardFocusWithin)
-                MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+                _ = MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
 
             //TODO Clock closed event
             //OnCalendarClosed(new RoutedEventArgs());
@@ -403,7 +398,7 @@ namespace WSharp.Wpf.Controls
             if (_clock != null)
             {
                 _clock.DisplayMode = EClockDisplayMode.Hours;
-                _clock.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
+                _ = _clock.MoveFocus(new TraversalRequest(FocusNavigationDirection.First));
             }
 
             //TODO ClockOpenedEvent
@@ -421,10 +416,7 @@ namespace WSharp.Wpf.Controls
             }
         }
 
-        private void DropDownButtonOnClick(object sender, RoutedEventArgs routedEventArgs)
-        {
-            TogglePopup();
-        }
+        private void DropDownButtonOnClick(object sender, RoutedEventArgs routedEventArgs) => TogglePopup();
 
         #endregion event handlers
 
@@ -464,7 +456,8 @@ namespace WSharp.Wpf.Controls
         /// <param name="e">DependencyPropertyChangedEventArgs.</param>
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var timePicker = (TimePicker)d;
+            if (!(d is TimePicker timePicker))
+                return;
 
             var newValue = (bool)e.NewValue;
             if (timePicker._popup == null || timePicker._popup.IsOpen == newValue) return;
@@ -475,10 +468,7 @@ namespace WSharp.Wpf.Controls
                 //TODO set time
                 //dp._originalSelectedDate = dp.SelectedDate;
 
-                timePicker.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>
-                {
-                    timePicker._clock.Focus();
-                }));
+                _ = timePicker.Dispatcher.BeginInvoke(DispatcherPriority.Input, new Action(() =>timePicker._clock.Focus()));
             }
         }
 

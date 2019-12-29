@@ -9,13 +9,13 @@ namespace WSharp.Wpf.Controls
             Mode = displayMode;
         }
 
-        public ClockChoiceMadeEventArgs(EClockDisplayMode displayMode, RoutedEvent routedEvent) 
+        public ClockChoiceMadeEventArgs(EClockDisplayMode displayMode, RoutedEvent routedEvent)
             : base(routedEvent)
         {
             Mode = displayMode;
         }
 
-        public ClockChoiceMadeEventArgs(EClockDisplayMode displayMode, RoutedEvent routedEvent, object source) 
+        public ClockChoiceMadeEventArgs(EClockDisplayMode displayMode, RoutedEvent routedEvent, object source)
             : base(routedEvent, source)
         {
             Mode = displayMode;

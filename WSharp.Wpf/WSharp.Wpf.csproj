@@ -85,7 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ButtonsAlignment.cs" />
+    <Compile Include="Controls\EButtonsAlignment.cs" />
     <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\Clock.cs" />
     <Compile Include="Controls\ClockChoiceMadeEventArgs.cs" />
@@ -108,6 +108,8 @@
     <Compile Include="Converters\ListToNoNewLineStringConverter.cs" />
     <Compile Include="Converters\ListToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
+    <Compile Include="Helpers\ButtonHelper.cs" />
+    <Compile Include="Helpers\ButtonProgressHelper.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
     <Compile Include="LabelProxy\ATextBoxBaseLabelProxy.cs" />
     <Compile Include="LabelProxy\LabelProxyProvider.cs" />
@@ -118,7 +120,7 @@
     <Compile Include="Controls\Icon.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
-    <Compile Include="Controls\NullableDateTimeToDateTimeConverter.cs" />
+    <Compile Include="Converters\NullableDateTimeToDateTimeConverter.cs" />
     <Compile Include="Controls\NumericInput.cs" />
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
