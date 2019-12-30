@@ -108,14 +108,20 @@
     <Compile Include="Controls\EColorZoneMode.cs" />
     <Compile Include="Controls\EComboBoxPopupPlacement.cs" />
     <Compile Include="Controls\EDialogHostOpenDialogCommandDataContextSource.cs" />
+    <Compile Include="Controls\PopupEx.cs" />
+    <Compile Include="Controls\Ripple.cs" />
     <Compile Include="Controls\Screen.cs" />
     <Compile Include="Controls\Snackbar.cs" />
     <Compile Include="Controls\SnackbarMessage.cs" />
     <Compile Include="Controls\SnackbarMessageEventArgs.cs" />
+    <Compile Include="Converters\BrushRoundConverter.cs" />
     <Compile Include="Converters\HsbLinearGradientConverter.cs" />
     <Compile Include="Converters\HsbToColorConverter.cs" />
+    <Compile Include="Converters\InvertedMultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="Converters\SnackbarMessageTypeConverter.cs" />
     <Compile Include="EBaseTheme.cs" />
+    <Compile Include="Helpers\ComboBoxHelper.cs" />
+    <Compile Include="Helpers\RippleHelper.cs" />
     <Compile Include="ISnackbarMessageQueue.cs" />
     <Compile Include="SnackbarMessageQueue.cs" />
     <Compile Include="Controls\Underline.cs" />
@@ -206,6 +212,7 @@
     <Compile Include="Helpers\TransitionHelper.cs" />
     <Compile Include="SnackbarMessageQueueItem.cs" />
     <Compile Include="ToRemove.cs" />
+    <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

@@ -1,0 +1,94 @@
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.TextBoxes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
+    xmlns:validation="clr-namespace:WSharp.Wpf.ValidationRules;assembly=WSharp.Wpf"
+    xmlns:viewModels="clr-namespace:WSharp.Wpf.Demo.ViewModels">
+    <UserControl.DataContext>
+        <viewModels:TextBoxesViewModel />
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <Style BasedOn="{StaticResource Icon}" TargetType="{x:Type controls:Icon}">
+            <Setter Property="Margin" Value="0,0,2,4" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+
+        <Style BasedOn="{StaticResource TextBox}" TargetType="{x:Type TextBox}">
+            <Setter Property="Width" Value="150" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+        </Style>
+    </UserControl.Resources>
+
+    <WrapPanel Orientation="Horizontal">
+        <!--  style: TextBox; with data validation  -->
+        <StackPanel
+            Margin="16"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <controls:Icon Foreground="{Binding ElementName=NameTextBox, Path=BorderBrush}" Resource="{StaticResource Account}" />
+            <TextBox
+                x:Name="NameTextBox"
+                helpers:LabelHelper.HelperText="Helper text longer than error"
+                helpers:LabelHelper.Label="Name">
+                <TextBox.Text>
+                    <Binding Path="Name" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <validation:NotEmptyValidationRule ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+        </StackPanel>
+
+        <!--  style: TextBox; no transitions  -->
+        <StackPanel
+            Margin="16"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <controls:Icon Foreground="{Binding ElementName=PhoneTextbox, Path=BorderBrush}" Resource="{StaticResource Phone}" />
+            <TextBox x:Name="PhoneTextbox" helpers:TransitionHelper.DisableTransitions="True" />
+        </StackPanel>
+
+        <!--  style: TextBox  -->
+        <StackPanel
+            Margin="16"
+            VerticalAlignment="Bottom"
+            Orientation="Horizontal">
+            <controls:Icon Foreground="{Binding ElementName=CommentTextBox, Path=BorderBrush}" Resource="{StaticResource Comment}" />
+            <TextBox
+                x:Name="CommentTextBox"
+                helpers:LabelHelper.HelperText="Insert your comment here"
+                helpers:LabelHelper.Label="Comment" />
+        </StackPanel>
+
+        <!--  style: FloatingLabelTextBox  -->
+        <StackPanel Margin="16" Orientation="Horizontal">
+            <controls:Icon Foreground="{Binding ElementName=FloatingLabelTextBox, Path=BorderBrush}" Resource="{StaticResource Comment}" />
+            <TextBox
+                x:Name="FloatingLabelTextBox"
+                Width="150"
+                VerticalAlignment="Bottom"
+                helpers:LabelHelper.Label="Floating Label"
+                Style="{StaticResource FloatingLabelTextBox}" />
+        </StackPanel>
+
+        <TextBox
+            VerticalAlignment="Center"
+            helpers:TextFieldHelper.HasClearButton="True"
+            helpers:TextFieldHelper.SuffixText="mm"
+            Style="{StaticResource FloatingLabelTextBox}"
+            Text="Good stuff">
+            <helpers:LabelHelper.Label>
+                <StackPanel Margin="-2,0,0,0" Orientation="Horizontal">
+                    <controls:Icon Resource="{StaticResource AccessPoint}" />
+                    <TextBlock>
+                        WiFi
+                    </TextBlock>
+                </StackPanel>
+            </helpers:LabelHelper.Label>
+        </TextBox>
+    </WrapPanel>
+</UserControl>

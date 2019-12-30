@@ -83,6 +83,10 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\TextBoxesViewModel.cs" />
+    <Compile Include="Views\ComboBoxes.xaml.cs">
+      <DependentUpon>ComboBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Expanders.xaml.cs">
       <DependentUpon>Expanders.xaml</DependentUpon>
     </Compile>
@@ -92,9 +96,16 @@
     <Compile Include="Views\Sliders.xaml.cs">
       <DependentUpon>Sliders.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\TextBoxes.xaml.cs">
+      <DependentUpon>TextBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Texts.xaml.cs">
       <DependentUpon>Texts.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\ComboBoxes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Expanders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -132,6 +143,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Sliders.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TextBoxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

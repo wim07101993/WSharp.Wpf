@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
 
@@ -34,7 +35,7 @@
                     TextWrapping="Wrap"
                     UseLayoutRounding="false" />
             </Border>
-            <Popup
+            <controls:PopupEx
                 x:Name="ValidationPopup"
                 AllowsTransparency="True"
                 IsOpen="False"
@@ -50,7 +51,7 @@
                         TextWrapping="Wrap"
                         UseLayoutRounding="false" />
                 </Border>
-            </Popup>
+            </controls:PopupEx>
         </StackPanel>
         <ControlTemplate.Triggers>
             <MultiDataTrigger>
