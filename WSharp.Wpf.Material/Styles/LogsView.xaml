@@ -8,6 +8,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Button/RaisedButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="LogsView" TargetType="{x:Type controls:LogsView}">
@@ -49,13 +50,6 @@
                                             </Style.Setters>
                                         </Style>
                                         <Style TargetType="{x:Type controls:TimePicker}">
-                                            <Style.Setters>
-                                                <Setter Property="Margin" Value="10,0,10,10" />
-                                                <Setter Property="MinWidth" Value="100" />
-                                                <Setter Property="VerticalAlignment" Value="Bottom" />
-                                            </Style.Setters>
-                                        </Style>
-                                        <Style TargetType="{x:Type Button}">
                                             <Style.Setters>
                                                 <Setter Property="Margin" Value="10,0,10,10" />
                                                 <Setter Property="MinWidth" Value="100" />
@@ -182,9 +176,21 @@
 
                                     <!--  buttons  -->
                                     <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
-                                        <Button x:Name="PART_SearchButton" Content="Search" />
+                                        <Button
+                                            x:Name="PART_SearchButton"
+                                            MinWidth="100"
+                                            Margin="10,0,10,10"
+                                            VerticalAlignment="Bottom"
+                                            Content="Search"
+                                            Style="{StaticResource RaisedAccentButton}" />
 
-                                        <Button x:Name="PART_ClearFilterButton" Content="Clear" />
+                                        <Button
+                                            x:Name="PART_ClearFilterButton"
+                                            MinWidth="100"
+                                            Margin="10,0,10,10"
+                                            VerticalAlignment="Bottom"
+                                            Content="Clear"
+                                            Style="{StaticResource RaisedButton}" />
                                     </StackPanel>
                                 </WrapPanel>
                             </Expander>

@@ -1,0 +1,107 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Button/FocusVisual.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="FlatButton" TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueMidBrush}" />
+        <Setter Property="helpers:RippleHelper.Feedback" Value="{DynamicResource FlatButtonRippleBrush}" />
+        <Setter Property="TextBlock.FontWeight" Value="Medium" />
+        <Setter Property="TextBlock.FontSize" Value="14" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="16,4,16,4" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
+                    <Grid>
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(helpers:ButtonHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                            <controls:Ripple
+                                Padding="{TemplateBinding Padding}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Focusable="False"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <controls:Ripple.Clip>
+                                    <MultiBinding Converter="{x:Static converters:BorderClipConverter.Instance}">
+                                        <Binding ElementName="border" Path="ActualWidth" />
+                                        <Binding ElementName="border" Path="ActualHeight" />
+                                        <Binding ElementName="border" Path="CornerRadius" />
+                                        <Binding ElementName="border" Path="BorderThickness" />
+                                    </MultiBinding>
+                                </controls:Ripple.Clip>
+                            </controls:Ripple>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsDefaulted" Value="true">
+                            <!--  Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/  -->
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource FlatButtonClickBrush}" />
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource FlatButtonClickBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="0.23" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="FlatAccentButton"
+        BasedOn="{StaticResource FlatButton}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentBrush}" />
+    </Style>
+
+    <Style
+        x:Key="FlatAccentBgButton"
+        BasedOn="{StaticResource RaisedAccentButton}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth0" />
+    </Style>
+
+    <Style
+        x:Key="FlatLightBgButton"
+        BasedOn="{StaticResource RaisedLightButton}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth0" />
+    </Style>
+
+    <Style
+        x:Key="FlatMidBgButton"
+        BasedOn="{StaticResource RaisedButton}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth0" />
+    </Style>
+
+    <Style
+        x:Key="FlatDarkBgButton"
+        BasedOn="{StaticResource RaisedDarkButton}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth0" />
+    </Style>
+
+</ResourceDictionary>
