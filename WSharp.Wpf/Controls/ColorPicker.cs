@@ -38,7 +38,7 @@ namespace WSharp.Wpf.Controls
                 FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
                 ColorPropertyChangedCallback));
 
-        internal static readonly DependencyProperty HsbProperty = DependencyProperty.Register(
+        public static readonly DependencyProperty HsbProperty = DependencyProperty.Register(
             nameof(Hsb),
             typeof(Hsb),
             typeof(ColorPicker),
@@ -63,7 +63,7 @@ namespace WSharp.Wpf.Controls
             set => SetValue(ColorProperty, value);
         }
 
-        internal Hsb Hsb
+        public Hsb Hsb
         {
             get => (Hsb)GetValue(HsbProperty);
             set => SetValue(HsbProperty, value);

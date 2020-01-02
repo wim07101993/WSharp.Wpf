@@ -85,6 +85,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindingProxy.cs" />
     <Compile Include="Controls\ColorPicker.cs" />
     <Compile Include="Controls\ColorZone.cs" />
     <Compile Include="Controls\ComboBoxPopup.cs" />
