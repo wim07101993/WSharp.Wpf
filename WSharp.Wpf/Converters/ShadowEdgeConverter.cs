@@ -10,7 +10,7 @@ namespace WSharp.Wpf.Converters
     public class ShadowEdgeConverter : ATypedMultiValueConverter<object, Brush>
     {
         private static ShadowEdgeConverter instance;
-        public static ShadowEdgeConverter Instance => instance ?? (instance = new ShadowEdgeConverter());
+        public static ShadowEdgeConverter Instance => instance ??= new ShadowEdgeConverter();
 
         protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<object> typedValues)
         {

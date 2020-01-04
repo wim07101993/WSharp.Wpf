@@ -9,7 +9,7 @@ namespace WSharp.Wpf.Converters
     public class EnumToIntConverter : ATypedValueConverter<Enum, int>
     {
         private static EnumToIntConverter instance;
-        public static EnumToIntConverter Instance => instance ?? (instance = new EnumToIntConverter());
+        public static EnumToIntConverter Instance => instance ??= new EnumToIntConverter();
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

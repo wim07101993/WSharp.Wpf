@@ -7,7 +7,7 @@ namespace WSharp.Wpf.Converters
     public class StringToVisibilityConverter : AStringNullOrEmptyConverter<Visibility>
     {
         private static StringToVisibilityConverter instance;
-        public static StringToVisibilityConverter Instance => instance ?? (instance = new StringToVisibilityConverter());
+        public static StringToVisibilityConverter Instance => instance ??= new StringToVisibilityConverter();
 
         public override Visibility NullOrEmptyValue { get; } = Visibility.Collapsed;
 

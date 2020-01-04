@@ -8,7 +8,7 @@ namespace WSharp.Wpf.Converters
     public class EnumStringCollectionConverter : ATypedValueConverter<Type, string[]>
     {
         private static EnumStringCollectionConverter instance;
-        public static EnumStringCollectionConverter Instance => instance ?? (instance = new EnumStringCollectionConverter());
+        public static EnumStringCollectionConverter Instance => instance ??= new EnumStringCollectionConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out Type typedValue)
         {

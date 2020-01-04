@@ -7,7 +7,7 @@ namespace WSharp.Wpf.Converters
     public class NewLineRemover : ATypedValueConverter<string, string>
     {
         private static NewLineRemover instance;
-        public static NewLineRemover Instance => instance ?? (instance = new NewLineRemover());
+        public static NewLineRemover Instance => instance ??= new NewLineRemover();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out string typedValue)
         {

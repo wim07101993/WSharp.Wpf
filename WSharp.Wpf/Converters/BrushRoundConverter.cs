@@ -7,7 +7,7 @@ namespace WSharp.Wpf.Converters
     public class BrushRoundConverter : ATypedValueConverter<SolidColorBrush, Brush>
     {
         private static BrushRoundConverter instance;
-        public static BrushRoundConverter Instance => instance ?? (instance = new BrushRoundConverter());
+        public static BrushRoundConverter Instance => instance ??= new BrushRoundConverter();
 
         public Brush HighValue { get; set; } = Brushes.White;
 

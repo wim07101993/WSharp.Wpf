@@ -11,7 +11,7 @@ namespace WSharp.Wpf.Converters
     public class ListToStringConverter : ATypedValueConverter<IList<object>, string>
     {
         private static ListToStringConverter instance;
-        public static ListToStringConverter Instance => instance ?? (instance = new ListToStringConverter());
+        public static ListToStringConverter Instance => instance ??= new ListToStringConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out IList<object> typedValue)
         {

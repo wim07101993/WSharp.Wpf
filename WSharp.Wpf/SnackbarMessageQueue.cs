@@ -90,7 +90,12 @@ namespace WSharp.Wpf
 
             private void UiElementOnMouseEnter(object sender, MouseEventArgs mouseEventArgs) => _ = _waitHandle.Reset();
 
-            public void Dispose() => _cleanUp();
+            public void Dispose()
+            {
+                _cleanUp();
+                _disposedWaitHandle.Dispose();
+                _waitHandle.Dispose();
+            }
         }
 
         #endregion private class MouseNotOverManagedWaitHandle : IDisposable
@@ -472,6 +477,7 @@ namespace WSharp.Wpf
             _ = _disposedEvent.Set();
             _disposedEvent.Dispose();
             _pausedEvent.Dispose();
+            _messageWaitingEvent.Dispose();
         }
     }
 }

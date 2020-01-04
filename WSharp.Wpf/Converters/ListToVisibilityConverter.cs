@@ -9,7 +9,7 @@ namespace WSharp.Wpf.Converters
     public class ListToVisibilityConverter : ATypedValueConverter<ICollection, Visibility>
     {
         private static ListToVisibilityConverter instance;
-        public static ListToVisibilityConverter Instance => instance ?? (instance = new ListToVisibilityConverter());
+        public static ListToVisibilityConverter Instance => instance ??= new ListToVisibilityConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out ICollection typedValue)
             => base.ValidateTIn(value, culture, out typedValue) || value == null;

@@ -7,7 +7,7 @@ namespace WSharp.Wpf.Converters
     public class ObjectToBooleanConverter : ATypedValueConverter<object, bool>
     {
         private static ObjectToBooleanConverter instance;
-        public static ObjectToBooleanConverter Instance => instance ?? (instance = new ObjectToBooleanConverter());
+        public static ObjectToBooleanConverter Instance => instance ??= new ObjectToBooleanConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out object typedValue)
         {

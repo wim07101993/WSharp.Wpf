@@ -12,7 +12,7 @@ namespace WSharp.Wpf.Converters
     public class ListToNoNewLineStringConverter : ATypedValueConverter<IList<object>, string>
     {
         private static ListToNoNewLineStringConverter instance;
-        public static ListToNoNewLineStringConverter Instance => instance ?? (instance = new ListToNoNewLineStringConverter());
+        public static ListToNoNewLineStringConverter Instance => instance ??= new ListToNoNewLineStringConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out IList<object> typedValue)
         {

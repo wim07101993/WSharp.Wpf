@@ -10,7 +10,7 @@ namespace WSharp.Wpf.Converters
     public class HsbLinearGradientConverter : ATypedValueConverter<double, LinearGradientBrush>
     {
         private static HsbLinearGradientConverter instance;
-        public static HsbLinearGradientConverter Instance => instance ?? (instance = new HsbLinearGradientConverter());
+        public static HsbLinearGradientConverter Instance => instance ??= new HsbLinearGradientConverter();
 
         protected override bool TInToTOut(double tin, object parameter, CultureInfo culture, out LinearGradientBrush tout)
         {

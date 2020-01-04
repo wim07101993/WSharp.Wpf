@@ -25,7 +25,7 @@ namespace WSharp.Wpf.Converters
 #pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
 
         private static TraceEventTypeToStringConverter instance;
-        public static TraceEventTypeToStringConverter Instance => instance ?? (instance = new TraceEventTypeToStringConverter());
+        public static TraceEventTypeToStringConverter Instance => instance ??= new TraceEventTypeToStringConverter();
 
         protected override bool TInToTOut(TraceEventType tin, object parameter, CultureInfo culture, out string tout)
         {

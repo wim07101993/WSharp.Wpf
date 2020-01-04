@@ -8,7 +8,7 @@ namespace WSharp.Wpf.Converters
     public class EditorBrowsableStateToBooleanConverter : ATypedValueConverter<EditorBrowsableState, bool>
     {
         private static EditorBrowsableStateToBooleanConverter instance;
-        public static EditorBrowsableStateToBooleanConverter Instance => instance ?? (instance = new EditorBrowsableStateToBooleanConverter());
+        public static EditorBrowsableStateToBooleanConverter Instance => instance ??= new EditorBrowsableStateToBooleanConverter();
 
         public EditorBrowsableState BrosableStates { get; set; } = EditorBrowsableState.Advanced | EditorBrowsableState.Always;
 

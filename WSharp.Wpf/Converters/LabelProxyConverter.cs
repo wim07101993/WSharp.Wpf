@@ -9,7 +9,7 @@ namespace WSharp.Wpf.Converters
     {
         private static LabelProxyConverter instance;
 
-        public static LabelProxyConverter Instance => instance ?? (instance = new LabelProxyConverter());
+        public static LabelProxyConverter Instance => instance ??= new LabelProxyConverter();
 
         protected override bool TInToTOut(Control tin, object parameter, CultureInfo culture, out ILabelProxy tout)
         {

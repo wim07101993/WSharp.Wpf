@@ -9,7 +9,7 @@ namespace WSharp.Wpf.Converters
     public class BorderClipConverter : IMultiValueConverter
     {
         private static BorderClipConverter instance;
-        public static BorderClipConverter Instance => instance ?? (instance = new BorderClipConverter());
+        public static BorderClipConverter Instance => instance ??= new BorderClipConverter();
 
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {

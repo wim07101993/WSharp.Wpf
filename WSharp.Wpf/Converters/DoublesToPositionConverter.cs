@@ -8,7 +8,7 @@ namespace WSharp.Wpf.Converters
     public class DoublesToPositionConverter : ATypedMultiValueConverter<double, double>
     {
         private static DoublesToPositionConverter instance;
-        public static DoublesToPositionConverter Instance => instance ?? (instance = new DoublesToPositionConverter());
+        public static DoublesToPositionConverter Instance => instance ??= new DoublesToPositionConverter();
 
         protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<double> typedValues)
         {

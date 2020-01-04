@@ -8,7 +8,7 @@ namespace WSharp.Wpf.Converters
     public class ShadowConverter : ATypedValueConverter<EShadowDepth, DropShadowEffect>
     {
         private static ShadowConverter instance;
-        public static ShadowConverter Instance => instance ?? (instance = new ShadowConverter());
+        public static ShadowConverter Instance => instance ??= new ShadowConverter();
 
         protected override bool TInToTOut(EShadowDepth tin, object parameter, CultureInfo culture, out DropShadowEffect tout)
         {

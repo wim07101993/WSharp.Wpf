@@ -9,33 +9,18 @@ namespace WSharp.Wpf.Converters
     {
         public EMathOperation Operation { get; set; }
 
-        protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<double> typedValues)
-        {
-            return base.ValidateTin(values, culture, out typedValues) && typedValues.Count == 2;
-        }
+        protected override bool ValidateTin(object[] values, CultureInfo culture, out IList<double> typedValues) 
+            => base.ValidateTin(values, culture, out typedValues) && typedValues.Count == 2;
 
         protected override bool TInToTOut(IList<double> tins, object parameter, CultureInfo culture, out double tout)
         {
-            switch (Operation)
+            tout = Operation switch
             {
-                case EMathOperation.Divide:
-                    tout = tins[0] / tins[1];
-                    break;
-
-                case EMathOperation.Multiply:
-                    tout = tins[0] * tins[1];
-                    break;
-
-                case EMathOperation.Subtract:
-                    tout = tins[0] - tins[1];
-                    break;
-
-                default:
-                    // (case MathOperation.Add:)
-                    tout = tins[0] + tins[1];
-                    break;
-            }
-
+                EMathOperation.Divide => tins[0] / tins[1],
+                EMathOperation.Multiply => tins[0] * tins[1],
+                EMathOperation.Subtract => tins[0] - tins[1],
+                _ => tins[0] + tins[1],// (case MathOperation.Add:)
+            };
             return true;
         }
     }

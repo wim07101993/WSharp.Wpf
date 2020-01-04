@@ -9,7 +9,7 @@ namespace WSharp.Wpf.Converters
     public class SnackbarMessageTypeConverter : TypeConverter
     {
         private static ShadowEdgeConverter instance;
-        public static ShadowEdgeConverter Instance => instance ?? (instance = new ShadowEdgeConverter());
+        public static ShadowEdgeConverter Instance => instance ??= new ShadowEdgeConverter();
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);

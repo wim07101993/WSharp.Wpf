@@ -7,7 +7,7 @@ namespace WSharp.Wpf.Converters
     public class NullableDateTimeToDateTimeConverter : IValueConverter
     {
         private static NullableDateTimeToDateTimeConverter instance;
-        public static NullableDateTimeToDateTimeConverter Instance => instance ?? (instance = new NullableDateTimeToDateTimeConverter());
+        public static NullableDateTimeToDateTimeConverter Instance => instance ??= new NullableDateTimeToDateTimeConverter();
 
         public DateTime Default { get; set; } = DateTime.Now;
 

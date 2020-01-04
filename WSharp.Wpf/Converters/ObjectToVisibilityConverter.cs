@@ -8,7 +8,7 @@ namespace WSharp.Wpf.Converters
     public class ObjectToVisibilityConverter : ATypedValueConverter<object, Visibility>
     {
         private static ObjectToVisibilityConverter instance;
-        public static ObjectToVisibilityConverter Instance => instance ?? (instance = new ObjectToVisibilityConverter());
+        public static ObjectToVisibilityConverter Instance => instance ??= new ObjectToVisibilityConverter();
 
         protected override bool ValidateTIn(object value, CultureInfo culture, out object typedValue)
         {

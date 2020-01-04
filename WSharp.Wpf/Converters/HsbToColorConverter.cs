@@ -10,7 +10,7 @@ namespace WSharp.Wpf.Converters
     public class HsbToColorConverter : ATypedValueConverter<Hsb, SolidColorBrush>, IMultiValueConverter
     {
         private static HsbToColorConverter instance;
-        public static HsbToColorConverter Instance => instance ?? (instance = new HsbToColorConverter());
+        public static HsbToColorConverter Instance => instance ??= new HsbToColorConverter();
 
         protected override bool TInToTOut(Hsb tin, object parameter, CultureInfo culture, out SolidColorBrush tout)
         {
