@@ -10,8 +10,8 @@
                 <!--<ResourceDictionary Source="pack://application:,,,/Dragablz;component/Themes/materialdesign.xaml" />-->
 
                 <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Themes/Recommended/Primary/DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Themes/Recommended/Accent/Lime.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Theme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
