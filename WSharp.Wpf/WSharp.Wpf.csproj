@@ -120,6 +120,7 @@
     <Compile Include="Controls\SnackbarMessageEventArgs.cs" />
     <Compile Include="Converters\BorderClipConverter.cs" />
     <Compile Include="Converters\BrushRoundConverter.cs" />
+    <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="Converters\EnumToStringConverter.cs" />
     <Compile Include="Converters\HsbLinearGradientConverter.cs" />
     <Compile Include="Converters\HsbToColorConverter.cs" />

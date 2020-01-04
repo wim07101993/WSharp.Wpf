@@ -2,23 +2,8 @@
     x:Class="WSharp.Wpf.Demo.Views.Fields"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:views="clr-namespace:WSharp.Wpf.Demo.Views">
     <StackPanel Orientation="Vertical">
         <views:TextBoxes />
-        <StackPanel Orientation="Horizontal">
-            <TextBox
-                Width="100"
-                Margin="10"
-                HorizontalAlignment="Left"
-                Text="abc" />
-            <controls:DateTimePicker MinWidth="100" Margin="10" />
-            <controls:NumericUpDown
-                Width="100"
-                Margin="10"
-                HorizontalAlignment="Left"
-                Value="10" />
-        </StackPanel>
-
     </StackPanel>
 </UserControl>
