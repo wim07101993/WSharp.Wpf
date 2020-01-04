@@ -1,0 +1,58 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ColorPicker/ColorSlider.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <ControlTemplate x:Key="ColorPickerVertical" TargetType="{x:Type controls:ColorPicker}">
+        <DockPanel>
+            <Slider
+                x:Name="PART_HueSlider"
+                Margin="8"
+                DockPanel.Dock="{TemplateBinding HueSliderPosition}"
+                IsMoveToPointEnabled="True"
+                Orientation="Vertical"
+                Style="{StaticResource ColorSlider}"
+                Value="{Binding Hsb.Hue, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWay}" />
+            <Grid>
+                <Rectangle Fill="{Binding Hsb.Hue, RelativeSource={RelativeSource TemplatedParent}, Converter={x:Static converters:HsbLinearGradientConverter.Instance}}" />
+                <Rectangle Fill="Black">
+                    <Rectangle.OpacityMask>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                            <GradientStop Offset="0" Color="Transparent" />
+                            <GradientStop Offset="1.0" Color="Black" />
+                        </LinearGradientBrush>
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+
+                <Canvas
+                    Name="PART_SaturationBrightnessPicker"
+                    Background="Transparent"
+                    ClipToBounds="True"
+                    Focusable="True">
+                    <Thumb
+                        Name="PART_SaturationBrightnessPickerThumb"
+                        Canvas.Left="20"
+                        Canvas.Top="20">
+                        <Thumb.Template>
+                            <ControlTemplate>
+                                <Ellipse
+                                    Width="24"
+                                    Height="24"
+                                    Margin="-12,-12,0,0"
+                                    Fill="Transparent"
+                                    Stroke="White"
+                                    StrokeThickness="2" />
+                            </ControlTemplate>
+                        </Thumb.Template>
+                    </Thumb>
+                </Canvas>
+            </Grid>
+        </DockPanel>
+    </ControlTemplate>
+
+</ResourceDictionary>

@@ -8,6 +8,7 @@
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Card.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Clock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ColorPicker/ColorPicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Divider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/LogEntry.xaml" />
@@ -36,6 +37,7 @@
     <Style BasedOn="{StaticResource Card}" TargetType="{x:Type material:Card}" />
     <Style BasedOn="{StaticResource Card}" TargetType="{x:Type controls:ClippedContentControl}" />
     <Style BasedOn="{StaticResource Clock}" TargetType="{x:Type controls:Clock}" />
+    <Style BasedOn="{StaticResource ColorPicker}" TargetType="{x:Type controls:ColorPicker}" />
     <Style BasedOn="{StaticResource Divider}" TargetType="{x:Type controls:Divider}" />
     <Style BasedOn="{StaticResource Icon}" TargetType="{x:Type controls:Icon}" />
     <Style BasedOn="{StaticResource LogEntry}" TargetType="{x:Type controls:LogEntry}" />
@@ -54,7 +56,8 @@
 
 
     <!--  This is the current way to setup your app's initial color theme  -->
-    <!--<ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />-->
-    <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />-->
-    <!--<ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />-->
+    <!--<ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Themes/Recommended/Primary/DeepPurple.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Themes/Recommended/Accent/Lime.xaml" />
+    <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Theme.xaml" />-->
 </ResourceDictionary>
