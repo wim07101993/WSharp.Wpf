@@ -1,9 +1,8 @@
 ﻿using System.Globalization;
 using System.Windows.Media;
-
-using MaterialDesignColors.ColorManipulation;
-
+using WSharp.Wpf.Colors;
 using WSharp.Wpf.Converters.Bases;
+using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Converters
 {
@@ -14,7 +13,7 @@ namespace WSharp.Wpf.Converters
 
         protected override bool TInToTOut(double tin, object parameter, CultureInfo culture, out LinearGradientBrush tout)
         {
-            tout = new LinearGradientBrush(Colors.White, new Hsb(tin, 1, 1).ToColor(), 0);
+            tout = new LinearGradientBrush(System.Windows.Media.Colors.White, new Hsb(tin, 1, 1).ToColor(), 0);
             return true;
         }
     }

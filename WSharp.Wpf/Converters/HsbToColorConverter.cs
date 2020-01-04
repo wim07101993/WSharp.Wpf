@@ -2,8 +2,9 @@
 using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
-using MaterialDesignColors.ColorManipulation;
+using WSharp.Wpf.Colors;
 using WSharp.Wpf.Converters.Bases;
+using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Converters
 {

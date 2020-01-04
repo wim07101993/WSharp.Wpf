@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.2.1\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -86,6 +83,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingProxy.cs" />
+    <Compile Include="Colors\ColorPair.cs" />
+    <Compile Include="Colors\Hsb.cs" />
+    <Compile Include="Colors\Hsl.cs" />
+    <Compile Include="Colors\Lab.cs" />
+    <Compile Include="Colors\LabConstants.cs" />
+    <Compile Include="Colors\Xyz.cs" />
     <Compile Include="Controls\ColorPicker.cs" />
     <Compile Include="Controls\ColorZone.cs" />
     <Compile Include="Controls\ComboBoxPopup.cs" />
@@ -124,6 +127,11 @@
     <Compile Include="Converters\InvertedObjectToVisibilityConverter.cs" />
     <Compile Include="Converters\SnackbarMessageTypeConverter.cs" />
     <Compile Include="EBaseTheme.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\HslExtensions.cs" />
+    <Compile Include="Extensions\LabExtensions.cs" />
+    <Compile Include="Extensions\ThemeExtensions.cs" />
+    <Compile Include="Extensions\XyzExtensions.cs" />
     <Compile Include="Helpers\ComboBoxHelper.cs" />
     <Compile Include="Helpers\RippleHelper.cs" />
     <Compile Include="ISnackbarMessageQueue.cs" />
@@ -215,6 +223,8 @@
     <Compile Include="ShadowLocalInfo.cs" />
     <Compile Include="Helpers\TransitionHelper.cs" />
     <Compile Include="SnackbarMessageQueueItem.cs" />
+    <Compile Include="Themes\IBaseTheme.cs" />
+    <Compile Include="Themes\ITheme.cs" />
     <Compile Include="ToRemove.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

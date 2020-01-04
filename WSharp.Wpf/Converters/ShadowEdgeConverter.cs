@@ -47,7 +47,7 @@ namespace WSharp.Wpf.Converters
             if (edges.HasFlag(EShadowEdges.Bottom))
                 rect = new Rect(rect.X, rect.Y, rect.Width, rect.Height + radius);
 
-            var size = new GeometryDrawing(new SolidColorBrush(Colors.White), new Pen(), new RectangleGeometry(rect));
+            var size = new GeometryDrawing(new SolidColorBrush(System.Windows.Media.Colors.White), new Pen(), new RectangleGeometry(rect));
             tout = new DrawingBrush(size)
             {
                 Stretch = Stretch.None,

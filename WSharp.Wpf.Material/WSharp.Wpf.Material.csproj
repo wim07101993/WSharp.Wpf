@@ -78,6 +78,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Underline.cs" />
+    <Compile Include="Extensions\ResourceDictionaryExtensions.cs" />
+    <Compile Include="Extensions\ThemeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -92,6 +94,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Controls\Card.cs" />
+    <Compile Include="Themes\DarkTheme.cs" />
+    <Compile Include="Themes\LightTheme.cs" />
+    <Compile Include="Themes\Theme.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

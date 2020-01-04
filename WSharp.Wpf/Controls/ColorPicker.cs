@@ -3,9 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-
-using MaterialDesignColors.ColorManipulation;
-
+using WSharp.Wpf.Colors;
 using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
