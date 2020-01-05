@@ -126,6 +126,7 @@
     <Compile Include="Converters\HsbToColorConverter.cs" />
     <Compile Include="Converters\InvertedMultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="Converters\InvertedObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\PointValueConverter.cs" />
     <Compile Include="Converters\SnackbarMessageTypeConverter.cs" />
     <Compile Include="EBaseTheme.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Extensions\XyzExtensions.cs" />
     <Compile Include="Helpers\ComboBoxHelper.cs" />
     <Compile Include="Helpers\RippleHelper.cs" />
+    <Compile Include="Helpers\ToggleButtonHelper.cs" />
     <Compile Include="ISnackbarMessageQueue.cs" />
     <Compile Include="SnackbarMessageQueue.cs" />
     <Compile Include="Controls\Underline.cs" />
