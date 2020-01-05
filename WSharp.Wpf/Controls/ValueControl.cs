@@ -45,6 +45,12 @@ namespace WSharp.Wpf.Controls
                 : (default);
 
             control.OnValueChanged(oldValue, newValue);
+
+            var args = new RoutedPropertyChangedEventArgs<T>(oldValue, newValue)
+            {
+                RoutedEvent = ValueChangedEvent
+            };
+            control.RaiseEvent(args);
         }
 
         private static object CoerceValue(DependencyObject d, object baseValue)

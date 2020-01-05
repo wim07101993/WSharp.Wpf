@@ -2,13 +2,16 @@
 using System.Windows.Controls;
 using WSharp.Wpf.Extensions;
 using System.Windows.Media;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
+using System.Linq;
 
 namespace WSharp.Wpf.Helpers
 {
     /// <summary>Helper properties for working with text fields.</summary>
     public static class TextFieldHelper
     {
-        #region view margin
+        #region TextBoxViewMargin
 
         /// <summary>The text box view margin property</summary>
         public static readonly DependencyProperty TextBoxViewMarginProperty = DependencyProperty.RegisterAttached(
@@ -61,9 +64,9 @@ namespace WSharp.Wpf.Helpers
             };
         }
 
-        #endregion view margin
+        #endregion TextBoxViewMargin
 
-        #region decoration visibility
+        #region DecorationVisibility
 
         /// <summary>Controls the visibility of the underline decoration.</summary>
         public static readonly DependencyProperty DecorationVisibilityProperty = DependencyProperty.RegisterAttached(
@@ -80,9 +83,9 @@ namespace WSharp.Wpf.Helpers
         /// <summary>Controls the visibility of the underline decoration.</summary>
         public static void SetDecorationVisibility(DependencyObject element, Visibility value) => element.SetValue(DecorationVisibilityProperty, value);
 
-        #endregion decoration visibility
+        #endregion DecorationVisibility
 
-        #region underline
+        #region UnderlineBrush
 
         /// <summary>
         /// The color for highlighting effects on the border of a text box.
@@ -103,9 +106,9 @@ namespace WSharp.Wpf.Helpers
         /// </summary>
         public static Brush GetUnderlineBrush(DependencyObject element) => (Brush)element.GetValue(UnderlineBrushProperty);
 
-        #endregion underline
+        #endregion UnderlineBrush
 
-        #region corner radius
+        #region TextFieldCornerRadius
 
         /// <summary>
         /// Controls the corner radius of the surrounding box.
@@ -120,9 +123,9 @@ namespace WSharp.Wpf.Helpers
 
         public static CornerRadius GetTextFieldCornerRadius(DependencyObject element) => (CornerRadius)element.GetValue(TextFieldCornerRadiusProperty);
 
-        #endregion corner radius
+        #endregion TextFieldCornerRadius
 
-        #region ripple on focus
+        #region RippleOnFocusEnabled
 
         /// <summary>
         /// Enables a ripple effect on focusing the text box.
@@ -137,9 +140,9 @@ namespace WSharp.Wpf.Helpers
 
         public static bool GetRippleOnFocusEnabled(DependencyObject element) => (bool)element.GetValue(RippleOnFocusEnabledProperty);
 
-        #endregion ripple on focus
+        #endregion RippleOnFocusEnabled
 
-        #region suffix text
+        #region SuffixText
 
         /// <summary>
         /// SuffixText dependency property
@@ -154,9 +157,9 @@ namespace WSharp.Wpf.Helpers
 
         public static string GetSuffixText(DependencyObject element) => (string)element.GetValue(SuffixTextProperty);
 
-        #endregion suffix text
+        #endregion SuffixText
 
-        #region has clear button
+        #region HasClearButton
 
         /// <summary>
         /// Controls the visbility of the clear button.
@@ -186,7 +189,7 @@ namespace WSharp.Wpf.Helpers
             var clearButton = box.GetTemplateChild<Button>("PART_ClearButton");
             if (clearButton != null)
             {
-                void handler(object sender, RoutedEventArgs args)
+                void Handler(object sender, RoutedEventArgs args)
                 {
                     (box as TextBox)?.SetCurrentValue(TextBox.TextProperty, null);
                     (box as ComboBox)?.SetCurrentValue(ComboBox.TextProperty, null);
@@ -195,9 +198,9 @@ namespace WSharp.Wpf.Helpers
                 }
 
                 if (bValue)
-                    clearButton.Click += handler;
+                    clearButton.Click += Handler;
                 else
-                    clearButton.Click -= handler;
+                    clearButton.Click -= Handler;
             }
         }
 
@@ -205,9 +208,9 @@ namespace WSharp.Wpf.Helpers
 
         public static bool GetHasClearButton(DependencyObject element) => (bool)element.GetValue(HasClearButtonProperty);
 
-        #endregion has clear button
+        #endregion HasClearButton
 
-        #region underline corner radius
+        #region UnderlineCornerRadius
 
         /// <summary>
         /// Controls the corner radius of the bottom line of the surrounding box.
@@ -222,9 +225,9 @@ namespace WSharp.Wpf.Helpers
 
         public static CornerRadius GetUnderlineCornerRadius(DependencyObject element) => (CornerRadius)element.GetValue(UnderlineCornerRadiusProperty);
 
-        #endregion underline corner radius
+        #endregion UnderlineCornerRadius
 
-        #region has filled text field
+        #region HasFilledTextField
 
         /// <summary>
         /// Controls the visibility of the filled text field.
@@ -239,9 +242,9 @@ namespace WSharp.Wpf.Helpers
 
         public static bool GetHasFilledTextField(DependencyObject element) => (bool)element.GetValue(HasFilledTextFieldProperty);
 
-        #endregion has filled text field
+        #endregion HasFilledTextField
 
-        #region has outlined text field
+        #region HasOutlinedTextField
 
         /// <summary>
         /// Controls the visibility of the text field area box.
@@ -256,9 +259,9 @@ namespace WSharp.Wpf.Helpers
 
         public static bool GetHasOutlinedTextField(DependencyObject element) => (bool)element.GetValue(HasOutlinedTextFieldProperty);
 
-        #endregion has outlined text field
+        #endregion HasOutlinedTextField
 
-        #region new spec highlight enabled
+        #region NewSpecHighlightingEnabled
 
         /// <summary>
         /// Controls the highlighting style of a text box.
@@ -273,6 +276,134 @@ namespace WSharp.Wpf.Helpers
 
         public static bool GetNewSpecHighlightingEnabled(DependencyObject element) => (bool)element.GetValue(NewSpecHighlightingEnabledProperty);
 
-        #endregion new spec highlight enabled
+        #endregion NewSpecHighlightingEnabled
+
+        #region IncludeSpellingSuggestions
+
+        /// <summary>
+        /// Automatically inserts spelling suggestions into the text box context menu.
+        /// </summary>
+        public static readonly DependencyProperty IncludeSpellingSuggestionsProperty = DependencyProperty.RegisterAttached(
+            "IncludeSpellingSuggestions",
+            typeof(bool), 
+            typeof(TextFieldHelper),
+            new PropertyMetadata(default(bool), IncludeSpellingSuggestionsChanged));
+
+        public static void SetIncludeSpellingSuggestions(TextBoxBase element, bool value) => element.SetValue(IncludeSpellingSuggestionsProperty, value);
+
+        public static bool GetIncludeSpellingSuggestions(TextBoxBase element) => (bool)element.GetValue(IncludeSpellingSuggestionsProperty);
+
+        private static void IncludeSpellingSuggestionsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(d is TextBoxBase textBox))
+                return;
+            
+            if ((bool)e.NewValue)
+            {
+                textBox.ContextMenuOpening += TextBoxOnContextMenuOpening;
+                textBox.ContextMenuClosing += TextBoxOnContextMenuClosing;
+            }
+            else
+            {
+                textBox.ContextMenuOpening -= TextBoxOnContextMenuOpening;
+                textBox.ContextMenuClosing -= TextBoxOnContextMenuClosing;
+            }
+        }
+
+        private static void TextBoxOnContextMenuOpening(object sender, ContextMenuEventArgs e)
+        {
+            if (!(sender is TextBoxBase textBox))
+                return;
+
+            var contextMenu = textBox?.ContextMenu;
+            if (contextMenu == null)
+                return;
+
+            RemoveSpellingSuggestions(contextMenu);
+
+            if (!SpellCheck.GetIsEnabled(textBox))
+                return;
+
+            var spellingError = GetSpellingError(textBox);
+            if (spellingError != null)
+            {
+                var spellingSuggestionStyle =
+                    contextMenu.TryFindResource(Spelling.SuggestionMenuItemStyleKey) as Style;
+
+                var insertionIndex = 0;
+                var hasSuggestion = false;
+                foreach (var suggestion in spellingError.Suggestions)
+                {
+                    hasSuggestion = true;
+                    var menuItem = new MenuItem
+                    {
+                        CommandTarget = textBox,
+                        Command = EditingCommands.CorrectSpellingError,
+                        CommandParameter = suggestion,
+                        Style = spellingSuggestionStyle,
+                        Tag = typeof(Spelling)
+                    };
+                    contextMenu.Items.Insert(insertionIndex++, menuItem);
+                }
+                if (!hasSuggestion)
+                {
+                    contextMenu.Items.Insert(insertionIndex++, new MenuItem
+                    {
+                        Style = contextMenu.TryFindResource(Spelling.NoSuggestionsMenuItemStyleKey) as Style,
+                        Tag = typeof(Spelling)
+                    });
+                }
+
+                contextMenu.Items.Insert(insertionIndex++, new Separator
+                {
+                    Style = contextMenu.TryFindResource(Spelling.SeparatorStyleKey) as Style,
+                    Tag = typeof(Spelling)
+                });
+
+                contextMenu.Items.Insert(insertionIndex++, new MenuItem
+                {
+                    Command = EditingCommands.IgnoreSpellingError,
+                    CommandTarget = textBox,
+                    Style = contextMenu.TryFindResource(Spelling.IgnoreAllMenuItemStyleKey) as Style,
+                    Tag = typeof(Spelling)
+                });
+
+                contextMenu.Items.Insert(insertionIndex, new Separator
+                {
+                    Style = contextMenu.TryFindResource(Spelling.SeparatorStyleKey) as Style,
+                    Tag = typeof(Spelling)
+                });
+            }
+        }
+
+        private static SpellingError GetSpellingError(TextBoxBase textBoxBase)
+        {
+            return textBoxBase switch
+            {
+                TextBox textBox => textBox.GetSpellingError(textBox.CaretIndex),
+                RichTextBox richTextBox => richTextBox.GetSpellingError(richTextBox.CaretPosition),
+                _ => null,
+            };
+        }
+
+        private static void TextBoxOnContextMenuClosing(object sender, ContextMenuEventArgs e)
+        {
+            if (!(sender is TextBoxBase textBox))
+                return;
+
+            var contextMenu = textBox.ContextMenu;
+            if (contextMenu != null)
+                RemoveSpellingSuggestions(contextMenu);
+        }
+
+        private static void RemoveSpellingSuggestions(ContextMenu menu)
+        {
+            menu.Items.OfType<FrameworkElement>()
+                .Where(x => ReferenceEquals(x.Tag, typeof(Spelling)))
+                .ToList()
+                .ForEach(menu.Items.Remove);
+        }
+
+        #endregion IncludeSpellingSuggestions
     }
 }

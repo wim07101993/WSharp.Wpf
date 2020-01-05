@@ -11,7 +11,7 @@ namespace WSharp.Wpf.Controls
     [TemplatePart(Name = HueSliderPartName, Type = typeof(Slider))]
     [TemplatePart(Name = SaturationBrightnessPickerPartName, Type = typeof(Canvas))]
     [TemplatePart(Name = SaturationBrightnessPickerThumbPartName, Type = typeof(Thumb))]
-    public class ColorPicker : Control
+    public class ColorPicker : ValueControl<Color>
     {
         public const string HueSliderPartName = "PART_HueSlider";
         public const string SaturationBrightnessPickerPartName = "PART_SaturationBrightnessPicker";
@@ -23,18 +23,10 @@ namespace WSharp.Wpf.Controls
         private bool _inCallback;
 
         public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent(
-                nameof(Color),
+                nameof(Value),
                 RoutingStrategy.Bubble,
                 typeof(RoutedPropertyChangedEventHandler<Color>),
                 typeof(ColorPicker));
-
-        public static readonly DependencyProperty ColorProperty = DependencyProperty.Register(
-            nameof(Color),
-            typeof(Color),
-            typeof(ColorPicker),
-            new FrameworkPropertyMetadata(default(Color),
-                FrameworkPropertyMetadataOptions.BindsTwoWayByDefault,
-                ColorPropertyChangedCallback));
 
         public static readonly DependencyProperty HsbProperty = DependencyProperty.Register(
             nameof(Hsb),
@@ -53,12 +45,6 @@ namespace WSharp.Wpf.Controls
         static ColorPicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPicker), new FrameworkPropertyMetadata(typeof(ColorPicker)));
-        }
-
-        public Color Color
-        {
-            get => (Color)GetValue(ColorProperty);
-            set => SetValue(ColorProperty, value);
         }
 
         public Hsb Hsb
@@ -102,6 +88,19 @@ namespace WSharp.Wpf.Controls
                 _hueSlider.ValueChanged += HueSliderOnValueChanged;
 
             base.OnApplyTemplate();
+        }
+
+        protected override void OnValueChanged(Color oldValue, Color newValue)
+        {
+            _inCallback = true;
+            SetCurrentValue(HsbProperty, newValue.ToHsb());
+            var args = new RoutedPropertyChangedEventArgs<Color>(oldValue, newValue)
+            {
+                RoutedEvent = ColorChangedEvent
+            };
+
+            RaiseEvent(args);
+            _inCallback = false;
         }
 
         private void HueSliderOnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -179,23 +178,6 @@ namespace WSharp.Wpf.Controls
             Canvas.SetTop(_saturationBrightnessThumb, top);
         }
 
-        private static void ColorPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var colorPicker = (ColorPicker)d;
-            if (colorPicker._inCallback)
-                return;
-
-            colorPicker._inCallback = true;
-            colorPicker.SetCurrentValue(HsbProperty, ((Color)e.NewValue).ToHsb());
-            var args = new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue)
-            { 
-                RoutedEvent = ColorChangedEvent 
-            };
-
-            colorPicker.RaiseEvent(args);
-            colorPicker._inCallback = false;
-        }
-
         private static void HsbPropertyChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var colorPicker = (ColorPicker)d;
@@ -208,7 +190,7 @@ namespace WSharp.Wpf.Controls
             if (e.NewValue is Hsb hsb)
                 color = hsb.ToColor();
 
-            colorPicker.SetCurrentValue(ColorProperty, color);
+            colorPicker.SetCurrentValue(ValueProperty, color);
             colorPicker._inCallback = false;
         }
        

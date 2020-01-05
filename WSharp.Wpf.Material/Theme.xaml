@@ -40,8 +40,7 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style BasedOn="{StaticResource Card}" TargetType="{x:Type material:Card}" />
-    <Style BasedOn="{StaticResource Card}" TargetType="{x:Type controls:ClippedContentControl}" />
+    <Style BasedOn="{StaticResource Card}" TargetType="{x:Type controls:Card}" />
     <Style BasedOn="{StaticResource Clock}" TargetType="{x:Type controls:Clock}" />
     <Style BasedOn="{StaticResource ColorPicker}" TargetType="{x:Type controls:ColorPicker}" />
     <Style BasedOn="{StaticResource Divider}" TargetType="{x:Type controls:Divider}" />

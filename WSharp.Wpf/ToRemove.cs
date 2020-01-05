@@ -14,12 +14,11 @@ namespace WSharp.Extensions
     {
         public static DateTimeFormatInfo GetDateFormat(this CultureInfo culture)
         {
-            if (culture == null) throw new ArgumentNullException(nameof(culture));
+            if (culture == null) 
+                throw new ArgumentNullException(nameof(culture));
 
             if (culture.Calendar is GregorianCalendar || culture.Calendar is PersianCalendar)
-            {
                 return culture.DateTimeFormat;
-            }
 
             GregorianCalendar foundCal = null;
             foreach (var cal in culture.OptionalCalendars.OfType<GregorianCalendar>())

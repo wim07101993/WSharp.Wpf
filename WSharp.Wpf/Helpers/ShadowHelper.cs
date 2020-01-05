@@ -24,15 +24,15 @@ namespace WSharp.Wpf.Helpers
 
         #region local info
 
-        private static readonly DependencyPropertyKey LocalInfoPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
+        private static readonly DependencyPropertyKey localInfoPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
             "LocalInfo",
             typeof(ShadowLocalInfo),
             typeof(ShadowHelper),
             new PropertyMetadata(default(ShadowLocalInfo)));
 
-        private static ShadowLocalInfo GetLocalInfo(DependencyObject element) => (ShadowLocalInfo)element.GetValue(LocalInfoPropertyKey.DependencyProperty);
+        private static ShadowLocalInfo GetLocalInfo(DependencyObject element) => (ShadowLocalInfo)element.GetValue(localInfoPropertyKey.DependencyProperty);
 
-        private static void SetLocalInfo(DependencyObject element, ShadowLocalInfo value) => element.SetValue(LocalInfoPropertyKey, value);
+        private static void SetLocalInfo(DependencyObject element, ShadowLocalInfo value) => element.SetValue(localInfoPropertyKey, value);
 
         #endregion local info
 

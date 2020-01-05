@@ -3,14 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
-    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
-    xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Themes/Shadows.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <ControlTemplate x:Key="CardTemplate" TargetType="{x:Type controls:ClippedContentControl}">
+    <ControlTemplate x:Key="CardTemplate" TargetType="{x:Type controls:Card}">
         <Grid Background="Transparent">
             <AdornerDecorator CacheMode="{Binding RelativeSource={RelativeSource Self}, Path=(helpers:ShadowHelper.CacheMode)}">
                 <AdornerDecorator.OpacityMask>
@@ -40,7 +39,7 @@
         </Grid>
     </ControlTemplate>
 
-    <Style x:Key="Card" TargetType="{x:Type controls:ClippedContentControl}">
+    <Style x:Key="Card" TargetType="{x:Type controls:Card}">
         <Setter Property="Template" Value="{StaticResource CardTemplate}" />
         <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
         <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth2" />

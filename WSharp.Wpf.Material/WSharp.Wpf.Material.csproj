@@ -74,7 +74,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\Underline.cs" />
     <Compile Include="Extensions\ResourceDictionaryExtensions.cs" />
     <Compile Include="Extensions\ThemeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -90,7 +89,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Controls\Card.cs" />
     <Compile Include="Themes\DarkTheme.cs" />
     <Compile Include="Themes\LightTheme.cs" />
     <Compile Include="Themes\Theme.cs" />
@@ -966,6 +964,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\" />
     <Folder Include="Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

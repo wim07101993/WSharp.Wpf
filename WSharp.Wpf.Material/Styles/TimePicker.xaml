@@ -3,8 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
-    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
-    xmlns:material="clr-namespace:WSharp.Wpf.Material.Controls">
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/ValidationErrorTemplate.xaml" />
@@ -152,7 +151,7 @@
                             X2="{Binding ActualWidth, ElementName=border}"
                             Y1="0"
                             Y2="0" />
-                        <material:Underline x:Name="Underline" Visibility="{Binding Path=(helpers:TextFieldHelper.DecorationVisibility), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <controls:Underline x:Name="Underline" Visibility="{Binding Path=(helpers:TextFieldHelper.DecorationVisibility), RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

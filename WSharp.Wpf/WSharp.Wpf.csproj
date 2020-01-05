@@ -89,35 +89,74 @@
     <Compile Include="Colors\Lab.cs" />
     <Compile Include="Colors\LabConstants.cs" />
     <Compile Include="Colors\Xyz.cs" />
+    <Compile Include="Controls\Badged.cs" />
+    <Compile Include="Controls\BadgedEx.cs" />
+    <Compile Include="Controls\BaseTheme.cs" />
+    <Compile Include="Controls\Card.cs" />
+    <Compile Include="Controls\Chip.cs" />
     <Compile Include="Controls\ColorPicker.cs" />
     <Compile Include="Controls\ColorZone.cs" />
     <Compile Include="Controls\ComboBoxPopup.cs" />
+    <Compile Include="Controls\EDialogHostOpenDialogCommandDataContextSource.cs" />
+    <Compile Include="Controls\EPopupBoxPlacementMode.cs" />
+    <Compile Include="Controls\EPopupBoxPopupMode.cs" />
+    <Compile Include="Controls\ETransitioningContentRunHint.cs" />
+    <Compile Include="EResourceKeyId.cs" />
+    <Compile Include="Helpers\DataGridHelper.cs" />
+    <Compile Include="Controls\DataGridComboBoxColumn.cs" />
+    <Compile Include="Controls\DataGridTextColumn.cs" />
     <Compile Include="Controls\DialogClosingEventArgs.cs" />
     <Compile Include="Controls\DialogClosingEventHandler.cs" />
     <Compile Include="Controls\DialogHost.cs" />
+    <Compile Include="Extensions\DialogHostExtensions.cs" />
     <Compile Include="Controls\DialogOpenedEventArgs.cs" />
     <Compile Include="Controls\DialogOpenedEventHandler.cs" />
     <Compile Include="Controls\DialogSession.cs" />
     <Compile Include="Controls\DrawerHost.cs" />
+    <Compile Include="Controls\EBadgePlacementMode.cs" />
     <Compile Include="Controls\EButtonsAlignment.cs" />
-    <Compile Include="Controls\ClippedContentControl.cs" />
     <Compile Include="Controls\Clock.cs" />
     <Compile Include="Controls\ClockChoiceMadeEventArgs.cs" />
     <Compile Include="Controls\ClockChoiceMadeEventHandler.cs" />
     <Compile Include="Controls\ClockItemButton.cs" />
-    <Compile Include="Controls\DateTimePicker.cs" />
     <Compile Include="Controls\Divider.cs" />
     <Compile Include="Controls\EClockDisplayAutomation.cs" />
     <Compile Include="Controls\EClockDisplayMode.cs" />
     <Compile Include="Controls\EColorZoneMode.cs" />
     <Compile Include="Controls\EComboBoxPopupPlacement.cs" />
-    <Compile Include="Controls\EDialogHostOpenDialogCommandDataContextSource.cs" />
+    <Compile Include="Controls\Flipper.cs" />
+    <Compile Include="Controls\GridViewColumnThumb.cs" />
+    <Compile Include="Controls\ListSortDirectionIndicator.cs" />
+    <Compile Include="Controls\DateDisplay.cs" />
+    <Compile Include="Extensions\MessageQueueExtension.cs" />
+    <Compile Include="Extensions\IconExtension.cs" />
+    <Compile Include="Controls\Plane3D.cs" />
+    <Compile Include="Controls\PopupBox.cs" />
     <Compile Include="Controls\PopupEx.cs" />
+    <Compile Include="Controls\RatingBar.cs" />
+    <Compile Include="Controls\RatingBarButton.cs" />
     <Compile Include="Controls\Ripple.cs" />
+    <Compile Include="Controls\ScaleHost.cs" />
     <Compile Include="Controls\Screen.cs" />
+    <Compile Include="Controls\SmartLabel.cs" />
     <Compile Include="Controls\Snackbar.cs" />
     <Compile Include="Controls\SnackbarMessage.cs" />
     <Compile Include="Controls\SnackbarMessageEventArgs.cs" />
+    <Compile Include="Helpers\ExpanderHelper.cs" />
+    <Compile Include="Helpers\ListBoxHelper.cs" />
+    <Compile Include="Helpers\ListViewHelper.cs" />
+    <Compile Include="Helpers\RippleHelper.cs" />
+    <Compile Include="Helpers\ScrollbarHelper.cs" />
+    <Compile Include="Helpers\ScrollViewerHelper.cs" />
+    <Compile Include="Helpers\ShadowHelper.cs" />
+    <Compile Include="Helpers\TextFieldHelper.cs" />
+    <Compile Include="Helpers\ThemeHelper.cs" />
+    <Compile Include="Helpers\ToggleButtonHelper.cs" />
+    <Compile Include="Helpers\ToolTipHelper.cs" />
+    <Compile Include="Helpers\TreeViewHelper.cs" />
+    <Compile Include="Spelling.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Controls\TimePickerTextBox.cs" />
     <Compile Include="Converters\BorderClipConverter.cs" />
     <Compile Include="Converters\BrushRoundConverter.cs" />
     <Compile Include="Converters\ColorToSolidColorBrushConverter.cs" />
@@ -134,9 +173,11 @@
     <Compile Include="Extensions\LabExtensions.cs" />
     <Compile Include="Extensions\ThemeExtensions.cs" />
     <Compile Include="Extensions\XyzExtensions.cs" />
+    <Compile Include="Helpers\ButtonHelper.cs" />
+    <Compile Include="Helpers\ButtonProgressHelper.cs" />
+    <Compile Include="Helpers\ColorZoneHelper.cs" />
     <Compile Include="Helpers\ComboBoxHelper.cs" />
-    <Compile Include="Helpers\RippleHelper.cs" />
-    <Compile Include="Helpers\ToggleButtonHelper.cs" />
+    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="ISnackbarMessageQueue.cs" />
     <Compile Include="SnackbarMessageQueue.cs" />
     <Compile Include="Controls\Underline.cs" />
@@ -153,8 +194,6 @@
     <Compile Include="Converters\ListToVisibilityConverter.cs" />
     <Compile Include="Converters\MultiBooleanAndToVisibilityConverter.cs" />
     <Compile Include="Extensions\DependencyObjectExtensions.cs" />
-    <Compile Include="Helpers\ButtonHelper.cs" />
-    <Compile Include="Helpers\ButtonProgressHelper.cs" />
     <Compile Include="Helpers\DpiHelper.cs" />
     <Compile Include="Helpers\TreeHelper.cs" />
     <Compile Include="LabelProxy\ALabelProxy.cs" />
@@ -172,7 +211,6 @@
     <Compile Include="Controls\NumericUpDown.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
     <Compile Include="Controls\NumericUpDownChangedRoutedEventHandler.cs" />
-    <Compile Include="Controls\SmartLabel.cs" />
     <Compile Include="Controls\TimePicker.cs" />
     <Compile Include="Controls\ValueControl.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -201,12 +239,8 @@
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Extensions\DispatcherObjectExtensions.cs" />
     <Compile Include="Helpers\CustomPopupPlacementCallbackHelper.cs" />
-    <Compile Include="Helpers\ExpanderHelper.cs" />
     <Compile Include="Helpers\LabelHelper.cs" />
-    <Compile Include="Helpers\ShadowHelper.cs" />
     <Compile Include="Helpers\TextBoxHelper.cs" />
-    <Compile Include="Helpers\TextFieldHelper.cs" />
-    <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="ILabelProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -224,11 +258,31 @@
     <Compile Include="ScaleHost.cs" />
     <Compile Include="ShadowInfo.cs" />
     <Compile Include="ShadowLocalInfo.cs" />
-    <Compile Include="Helpers\TransitionHelper.cs" />
     <Compile Include="SnackbarMessageQueueItem.cs" />
     <Compile Include="Themes\IBaseTheme.cs" />
     <Compile Include="Themes\ITheme.cs" />
     <Compile Include="ToRemove.cs" />
+    <Compile Include="Transitions\CircleWipe.cs" />
+    <Compile Include="Transitions\FadeWipe.cs" />
+    <Compile Include="Transitions\IndexedItemOffsetMultiplierExtension.cs" />
+    <Compile Include="Transitions\ITransitionEffect.cs" />
+    <Compile Include="Controls\ITransitionEffectSubject.cs" />
+    <Compile Include="Transitions\ITransitionWipe.cs" />
+    <Compile Include="Controls\IZIndexController.cs" />
+    <Compile Include="Transitions\ESlideDirection.cs" />
+    <Compile Include="Transitions\SlideOutWipe.cs" />
+    <Compile Include="Transitions\SlideWipe.cs" />
+    <Compile Include="Helpers\TransitionHelper.cs" />
+    <Compile Include="Transitions\TransitionEffect.cs" />
+    <Compile Include="Transitions\TransitionEffectBase.cs" />
+    <Compile Include="Extensions\TransitionEffectExtension.cs" />
+    <Compile Include="Transitions\ETransitionEffectKind.cs" />
+    <Compile Include="Transitions\TransitionEffectTypeConverter.cs" />
+    <Compile Include="Controls\Transitioner.cs" />
+    <Compile Include="Controls\TransitionerSlide.cs" />
+    <Compile Include="Transitions\ETransitionerSlideState.cs" />
+    <Compile Include="Controls\TransitioningContent.cs" />
+    <Compile Include="Controls\TransitioningContentBase.cs" />
     <Compile Include="ValidationRules\NotEmptyValidationRule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -242,9 +296,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Transitions\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Icons.xaml">
       <SubType>Designer</SubType>

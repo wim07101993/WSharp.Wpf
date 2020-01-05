@@ -7,6 +7,7 @@ namespace WSharp.Wpf.Helpers
     /// </summary>
     public static class TransitionHelper
     {
+        #region DisableTransitions
         /// <summary>
         /// Allows transitions to be disabled where supported.  Note this is an inheritable property.
         /// </summary>
@@ -25,5 +26,7 @@ namespace WSharp.Wpf.Helpers
         /// Allows transitions to be disabled where supported.  Note this is an inheritable property.
         /// </summary>
         public static void SetDisableTransitions(DependencyObject element, bool value) => element.SetValue(DisableTransitionsProperty, value);
+
+        #endregion DisableTransitions
     }
 }

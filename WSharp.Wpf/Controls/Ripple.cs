@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+
 using WSharp.Wpf.Extensions;
 using WSharp.Wpf.Helpers;
 
@@ -26,9 +27,9 @@ namespace WSharp.Wpf.Controls
         #region DEPENDENCY PROPERTIES
 
         public static readonly DependencyProperty FeedbackProperty = DependencyProperty.Register(
-            nameof(Feedback), 
-            typeof(Brush), 
-            typeof(Ripple), 
+            nameof(Feedback),
+            typeof(Brush),
+            typeof(Ripple),
             new PropertyMetadata(default(Brush)));
 
         private static readonly DependencyPropertyKey rippleSizePropertyKey = DependencyProperty.RegisterReadOnly(
@@ -50,20 +51,19 @@ namespace WSharp.Wpf.Controls
 
         private static readonly DependencyPropertyKey rippleYPropertyKey =
             DependencyProperty.RegisterReadOnly(
-                "RippleY", 
-                typeof(double), 
+                "RippleY",
+                typeof(double),
                 typeof(Ripple),
                 new PropertyMetadata(default(double)));
 
         public static readonly DependencyProperty RippleYProperty = rippleYPropertyKey.DependencyProperty;
 
         /// <summary>
-        ///   The DependencyProperty for the RecognizesAccessKey property. 
-        ///   Default Value: false 
-        /// </summary> 
+        ///     The DependencyProperty for the RecognizesAccessKey property. Default Value: false
+        /// </summary>
         public static readonly DependencyProperty RecognizesAccessKeyProperty = DependencyProperty.Register(
             nameof(RecognizesAccessKey),
-            typeof(bool), 
+            typeof(bool),
             typeof(Ripple),
             new PropertyMetadata(default(bool)));
 
@@ -110,9 +110,7 @@ namespace WSharp.Wpf.Controls
             private set => SetValue(rippleYPropertyKey, value);
         }
 
-        /// <summary> 
-        ///   Determine if Ripple should use AccessText in its style
-        /// </summary> 
+        /// <summary>Determine if Ripple should use AccessText in its style</summary>
         public bool RecognizesAccessKey
         {
             get => (bool)GetValue(RecognizesAccessKeyProperty);

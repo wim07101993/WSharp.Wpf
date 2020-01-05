@@ -15,7 +15,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <controls:ClippedContentControl
+        <controls:Card
             Grid.Row="0"
             Grid.RowSpan="2"
             Grid.Column="0"
@@ -66,9 +66,9 @@
                     </Expander>
                 </StackPanel>
             </ScrollViewer>
-        </controls:ClippedContentControl>
+        </controls:Card>
 
-        <controls:ClippedContentControl
+        <controls:Card
             Grid.Row="0"
             Grid.Column="1"
             Margin="24">
@@ -83,7 +83,7 @@
                     <TextBlock Style="{StaticResource Headline6TextBlock}" Text="Why did you have to do that?" />
                 </Expander>
             </StackPanel>
-        </controls:ClippedContentControl>
+        </controls:Card>
 
         <StackPanel Grid.Row="1" Grid.Column="1">
             <Expander Content="These expanders are not placed within a card. Therefore they do not have the fancy shadow effect." Header="No card" />
