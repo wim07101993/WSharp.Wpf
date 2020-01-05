@@ -30,6 +30,9 @@
                 Text="This is the demo application for the WSharp WPF library for WSharp.Wpf"
                 TextWrapping="Wrap" />
         </TabItem>
+        <TabItem Header="Buttons">
+            <views:ButtonLikeControls />
+        </TabItem>
         <TabItem Header="Fields">
             <views:Fields />
         </TabItem>

@@ -1,0 +1,258 @@
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.Buttons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
+    FontFamily="Roboto"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource BodyBrush}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <StackPanel Orientation="Vertical">
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Floating action buttons" />
+        <WrapPanel Orientation="Horizontal">
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionMiniLightButton}"
+                ToolTip="FloatingActionMiniLightButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionMiniButton}"
+                ToolTip="FloatingActionMiniButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionMiniDarkButton}"
+                ToolTip="FloatingActionMiniDarkButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionMiniAccentButton}"
+                ToolTip="FloatingActionMiniAccentButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionLightButton}"
+                ToolTip="FloatingActionLightButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionButton}"
+                ToolTip="FloatingActionButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionDarkButton}"
+                ToolTip="FloatingActionDarkButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+
+            <Button
+                Margin="16"
+                Style="{StaticResource FloatingActionAccentButton}"
+                ToolTip="FloatingActionAccentButton">
+                <controls:Icon
+                    Width="24"
+                    Height="24"
+                    Resource="{StaticResource Alarm}" />
+            </Button>
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Raised action buttons" />
+
+        <WrapPanel>
+            <Button
+                Width="100"
+                Margin="16"
+                Style="{StaticResource RaisedLightButton}"
+                ToolTip="RaisedLightButton">
+                _LIGHT
+            </Button>
+            <Button
+                Width="100"
+                Margin="16"
+                Style="{StaticResource RaisedButton}"
+                ToolTip="RaisedButton">
+                _MID
+            </Button>
+            <Button
+                Width="100"
+                Margin="16"
+                Style="{StaticResource RaisedDarkButton}"
+                ToolTip="RaisedDarkButton">
+                _DARK
+            </Button>
+            <Button
+                Width="100"
+                Margin="16"
+                Style="{StaticResource RaisedAccentButton}"
+                ToolTip="RaisedAccentButton">
+                _ACCENT
+            </Button>
+            <Button
+                Margin="16"
+                helpers:ButtonHelper.CornerRadius="15"
+                Style="{StaticResource RaisedButton}"
+                ToolTip="RaisedAccentButton">
+                _Custom corner radius
+            </Button>
+        </WrapPanel>
+
+        <WrapPanel>
+            <Button
+                Width="150"
+                Margin="16"
+                helpers:RippleHelper.Feedback="#DD000000"
+                Style="{StaticResource RaisedAccentButton}"
+                ToolTip="RaisedLightButton">
+                _CUSTOM RIPPLE
+            </Button>
+            <Button
+                Width="150"
+                Margin="16"
+                helpers:RippleHelper.IsDisabled="True"
+                Style="{StaticResource RaisedAccentButton}"
+                ToolTip="RaisedLightButton">
+                _NO RIPPLE
+            </Button>
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Flat buttons" />
+
+        <WrapPanel>
+            <Button
+                Width="100"
+                Margin="16"
+                Style="{StaticResource FlatButton}"
+                ToolTip="FlatButton">
+                _ACCEPT
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource FlatLightBgButton}"
+                ToolTip="RaisedDarkButton">
+                _Okay
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource FlatMidBgButton}"
+                ToolTip="RaisedAccentButton">
+                _Okay
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource FlatDarkBgButton}"
+                ToolTip="RaisedAccentButton">
+                _Okay
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource FlatAccentBgButton}"
+                ToolTip="RaisedAccentButton">
+                _Okay
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource OutlinedButton}"
+                ToolTip="RaisedAccentButton">
+                _OUTLINE
+            </Button>
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Icon buttons" />
+
+        <WrapPanel>
+            <Button
+                Margin="16"
+                Style="{StaticResource IconButton}"
+                ToolTip="FlatButton">
+                <controls:Icon Resource="{StaticResource Play}" />
+            </Button>
+            <Button
+                Margin="16"
+                IsEnabled="False"
+                Style="{StaticResource IconButton}"
+                ToolTip="RaisedDarkButton">
+                <controls:Icon Resource="{StaticResource Play}" />
+            </Button>
+            <Button
+                Margin="16"
+                Style="{StaticResource IconForegroundButton}"
+                ToolTip="RaisedAccentButton">
+                <controls:Icon Resource="{StaticResource Play}" />
+            </Button>
+            <Button
+                Margin="16"
+                Background="{DynamicResource TextFieldBoxBackgroundBrush}"
+                Style="{StaticResource IconButton}"
+                ToolTip="RaisedAccentButton">
+                <controls:Icon Resource="{StaticResource Play}" />
+            </Button>
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Progress buttons" />
+
+        <WrapPanel>
+            <Button
+                Margin="16"
+                helpers:ButtonProgressHelper.IsIndeterminate="True"
+                helpers:ButtonProgressHelper.IsIndicatorVisible="True"
+                helpers:ButtonProgressHelper.Value="-1"
+                Content="_Indeterminate"
+                Style="{StaticResource RaisedButton}"
+                ToolTip="RaisedAccentButton" />
+        </WrapPanel>
+    </StackPanel>
+</UserControl>

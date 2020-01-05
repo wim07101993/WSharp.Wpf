@@ -4,7 +4,7 @@
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf">
 
     <Style x:Key="Divider" TargetType="{x:Type controls:Divider}">
-        <Setter Property="BorderBrush" Value="{DynamicResource DividerBrushBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
         <Setter Property="Thickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>

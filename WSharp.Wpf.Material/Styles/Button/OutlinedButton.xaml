@@ -13,7 +13,7 @@
         x:Key="OutlinedButton"
         BasedOn="{StaticResource FlatButton}"
         TargetType="{x:Type ButtonBase}">
-        <Setter Property="BorderBrush" Value="{StaticResource DividerBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DividerBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="helpers:RippleHelper.Feedback" Value="{DynamicResource PrimaryHueMidBrush}" />
         <Setter Property="helpers:ButtonHelper.CornerRadius" Value="2" />

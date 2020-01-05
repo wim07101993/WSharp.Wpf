@@ -120,7 +120,7 @@
                                     <Border
                                         Height="1"
                                         HorizontalAlignment="Stretch"
-                                        Background="{DynamicResource DividerBrushBrush}"
+                                        Background="{DynamicResource DividerBrush}"
                                         SnapsToDevicePixels="True" />
 
 
@@ -157,7 +157,7 @@
                                     <Border
                                         Height="1"
                                         HorizontalAlignment="Stretch"
-                                        Background="{DynamicResource DividerBrushBrush}"
+                                        Background="{DynamicResource DividerBrush}"
                                         SnapsToDevicePixels="True" />
 
 

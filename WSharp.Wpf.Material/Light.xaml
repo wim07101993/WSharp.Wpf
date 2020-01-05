@@ -53,7 +53,7 @@
         po:Freeze="True"
         Color="#89000000" />
     <SolidColorBrush
-        x:Key="DividerBrushBrush"
+        x:Key="DividerBrush"
         po:Freeze="True"
         Color="#1F000000" />
     <!--  12%  -->

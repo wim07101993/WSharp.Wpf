@@ -84,6 +84,12 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Compile Include="ViewModels\TextBoxesViewModel.cs" />
+    <Compile Include="Views\ButtonLikeControls.xaml.cs">
+      <DependentUpon>ButtonLikeControls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Buttons.xaml.cs">
+      <DependentUpon>Buttons.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ComboBoxes.xaml.cs">
       <DependentUpon>ComboBoxes.xaml</DependentUpon>
     </Compile>
@@ -102,6 +108,21 @@
     <Compile Include="Views\Texts.xaml.cs">
       <DependentUpon>Texts.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ToggleButtons.xaml.cs">
+      <DependentUpon>ToggleButtons.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ButtonLikeControls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ComboBoxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,6 +172,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Texts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToggleButtons.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

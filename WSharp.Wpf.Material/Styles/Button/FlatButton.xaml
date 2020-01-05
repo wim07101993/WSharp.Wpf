@@ -7,6 +7,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Button/FocusVisual.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Button/RaisedButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="FlatButton" TargetType="{x:Type ButtonBase}">
