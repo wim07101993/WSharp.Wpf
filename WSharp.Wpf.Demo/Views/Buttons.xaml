@@ -9,7 +9,7 @@
 
         <TextBlock
             Margin="16,16,16,0"
-            Style="{StaticResource Headline6TextBlock}"
+            Style="{StaticResource Headline5TextBlock}"
             Text="Floating action buttons" />
         <WrapPanel Orientation="Horizontal">
             <Button
@@ -95,7 +95,7 @@
 
         <TextBlock
             Margin="16,16,16,0"
-            Style="{StaticResource Headline6TextBlock}"
+            Style="{StaticResource Headline5TextBlock}"
             Text="Raised action buttons" />
 
         <WrapPanel>
@@ -157,7 +157,7 @@
 
         <TextBlock
             Margin="16,16,16,0"
-            Style="{StaticResource Headline6TextBlock}"
+            Style="{StaticResource Headline5TextBlock}"
             Text="Flat buttons" />
 
         <WrapPanel>
@@ -202,7 +202,7 @@
 
         <TextBlock
             Margin="16,16,16,0"
-            Style="{StaticResource Headline6TextBlock}"
+            Style="{StaticResource Headline5TextBlock}"
             Text="Icon buttons" />
 
         <WrapPanel>
@@ -236,7 +236,7 @@
 
         <TextBlock
             Margin="16,16,16,0"
-            Style="{StaticResource Headline6TextBlock}"
+            Style="{StaticResource Headline5TextBlock}"
             Text="Progress buttons" />
 
         <WrapPanel>

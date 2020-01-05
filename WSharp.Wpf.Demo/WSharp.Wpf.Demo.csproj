@@ -90,6 +90,9 @@
     <Compile Include="Views\Buttons.xaml.cs">
       <DependentUpon>Buttons.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\CheckBoxes.xaml.cs">
+      <DependentUpon>CheckBoxes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ComboBoxes.xaml.cs">
       <DependentUpon>ComboBoxes.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CheckBoxes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

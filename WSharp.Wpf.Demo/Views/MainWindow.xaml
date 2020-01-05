@@ -30,9 +30,19 @@
                 Text="This is the demo application for the WSharp WPF library for WSharp.Wpf"
                 TextWrapping="Wrap" />
         </TabItem>
-        <TabItem Header="Buttons">
+        <TabItem Header="Button">
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <views:ButtonLikeControls />
+                <views:Buttons />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="CheckBox">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:CheckBoxes />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Expander">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Expanders />
             </ScrollViewer>
         </TabItem>
         <TabItem Header="Fields">
@@ -40,29 +50,29 @@
                 <views:Fields />
             </ScrollViewer>
         </TabItem>
-        <TabItem Header="Pickers">
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <views:Pickers />
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Text">
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <views:Texts />
-            </ScrollViewer>
-        </TabItem>
-        <TabItem Header="Expanders">
-            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
-                <views:Expanders />
-            </ScrollViewer>
-        </TabItem>
         <TabItem Header="Logging">
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <views:Logging DataContext="{Binding LoggingViewModel}" />
             </ScrollViewer>
         </TabItem>
+        <TabItem Header="Pickers">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Pickers />
+            </ScrollViewer>
+        </TabItem>
         <TabItem Header="Slider">
             <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
                 <views:Sliders />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="Texts">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Texts />
+            </ScrollViewer>
+        </TabItem>
+        <TabItem Header="ToggleButton">
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:ToggleButtons />
             </ScrollViewer>
         </TabItem>
     </TabControl>

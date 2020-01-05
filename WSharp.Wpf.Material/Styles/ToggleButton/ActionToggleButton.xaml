@@ -7,6 +7,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Icon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf;component/Icons.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converters:MathConverter x:Key="DivisionMathConverter" Operation="Divide" />
@@ -29,7 +30,11 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="helpers:ShadowHelper.ShadowDepth" Value="Depth0" />
-        <Setter Property="helpers:ToggleButtonHelper.OnContent" Value="{StaticResource CheckMarkIcon}" />
+        <Setter Property="helpers:ToggleButtonHelper.OnContent">
+            <Setter.Value>
+                <controls:Icon Resource="{StaticResource Check}" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>

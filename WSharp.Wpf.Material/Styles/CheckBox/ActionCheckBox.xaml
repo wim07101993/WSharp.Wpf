@@ -1,0 +1,39 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/ActionToggleButton.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style
+        x:Key="ActionCheckBox"
+        BasedOn="{StaticResource ActionToggleButton}"
+        TargetType="{x:Type CheckBox}" />
+
+    <Style
+        x:Key="ActionLightCheckBox"
+        BasedOn="{StaticResource ActionCheckBox}"
+        TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueLightBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueLightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueLightForegroundBrush}" />
+    </Style>
+
+    <Style
+        x:Key="ActionDarkCheckBox"
+        BasedOn="{StaticResource ActionCheckBox}"
+        TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource PrimaryHueDarkBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryHueDarkForegroundBrush}" />
+    </Style>
+
+    <Style
+        x:Key="ActionAccentCheckBox"
+        BasedOn="{StaticResource ActionCheckBox}"
+        TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource SecondaryAccentBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SecondaryAccentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryAccentForegroundBrush}" />
+    </Style>
+
+</ResourceDictionary>
