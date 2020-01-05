@@ -20,7 +20,7 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <TabControl ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto">
+    <TabControl>
         <TabItem Header="Start">
             <TextBlock
                 Margin="50"
@@ -31,25 +31,39 @@
                 TextWrapping="Wrap" />
         </TabItem>
         <TabItem Header="Buttons">
-            <views:ButtonLikeControls />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:ButtonLikeControls />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Fields">
-            <views:Fields />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Fields />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Pickers">
-            <views:Pickers />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Pickers />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Text">
-            <views:Texts />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Texts />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Expanders">
-            <views:Expanders />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Expanders />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Logging">
-            <views:Logging DataContext="{Binding LoggingViewModel}" />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Logging DataContext="{Binding LoggingViewModel}" />
+            </ScrollViewer>
         </TabItem>
         <TabItem Header="Slider">
-            <views:Sliders />
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <views:Sliders />
+            </ScrollViewer>
         </TabItem>
     </TabControl>
 </Window>

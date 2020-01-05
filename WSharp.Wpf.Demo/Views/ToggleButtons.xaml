@@ -1,12 +1,156 @@
-﻿<UserControl x:Class="WSharp.Wpf.Demo.Views.ToggleButtons"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:WSharp.Wpf.Demo.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+﻿<UserControl
+    x:Class="WSharp.Wpf.Demo.Views.ToggleButtons"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
+    FontFamily="Roboto"
+    TextElement.FontSize="13"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource BodyBrush}"
+    TextOptions.TextFormattingMode="Ideal"
+    TextOptions.TextRenderingMode="Auto">
+    <StackPanel Orientation="Vertical">
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Action toggle buttons" />
+
+        <WrapPanel Orientation="Horizontal">
+            <ToggleButton
+                Margin="16"
+                Content="C"
+                Style="{StaticResource ActionLightToggleButton}"
+                ToolTip="ActionLightToggleButton" />
+
+            <ToggleButton
+                Margin="16"
+                Content="H"
+                Style="{StaticResource ActionToggleButton}"
+                ToolTip="ActionToggleButton" />
+
+            <ToggleButton
+                Margin="16"
+                Content="E"
+                Style="{StaticResource ActionDarkToggleButton}"
+                ToolTip="ActionDarkToggleButton" />
+
+            <ToggleButton
+                Margin="16"
+                Content="C"
+                Style="{StaticResource ActionAccentToggleButton}"
+                ToolTip="ActionAccentToggleButton" />
+
+            <ToggleButton
+                Margin="16"
+                Content="K"
+                IsEnabled="False"
+                Style="{StaticResource ActionToggleButton}"
+                ToolTip="ActionToggleButton" />
+
+            <ToggleButton
+                Margin="16"
+                Style="{StaticResource ActionToggleButton}"
+                ToolTip="ActionLightToggleButton">
+                <ToggleButton.Content>
+                    <controls:Icon Resource="{StaticResource EmoticonSad}" />
+                </ToggleButton.Content>
+                <helpers:ToggleButtonHelper.OnContent>
+                    <controls:Icon Resource="{StaticResource EmoticonHappy}" />
+                </helpers:ToggleButtonHelper.OnContent>
+            </ToggleButton>
+
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Flat toggle buttons" />
+
+        <WrapPanel Orientation="Horizontal">
+            <ToggleButton
+                Margin="16"
+                Style="{StaticResource FlatToggleButton}"
+                ToolTip="FlatToggleButton">
+                <controls:Icon
+                    Width="21"
+                    Height="21"
+                    Resource="{StaticResource Paperclip}" />
+            </ToggleButton>
+
+            <ToggleButton
+                Margin="16"
+                IsChecked="True"
+                Style="{StaticResource FlatPrimaryToggleButton}"
+                ToolTip="FlatPrimaryToggleButton">
+                <controls:Icon
+                    Width="21"
+                    Height="21"
+                    Resource="{StaticResource Heart}" />
+            </ToggleButton>
+
+            <ToggleButton
+                Margin="16"
+                IsEnabled="False"
+                Style="{StaticResource FlatPrimaryToggleButton}"
+                ToolTip="FlatPrimaryToggleButton">
+                <controls:Icon
+                    Width="21"
+                    Height="21"
+                    Resource="{StaticResource Heart}" />
+            </ToggleButton>
+        </WrapPanel>
+
+        <TextBlock
+            Margin="16,16,16,0"
+            Style="{StaticResource Headline6TextBlock}"
+            Text="Switch toggle buttons" />
+
+        <WrapPanel>
+            <ToggleButton
+                Margin="16"
+                Style="{StaticResource SwitchLightToggleButton}"
+                ToolTip="SwitchToggleButton" />
+            <ToggleButton
+                Margin="16"
+                IsChecked="True"
+                Style="{StaticResource SwitchLightToggleButton}"
+                ToolTip="SwitchLightToggleButton" />
+            <ToggleButton
+                Margin="16"
+                IsEnabled="False"
+                Style="{StaticResource SwitchToggleButton}"
+                ToolTip="SwitchToggleButton" />
+            <ToggleButton
+                Margin="16"
+                IsChecked="True"
+                Style="{StaticResource SwitchDarkToggleButton}"
+                ToolTip="SwitchDarkToggleButton" />
+            <ToggleButton
+                Margin="16"
+                IsChecked="True"
+                Style="{StaticResource SwitchAccentToggleButton}"
+                ToolTip="SwitchAccentToggleButton" />
+            <ToggleButton Margin="16" ToolTip="SwitchAccentToggleButton">
+                <controls:Icon RenderTransformOrigin=".5,.5" Resource="{StaticResource Pin}">
+                    <controls:Icon.RenderTransform>
+                        <RotateTransform Angle="45" />
+                    </controls:Icon.RenderTransform>
+                </controls:Icon>
+                <helpers:ToggleButtonHelper.OnContent>
+                    <controls:Icon Resource="{StaticResource Pin}" />
+                </helpers:ToggleButtonHelper.OnContent>
+            </ToggleButton>
+            <ToggleButton Margin="16" ToolTip="SwitchToggleButton">
+                <helpers:ToggleButtonHelper.SwitchTrackOnBackground>
+                    <SolidColorBrush Color="Green" />
+                </helpers:ToggleButtonHelper.SwitchTrackOnBackground>
+                <helpers:ToggleButtonHelper.SwitchTrackOffBackground>
+                    <SolidColorBrush Color="Red" />
+                </helpers:ToggleButtonHelper.SwitchTrackOffBackground>
+            </ToggleButton>
+        </WrapPanel>
+
+    </StackPanel>
 </UserControl>

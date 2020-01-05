@@ -30,6 +30,10 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Slider/Slider.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBlock.xaml" />
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/ActionToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/FlatToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/SwitchToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/HamburgerToggleButton.xaml" />
 
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Light.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -53,6 +57,7 @@
     <Style BasedOn="{StaticResource Slider}" TargetType="{x:Type Slider}" />
     <Style BasedOn="{StaticResource TextBlock}" TargetType="{x:Type TextBlock}" />
     <Style BasedOn="{StaticResource TextBox}" TargetType="{x:Type TextBox}" />
+    <Style BasedOn="{StaticResource SwitchToggleButton}" TargetType="{x:Type ToggleButton}" />
 
 
     <!--  This is the current way to setup your app's initial color theme  -->

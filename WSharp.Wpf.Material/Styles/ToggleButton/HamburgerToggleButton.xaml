@@ -4,7 +4,7 @@
         <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/ToggleButton/FocusVisual.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="MaterialDesignHamburgerToggleButton" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="HamburgerToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />

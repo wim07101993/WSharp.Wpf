@@ -3,13 +3,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
-    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf"
-    FontFamily="Roboto"
-    TextElement.FontSize="13"
-    TextElement.FontWeight="Regular"
-    TextElement.Foreground="{DynamicResource BodyBrush}"
-    TextOptions.TextFormattingMode="Ideal"
-    TextOptions.TextRenderingMode="Auto">
+    xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
+
     <StackPanel Orientation="Vertical">
 
         <TextBlock

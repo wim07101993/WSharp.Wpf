@@ -5,12 +5,16 @@
     xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:helpers="clr-namespace:WSharp.Wpf.Helpers;assembly=WSharp.Wpf">
 
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/Styles/Icon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
     <converters:MathConverter x:Key="DivisionMathConverter" Operation="Divide" />
 
     <Style x:Key="ActionToggleButton" TargetType="{x:Type ToggleButton}">
         <Style.Resources>
             <ResourceDictionary>
-                <Style BasedOn="{StaticResource {x:Type controls:Icon}}" TargetType="{x:Type controls:Icon}">
+                <Style BasedOn="{StaticResource Icon}" TargetType="{x:Type controls:Icon}">
                     <Setter Property="Width" Value="20" />
                     <Setter Property="Height" Value="20" />
                 </Style>
