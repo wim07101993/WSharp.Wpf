@@ -1,6 +1,6 @@
 ﻿namespace WSharp.Wpf.Controls
 {
-    public enum ButtonsAlignment
+    public enum EButtonsAlignment
     {
         Left,
         Right

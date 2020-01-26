@@ -1,290 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+
 using WSharp.Extensions;
 using WSharp.Logging;
+using WSharp.Wpf.Extensions;
 
 namespace WSharp.Wpf.Controls
 {
-    [TemplatePart(Name = nameof(PartIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTimeColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartSourceColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTagColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartEventTypeColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartTitleColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartPayloadColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartProcessIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartThreadIdColumn), Type = typeof(DataGridColumn))]
-    [TemplatePart(Name = nameof(PartCallStackColumn), Type = typeof(DataGridColumn))]
     [TemplatePart(Name = nameof(PartSearchButton), Type = typeof(Button))]
     [TemplatePart(Name = nameof(PartClearFilterButton), Type = typeof(Button))]
-    public class LogsView : AControl
+    public class LogsView : ACollectionControl<ILogEntry>
     {
-        #region DEPENDENCY PROPERTIES
-
-        public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
-            nameof(ItemsSource),
-            typeof(IEnumerable<ILogEntry>),
-            typeof(LogsView),
-            new PropertyMetadata(default(IEnumerable<ILogEntry>), OnItemsSourceChanged));
-
-        public static readonly DependencyProperty FilteredItemsSourceProperty = DependencyProperty.Register(
-            nameof(FilteredItemsSource),
-            typeof(IEnumerable<ILogEntry>),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
-            nameof(SelectedItem),
-            typeof(ILogEntry),
-            typeof(LogsView));
-
-        #region collumn visibilities
-
-        public static readonly DependencyProperty IdColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(IdColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty SourceColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(SourceColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty TimeColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(TimeColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty TagColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(TagColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty EventTypeColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(EventTypeColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty TitleColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(TitleColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty PayloadColumnVisibilityProperty = DependencyProperty.Register(
-            nameof(PayloadColumnVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty OperationStackColumnVisibilityProperty = DependencyProperty.Register(
-           nameof(OperationStackColumnVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty TimeStampColumnVisibilityProperty = DependencyProperty.Register(
-           nameof(TimeStampColumnVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty ProcessIdColumnVisibilityProperty = DependencyProperty.Register(
-           nameof(ProcessIdColumnVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty ThreadIdColumnVisibilityProperty = DependencyProperty.Register(
-           nameof(ThreadIdColumnVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        public static readonly DependencyProperty CallStackColumnVisibilityProperty = DependencyProperty.Register(
-           nameof(CallStackColumnVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed, OnColumnVisibilityChanged));
-
-        #endregion collumn visibilities
-
-        #region filter
-
-        public static readonly DependencyProperty IdFilterProperty = DependencyProperty.Register(
-            nameof(IdFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty SourceFilterProperty = DependencyProperty.Register(
-            nameof(SourceFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty TagFilterProperty = DependencyProperty.Register(
-            nameof(TagFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty EventTypeFilterProperty = DependencyProperty.Register(
-            nameof(EventTypeFilter),
-            typeof(TraceEventType),
-            typeof(LogsView),
-            new PropertyMetadata(NoEventTypeFilter));
-
-        public static readonly DependencyProperty TitleFilterProperty = DependencyProperty.Register(
-            nameof(TitleFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty PayloadFilterProperty = DependencyProperty.Register(
-            nameof(PayloadFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty OperationStackFilterProperty = DependencyProperty.Register(
-            nameof(OperationStackFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty DateLowerLimitProperty = DependencyProperty.Register(
-            nameof(DateLowerLimit),
-            typeof(DateTime?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty TimeLowerLimitProperty = DependencyProperty.Register(
-            nameof(TimeLowerLimit),
-            typeof(DateTime?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty DateUpperLimitProperty = DependencyProperty.Register(
-            nameof(DateUpperLimit),
-            typeof(DateTime?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty TimeUpperLimitProperty = DependencyProperty.Register(
-            nameof(TimeUpperLimit),
-            typeof(DateTime?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty TimeStampLowerLimitProperty = DependencyProperty.Register(
-            nameof(TimeStampLowerLimit),
-            typeof(int?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty TimeStampUpperLimitProperty = DependencyProperty.Register(
-            nameof(TimeStampUpperLimit),
-            typeof(int?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty ProcessIdFilterProperty = DependencyProperty.Register(
-            nameof(ProcessIdFilter),
-            typeof(int?),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty ThreadIdFilterProperty = DependencyProperty.Register(
-            nameof(ThreadIdFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        public static readonly DependencyProperty CallStackFilterProperty = DependencyProperty.Register(
-            nameof(CallStackFilter),
-            typeof(string),
-            typeof(LogsView));
-
-        #endregion filter
-
-        #region filter visibilities
-
-        public static readonly DependencyProperty IdFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(IdFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Collapsed));
-
-        public static readonly DependencyProperty SourceFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(SourceFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty TimeFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(TimeFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty TagFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(TagFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty EventTypeFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(EventTypeFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty TitleFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(TitleFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty PayloadFilterVisibilityProperty = DependencyProperty.Register(
-            nameof(PayloadFilterVisibility),
-            typeof(Visibility),
-            typeof(LogsView),
-            new PropertyMetadata(Visibility.Visible));
-
-        public static readonly DependencyProperty OperationStackFilterVisibilityProperty = DependencyProperty.Register(
-           nameof(OperationStackFilterVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed));
-
-        public static readonly DependencyProperty TimeStampFilterVisibilityProperty = DependencyProperty.Register(
-           nameof(TimeStampFilterVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed));
-
-        public static readonly DependencyProperty ProcessIdFilterVisibilityProperty = DependencyProperty.Register(
-           nameof(ProcessIdFilterVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed));
-
-        public static readonly DependencyProperty ThreadIdFilterVisibilityProperty = DependencyProperty.Register(
-           nameof(ThreadIdFilterVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed));
-
-        public static readonly DependencyProperty CallStackFilterVisibilityProperty = DependencyProperty.Register(
-           nameof(CallStackFilterVisibility),
-           typeof(Visibility),
-           typeof(LogsView),
-           new PropertyMetadata(Visibility.Collapsed));
-
-        #endregion filter visibilities
-
-        #endregion DEPENDENCY PROPERTIES
-
-
-        #region FIELDS
-
-#pragma warning disable RECS0016 // Bitwise operation on enum which has no [Flags] attribute
         private const TraceEventType NoEventTypeFilter =
             TraceEventType.Critical |
             TraceEventType.Error |
@@ -296,76 +26,26 @@ namespace WSharp.Wpf.Controls
             TraceEventType.Suspend |
             TraceEventType.Resume |
             TraceEventType.Transfer;
-#pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
-
-        private const string PartIdColumn = "IdColumn";
-        private const string PartTimeColumn = "TimeColumn";
-        private const string PartSourceColumn = "SourceColumn";
-        private const string PartTagColumn = "TagColumn";
-        private const string PartEventTypeColumn = "EventTypeColumn";
-        private const string PartTitleColumn = "TitleColumn";
-        private const string PartPayloadColumn = "PayloadColumn";
-        private const string PartOperationStackColumn = "OperationStackColumn";
-        private const string PartTimeStampColumn = "TimeStampColumn";
-        private const string PartProcessIdColumn = "ProcessIdColumn";
-        private const string PartThreadIdColumn = "ThreadIdColumn";
-        private const string PartCallStackColumn = "CallStackColumn";
-        private const string PartSearchButton = "SearchButton";
-        private const string PartClearFilterButton = "ClearFilterButton";
-
-        private readonly Dictionary<string, DataGridColumn> _collumns = new Dictionary<string, DataGridColumn>
-        {
-            { PartIdColumn, null },
-            { PartTimeColumn, null },
-            { PartSourceColumn, null },
-            { PartTagColumn, null },
-            { PartEventTypeColumn, null },
-            { PartTitleColumn, null },
-            { PartPayloadColumn, null },
-            { PartOperationStackColumn, null },
-            { PartTimeStampColumn, null },
-            { PartProcessIdColumn, null },
-            { PartThreadIdColumn, null },
-            { PartCallStackColumn, null }
-        };
-
-        private Button _searchButton;
-        private Button _clearFilterButton;
-
-        #endregion FIELDS
-
-
-        #region CONSTRUCTORS
 
         static LogsView()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(LogsView), new FrameworkPropertyMetadata(typeof(LogsView)));
         }
 
-        #endregion CONSTRUCTORS
+        #region collumn visibilities
 
-
-        #region PROPERTIES
-
-        public IEnumerable<ILogEntry> ItemsSource
-        {
-            get => (IEnumerable<ILogEntry>)GetValue(ItemsSourceProperty);
-            set => SetValue(ItemsSourceProperty, value);
-        }
-
-        public IEnumerable<ILogEntry> FilteredItemsSource
-        {
-            get => (IEnumerable<ILogEntry>)GetValue(FilteredItemsSourceProperty);
-            set => SetValue(FilteredItemsSourceProperty, value);
-        }
-
-        public ILogEntry SelectedItem
-        {
-            get => (ILogEntry)GetValue(SelectedItemProperty);
-            set => SetValue(SelectedItemProperty, value);
-        }
-
-        #region column visibilities
+        public static readonly DependencyProperty IdColumnVisibilityProperty = DependencyProperty.Register(nameof(IdColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty SourceColumnVisibilityProperty = DependencyProperty.Register(nameof(SourceColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TimeColumnVisibilityProperty = DependencyProperty.Register(nameof(TimeColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TagColumnVisibilityProperty = DependencyProperty.Register(nameof(TagColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty EventTypeColumnVisibilityProperty = DependencyProperty.Register(nameof(EventTypeColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TitleColumnVisibilityProperty = DependencyProperty.Register(nameof(TitleColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty PayloadColumnVisibilityProperty = DependencyProperty.Register(nameof(PayloadColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty OperationStackColumnVisibilityProperty = DependencyProperty.Register(nameof(OperationStackColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty TimeStampColumnVisibilityProperty = DependencyProperty.Register(nameof(TimeStampColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty ProcessIdColumnVisibilityProperty = DependencyProperty.Register(nameof(ProcessIdColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty ThreadIdColumnVisibilityProperty = DependencyProperty.Register(nameof(ThreadIdColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty CallStackColumnVisibilityProperty = DependencyProperty.Register(nameof(CallStackColumnVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
 
         public Visibility IdColumnVisibility
         {
@@ -439,9 +119,26 @@ namespace WSharp.Wpf.Controls
             set => SetValue(CallStackColumnVisibilityProperty, value);
         }
 
-        #endregion column visibilities
+        #endregion collumn visibilities
 
         #region filter
+
+        public static readonly DependencyProperty IdFilterProperty = DependencyProperty.Register(nameof(IdFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty SourceFilterProperty = DependencyProperty.Register(nameof(SourceFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty TagFilterProperty = DependencyProperty.Register(nameof(TagFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty EventTypeFilterProperty = DependencyProperty.Register(nameof(EventTypeFilter), typeof(TraceEventType), typeof(LogsView), new PropertyMetadata(NoEventTypeFilter));
+        public static readonly DependencyProperty TitleFilterProperty = DependencyProperty.Register(nameof(TitleFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty PayloadFilterProperty = DependencyProperty.Register(nameof(PayloadFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty OperationStackFilterProperty = DependencyProperty.Register(nameof(OperationStackFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty DateLowerLimitProperty = DependencyProperty.Register(nameof(DateLowerLimit), typeof(DateTime?), typeof(LogsView));
+        public static readonly DependencyProperty TimeLowerLimitProperty = DependencyProperty.Register(nameof(TimeLowerLimit), typeof(DateTime?), typeof(LogsView));
+        public static readonly DependencyProperty DateUpperLimitProperty = DependencyProperty.Register(nameof(DateUpperLimit), typeof(DateTime?), typeof(LogsView));
+        public static readonly DependencyProperty TimeUpperLimitProperty = DependencyProperty.Register(nameof(TimeUpperLimit), typeof(DateTime?), typeof(LogsView));
+        public static readonly DependencyProperty TimeStampLowerLimitProperty = DependencyProperty.Register(nameof(TimeStampLowerLimit), typeof(int?), typeof(LogsView));
+        public static readonly DependencyProperty TimeStampUpperLimitProperty = DependencyProperty.Register(nameof(TimeStampUpperLimit), typeof(int?), typeof(LogsView));
+        public static readonly DependencyProperty ProcessIdFilterProperty = DependencyProperty.Register(nameof(ProcessIdFilter), typeof(int?), typeof(LogsView));
+        public static readonly DependencyProperty ThreadIdFilterProperty = DependencyProperty.Register(nameof(ThreadIdFilter), typeof(string), typeof(LogsView));
+        public static readonly DependencyProperty CallStackFilterProperty = DependencyProperty.Register(nameof(CallStackFilter), typeof(string), typeof(LogsView));
 
         public string IdFilter
         {
@@ -543,6 +240,19 @@ namespace WSharp.Wpf.Controls
 
         #region filter visibilities
 
+        public static readonly DependencyProperty IdFilterVisibilityProperty = DependencyProperty.Register(nameof(IdFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty SourceFilterVisibilityProperty = DependencyProperty.Register(nameof(SourceFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TimeFilterVisibilityProperty = DependencyProperty.Register(nameof(TimeFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TagFilterVisibilityProperty = DependencyProperty.Register(nameof(TagFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty EventTypeFilterVisibilityProperty = DependencyProperty.Register(nameof(EventTypeFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty TitleFilterVisibilityProperty = DependencyProperty.Register(nameof(TitleFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty PayloadFilterVisibilityProperty = DependencyProperty.Register(nameof(PayloadFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Visible));
+        public static readonly DependencyProperty OperationStackFilterVisibilityProperty = DependencyProperty.Register(nameof(OperationStackFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty TimeStampFilterVisibilityProperty = DependencyProperty.Register(nameof(TimeStampFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty ProcessIdFilterVisibilityProperty = DependencyProperty.Register(nameof(ProcessIdFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty ThreadIdFilterVisibilityProperty = DependencyProperty.Register(nameof(ThreadIdFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+        public static readonly DependencyProperty CallStackFilterVisibilityProperty = DependencyProperty.Register(nameof(CallStackFilterVisibility), typeof(Visibility), typeof(LogsView), new PropertyMetadata(Visibility.Collapsed));
+
         public Visibility IdFilterVisibility
         {
             get => (Visibility)GetValue(IdFilterVisibilityProperty);
@@ -617,63 +327,9 @@ namespace WSharp.Wpf.Controls
 
         #endregion filter visibilities
 
-        #endregion PROPERTIES
-
-
         #region METHODS
 
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            GetTemplateChilds();
-
-            UpdateColumnVisibilities();
-        }
-
-        private void GetTemplateChilds()
-        {
-            foreach (var collumn in _collumns.Keys.ToList())
-                _collumns[collumn] = GetTemplateChild<DataGridColumn>(collumn);
-
-            _searchButton = GetTemplateChild<Button>(PartSearchButton);
-            _searchButton.Click += OnSearchButtonClick;
-
-            _clearFilterButton = GetTemplateChild<Button>(PartClearFilterButton);
-            _clearFilterButton.Click += OnClearFilterButtonClick;
-        }
-
-        #region callbacks
-
-        private static void OnItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(d is LogsView logsView))
-                return;
-
-            if (e.OldValue is INotifyCollectionChanged oldCollection)
-                oldCollection.CollectionChanged -= logsView.OnItemsSourceCollectionChanged;
-            if (e.NewValue is INotifyCollectionChanged newCollection)
-                newCollection.CollectionChanged += logsView.OnItemsSourceCollectionChanged;
-
-            logsView.UpdateFilteredItemsSource();
-        }
-
-        private static void OnColumnVisibilityChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(d is LogsView logsView))
-                return;
-
-            var newValue = e.NewValue as Visibility? ?? Visibility.Collapsed;
-            logsView.UpdateColumnVisibility(e.Property.Name, newValue);
-        }
-
-        #endregion callbacks
-
-        private void OnItemsSourceCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) => UpdateFilteredItemsSource();
-        private void OnSearchButtonClick(object sender, RoutedEventArgs e) => UpdateFilteredItemsSource();
-        private void OnClearFilterButtonClick(object sender, RoutedEventArgs e) => ClearFilter();
-
-        public void ClearFilter()
+        public override void ClearFilter()
         {
             IdFilter = null;
             SourceFilter = null;
@@ -692,13 +348,12 @@ namespace WSharp.Wpf.Controls
             DateUpperLimit = null;
             DateLowerLimit = null;
 
-            FilteredItemsSource = ItemsSource;
+            UpdateFilteredItemsSource();
         }
-        public void UpdateFilteredItemsSource()
-        {
-            var itemsSource = ItemsSource;
 
-            itemsSource = itemsSource
+        public override IEnumerable<ILogEntry> FilterItems(IEnumerable<ILogEntry> items)
+        {
+            items = items
                 .WhereStringContains(x => x.Id.ToString(), IdFilter)
                 .WhereStringContains(x => x.Source, SourceFilter)
                 .WhereStringContains(x => x.Tag, TagFilter)
@@ -710,46 +365,24 @@ namespace WSharp.Wpf.Controls
                 .WhereBetweenOrEqual(x => x.EventCache?.Timestamp, TimeStampUpperLimit, TimeStampLowerLimit);
 
             if (ProcessIdFilter != null)
-                itemsSource = itemsSource.Where(x => x.EventCache?.ProcessId == ProcessIdFilter);
+                items = items.Where(x => x.EventCache?.ProcessId == ProcessIdFilter);
 
             if (DateLowerLimit != null)
-                itemsSource = itemsSource.WhereGreaterOrEqual(x => x.EventCache.DateTime, DateLowerLimit?.ChangeTime(TimeLowerLimit));
+                items = items.WhereGreaterOrEqual(x => x.EventCache.DateTime, DateLowerLimit?.ChangeTime(TimeLowerLimit));
             else if (TimeLowerLimit != null)
-                itemsSource = itemsSource.WhereGreaterOrEqual(x => x.EventCache?.DateTime.TimeOfDay, TimeLowerLimit?.TimeOfDay);
+                items = items.WhereGreaterOrEqual(x => x.EventCache?.DateTime.TimeOfDay, TimeLowerLimit?.TimeOfDay);
 
             if (DateUpperLimit != null)
-                itemsSource = itemsSource.WhereGreaterOrEqual(x => x.EventCache.DateTime, DateUpperLimit?.ChangeTime(TimeUpperLimit));
+                items = items.WhereGreaterOrEqual(x => x.EventCache.DateTime, DateUpperLimit?.ChangeTime(TimeUpperLimit));
             else if (TimeUpperLimit != null)
-                itemsSource = itemsSource.WhereGreaterOrEqual(x => x.EventCache?.DateTime.TimeOfDay, TimeUpperLimit?.TimeOfDay);
+                items = items.WhereGreaterOrEqual(x => x.EventCache?.DateTime.TimeOfDay, TimeUpperLimit?.TimeOfDay);
 
 #pragma warning disable RECS0016 // Bitwise operation on enum which has no [Flags] attribute
             if (EventTypeFilter != NoEventTypeFilter)
-                itemsSource = itemsSource.Where(x => (EventTypeFilter & x.EventType) > 0);
+                items = items.Where(x => (EventTypeFilter & x.EventType) > 0);
 #pragma warning restore RECS0016 // Bitwise operation on enum which has no [Flags] attribute
 
-            FilteredItemsSource = itemsSource.ToList();
-        }
-
-        private void UpdateColumnVisibility(string propertyName, Visibility visibility)
-        {
-            var l = "Visibility".Length;
-            var columnName = propertyName.Remove(propertyName.Length - l, l);
-            _collumns[columnName].Visibility = visibility;
-        }
-        public void UpdateColumnVisibilities()
-        {
-            _collumns[PartIdColumn].Visibility = IdColumnVisibility;
-            _collumns[PartTimeColumn].Visibility = TimeColumnVisibility;
-            _collumns[PartSourceColumn].Visibility = SourceColumnVisibility;
-            _collumns[PartTagColumn].Visibility = TagColumnVisibility;
-            _collumns[PartEventTypeColumn].Visibility = EventTypeColumnVisibility;
-            _collumns[PartTitleColumn].Visibility = TitleColumnVisibility;
-            _collumns[PartPayloadColumn].Visibility = PayloadColumnVisibility;
-            _collumns[PartOperationStackColumn].Visibility = OperationStackColumnVisibility;
-            _collumns[PartTimeStampColumn].Visibility = TimeStampColumnVisibility;
-            _collumns[PartProcessIdColumn].Visibility = ProcessIdColumnVisibility;
-            _collumns[PartThreadIdColumn].Visibility = ThreadIdColumnVisibility;
-            _collumns[PartCallStackColumn].Visibility = CallStackColumnVisibility;
+            return items;
         }
 
         #endregion METHODS

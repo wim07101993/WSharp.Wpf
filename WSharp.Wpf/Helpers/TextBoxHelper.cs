@@ -59,11 +59,11 @@ namespace WSharp.Wpf.Helpers
                         break;
                     }
 
-                case NumericUpDown spinner:
+                case NumberInput spinner:
                     {
                         if ((bool)e.NewValue)
                         {
-                            spinner.BeginInvoke(() => OnSpinnerValueChaged(spinner, new RoutedEventArgs(NumericUpDown.ValueChangedEvent, spinner)));
+                            spinner.BeginInvoke(() => OnSpinnerValueChaged(spinner, new RoutedEventArgs(NumberInput.ValueChangedEvent, spinner)));
                             spinner.ValueChanged += OnSpinnerValueChaged;
                         }
                         else
@@ -85,7 +85,7 @@ namespace WSharp.Wpf.Helpers
         }
 
         private static void TextChanged(object sender, RoutedEventArgs e) => SetTextLength(sender as TextBox, textBox => textBox.Text.Length);
-        private static void OnSpinnerValueChaged(object sender, RoutedEventArgs e) => SetTextLength(sender as NumericUpDown, numericUpDown => numericUpDown.Value.HasValue ? 1 : 0);
+        private static void OnSpinnerValueChaged(object sender, RoutedEventArgs e) => SetTextLength(sender as NumberInput, numericUpDown => numericUpDown.Value.HasValue ? 1 : 0);
         private static void PasswordChanged(object sender, RoutedEventArgs e) => SetTextLength(sender as PasswordBox, passwordBox => passwordBox.Password.Length);
         private static void OnDatePickerBaseSelectedDateChanged(object sender, RoutedEventArgs e) => SetTextLength(sender as DatePicker, timePickerBase => timePickerBase.SelectedDate.HasValue ? 1 : 0);
        
@@ -128,7 +128,7 @@ namespace WSharp.Wpf.Helpers
         [AttachedPropertyBrowsableForType(typeof(PasswordBox))]
         [AttachedPropertyBrowsableForType(typeof(ComboBox))]
         [AttachedPropertyBrowsableForType(typeof(DatePicker))]
-        [AttachedPropertyBrowsableForType(typeof(NumericUpDown))]
+        [AttachedPropertyBrowsableForType(typeof(NumberInput))]
         public static bool GetHasText(DependencyObject obj) => (bool)obj.GetValue(HasTextProperty);
 
         public static void SetHasText(DependencyObject obj, bool value) => obj.SetValue(HasTextProperty, value);
