@@ -1,30 +1,34 @@
 ﻿using System;
 using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
+
+using WSharp.Wpf.Converters.Bases;
 
 namespace WSharp.Wpf.Converters
 {
-    public class NewLineRemover : IValueConverter
+    public class NewLineRemover : ATypedValueConverter<string, string>
     {
-        private static NewLineRemover _instance;
-        public static NewLineRemover Instance => _instance ?? (_instance = new NewLineRemover());
+        private static NewLineRemover instance;
+        public static NewLineRemover Instance => instance ??= new NewLineRemover();
 
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        protected override bool ValidateTIn(object value, CultureInfo culture, out string typedValue)
         {
-            if (value == null)
-                return null;
+            if (base.ValidateTIn(value, culture, out typedValue))
+                return true;
 
-            var str = value.ToString()
+            typedValue = value?.ToString();
+            return typedValue != null;
+        }
+
+        protected override bool TInToTOut(string tin, object parameter, CultureInfo culture, out string tout)
+        {
+            var split = tin
                 .Replace('\r', ',')
                 .Replace('\n', ' ')
                 .Replace('\t', ' ')
                 .Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            return string.Join(" ", str);
+            tout = string.Join(" ", split);
+            return true;
         }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            => DependencyProperty.UnsetValue;
     }
 }
