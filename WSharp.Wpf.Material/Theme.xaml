@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/NumberInput.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/LogEntry.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/WSharp.Wpf.Material;component/LogsView.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

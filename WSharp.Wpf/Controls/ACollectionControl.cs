@@ -24,7 +24,7 @@ namespace WSharp.Wpf.Controls
         public static readonly DependencyProperty ItemsSourceProperty = DependencyProperty.Register(
             nameof(ItemsSource),
             typeof(IEnumerable<T>),
-            typeof(LogsView),
+            typeof(ACollectionControl<T>),
             new PropertyMetadata(default(IEnumerable<T>), OnItemsSourceChanged));
 
         public IEnumerable<T> ItemsSource
@@ -66,7 +66,7 @@ namespace WSharp.Wpf.Controls
         private static readonly DependencyPropertyKey filteredItemsSourcePropertyKey = DependencyProperty.RegisterReadOnly(
             nameof(FilteredItemsSource),
             typeof(IEnumerable<T>),
-            typeof(LogsView),
+            typeof(ACollectionControl<T>),
             new PropertyMetadata(default, OnFilteredItemsSourceChanged));
 
         public static readonly DependencyProperty FilteredItemsSourceProperty = filteredItemsSourcePropertyKey.DependencyProperty;
@@ -104,7 +104,7 @@ namespace WSharp.Wpf.Controls
         public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.Register(
             nameof(SelectedItem),
             typeof(T),
-            typeof(LogsView),
+            typeof(ACollectionControl<T>),
             new PropertyMetadata(default, OnSelectedItemChanged));
 
         public T SelectedItem
@@ -140,7 +140,7 @@ namespace WSharp.Wpf.Controls
             nameof(SelectedItemChanged),
             RoutingStrategy.Bubble,
             typeof(RoutedPropertyChangedEventHandler<T>),
-            typeof(ValueControl<T>));
+            typeof(ACollectionControl<T>));
 
         public event RoutedPropertyChangedEventHandler<T> SelectedItemChanged
         {

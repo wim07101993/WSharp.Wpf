@@ -18,8 +18,7 @@ namespace WSharp.Wpf.Controls
     /// </summary>
     [TemplatePart(Name = NumericUpPartName, Type = typeof(RepeatButton))]
     [TemplatePart(Name = NumericDownPartName, Type = typeof(RepeatButton))]
-    [TemplatePart(Name = TextBoxPartName, Type = typeof(TextBox))]
-    public class NumberInput : ValueControl<double?>
+    public class NumberInput : ATextInput<double?>
     {
         #region FIELDS
 
@@ -27,7 +26,6 @@ namespace WSharp.Wpf.Controls
         private const int DefaultDelay = 500;
         private const string NumericDownPartName = "PART_DownButton";
         private const string NumericUpPartName = "PART_UpButton";
-        private const string TextBoxPartName = "PART_TextBox";
         private const string ContentHostPartName = "PART_ContentHost";
         private const string ScientificNotationChar = "E";
         private const StringComparison StrComp = StringComparison.InvariantCultureIgnoreCase;
@@ -42,7 +40,6 @@ namespace WSharp.Wpf.Controls
         private bool _manualChange;
         private RepeatButton _repeatDown;
         private RepeatButton _repeatUp;
-        private TextBox _valueTextBox;
         private ScrollViewer _scrollViewer;
 
         #endregion FIELDS
@@ -60,41 +57,6 @@ namespace WSharp.Wpf.Controls
         private CultureInfo SpecificCultureInfo => Culture ?? Language.GetSpecificCulture();
 
         #region DEPENDENCY PROPERTIES
-
-        #region TextAlignment
-
-        public static readonly DependencyProperty TextAlignmentProperty = TextBox.TextAlignmentProperty.AddOwner(
-            typeof(NumberInput));
-
-        public TextAlignment TextAlignment
-        {
-            get => (TextAlignment)GetValue(TextAlignmentProperty);
-            set => SetValue(TextAlignmentProperty, value);
-        }
-
-        #endregion TextAlignment
-
-        #region IsReadOnly
-
-        public static readonly DependencyProperty IsReadOnlyProperty = TextBoxBase.IsReadOnlyProperty.AddOwner(
-            typeof(NumberInput),
-            new FrameworkPropertyMetadata(false, FrameworkPropertyMetadataOptions.Inherits, OnIsReadOnlyPropertyChanged));
-
-        public bool IsReadOnly
-        {
-            get => (bool)GetValue(IsReadOnlyProperty);
-            set => SetValue(IsReadOnlyProperty, value);
-        }
-
-        private static void OnIsReadOnlyPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (!(d is NumberInput numUpDown) || e.NewValue == e.OldValue || !(e.NewValue is bool newValue))
-                return;
-
-            numUpDown.ToggleReadOnlyMode(newValue || !numUpDown.InterceptManualEnter);
-        }
-
-        #endregion IsReadOnly
 
         #region Delay
 
@@ -174,7 +136,7 @@ namespace WSharp.Wpf.Controls
             if (!(d is NumberInput numericUpDown))
                 return;
 
-            if (numericUpDown._valueTextBox != null && numericUpDown.Value.HasValue)
+            if (numericUpDown.Value.HasValue)
                 numericUpDown.InternalSetText(numericUpDown.Value);
 
             if (!(e.NewValue is string value))
@@ -540,10 +502,6 @@ namespace WSharp.Wpf.Controls
 
         #region METHODS
 
-        /// <summary>
-        ///     When overridden in a derived class, is invoked whenever application code or internal processes call
-        ///     <see cref="M:System.Windows.FrameworkElement.ApplyTemplate" />.
-        /// </summary>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -572,12 +530,8 @@ namespace WSharp.Wpf.Controls
                 _repeatDown.PreviewMouseUp += OnRepeatDownPreviewMouseUp;
             }
 
-            _valueTextBox = this.GetTemplateChild<TextBox>(TextBoxPartName);
-
             ToggleReadOnlyMode(IsReadOnly | !InterceptManualEnter);
             OnValueChanged(Value, Value);
-
-            _ = _valueTextBox.ApplyTemplate();
 
             if (this.TryGetTemplateChild(ContentHostPartName, out _scrollViewer))
                 _handlesMouseWheelScrolling = new Lazy<PropertyInfo>(() => _scrollViewer
@@ -613,28 +567,26 @@ namespace WSharp.Wpf.Controls
 
         private void ToggleReadOnlyMode(bool isReadOnly)
         {
-            if (_repeatUp == null || _repeatDown == null || _valueTextBox == null)
+            if (_repeatUp == null || _repeatDown == null)
                 return;
 
             if (isReadOnly)
             {
-                _valueTextBox.LostFocus -= OnTextBoxLostFocus;
-                _valueTextBox.PreviewTextInput -= OnPreviewTextInput;
-                _valueTextBox.PreviewKeyDown -= OnTextBoxKeyDown;
-                _valueTextBox.TextChanged -= OnTextChanged;
-                DataObject.RemovePastingHandler(_valueTextBox, OnValueTextBoxPaste);
+                LostFocus -= OnTextBoxLostFocus;
+                PreviewTextInput -= OnPreviewTextInput;
+                PreviewKeyDown -= OnTextBoxKeyDown;
+                TextChanged -= OnTextChanged;
+                DataObject.RemovePastingHandler(this, OnValueTextBoxPaste);
             }
             else
             {
-                _valueTextBox.LostFocus += OnTextBoxLostFocus;
-                _valueTextBox.PreviewTextInput += OnPreviewTextInput;
-                _valueTextBox.PreviewKeyDown += OnTextBoxKeyDown;
-                _valueTextBox.TextChanged += OnTextChanged;
-                DataObject.AddPastingHandler(_valueTextBox, OnValueTextBoxPaste);
+                LostFocus += OnTextBoxLostFocus;
+                PreviewTextInput += OnPreviewTextInput;
+                PreviewKeyDown += OnTextBoxKeyDown;
+                TextChanged += OnTextChanged;
+                DataObject.AddPastingHandler(this, OnValueTextBoxPaste);
             }
         }
-
-        public void SelectAll() => _valueTextBox?.SelectAll();
 
         protected virtual void OnDelayChanged(int oldValue, int newValue)
         {
@@ -697,7 +649,7 @@ namespace WSharp.Wpf.Controls
         {
             base.OnPreviewMouseWheel(e);
 
-            if (InterceptMouseWheel && (IsFocused || _valueTextBox.IsFocused || TrackMouseWheelWhenMouseOver))
+            if (InterceptMouseWheel && (IsFocused || IsFocused || TrackMouseWheelWhenMouseOver))
             {
                 var increment = e.Delta > 0;
                 _manualChange = false;
@@ -709,7 +661,7 @@ namespace WSharp.Wpf.Controls
                 if (TrackMouseWheelWhenMouseOver)
                     _handlesMouseWheelScrolling.Value.SetValue(_scrollViewer, true, null);
                 else if (InterceptMouseWheel)
-                    _handlesMouseWheelScrolling.Value.SetValue(_scrollViewer, _valueTextBox.IsFocused, null);
+                    _handlesMouseWheelScrolling.Value.SetValue(_scrollViewer, IsFocused, null);
                 else
                     _handlesMouseWheelScrolling.Value.SetValue(_scrollViewer, true, null);
             }
@@ -803,8 +755,7 @@ namespace WSharp.Wpf.Controls
             {
                 if (!newValue.HasValue)
                 {
-                    if (_valueTextBox != null)
-                        _valueTextBox.Text = null;
+                    Text = null;
 
                     if (oldValue != newValue)
                         RaiseValueChanged(oldValue, newValue);
@@ -840,8 +791,7 @@ namespace WSharp.Wpf.Controls
                         RaiseMaxinumReached();
                 }
 
-                if (_valueTextBox != null)
-                    InternalSetText(newValue);
+                InternalSetText(newValue);
             }
 
             if (oldValue != newValue)
@@ -854,14 +804,14 @@ namespace WSharp.Wpf.Controls
         {
             if (!newValue.HasValue)
             {
-                _valueTextBox.Text = null;
+                Text = null;
                 return;
             }
 
-            _valueTextBox.Text = FormattedValue(newValue, StringFormat, SpecificCultureInfo);
+            Text = FormattedValue(newValue, StringFormat, SpecificCultureInfo);
 
             if ((bool)GetValue(TextBoxHelper.IsMonitoringProperty))
-                SetValue(TextBoxHelper.TextLengthProperty, _valueTextBox.Text.Length);
+                SetValue(TextBoxHelper.TextLengthProperty, Text.Length);
         }
 
         private string FormattedValue(double? newValue, string format, CultureInfo culture)
@@ -921,15 +871,15 @@ namespace WSharp.Wpf.Controls
                 return;
 
             var routedEvent = interval > 0 ?
-                new NumericUpDownChangedRoutedEventArgs(ValueIncrementedEvent, interval) :
-                new NumericUpDownChangedRoutedEventArgs(ValueDecrementedEvent, interval);
+                new NumberInputChangedRoutedEventArgs(ValueIncrementedEvent, interval) :
+                new NumberInputChangedRoutedEventArgs(ValueDecrementedEvent, interval);
 
             RaiseEvent(routedEvent);
 
             if (!routedEvent.Handled)
             {
                 ChangeValueBy(routedEvent.Interval);
-                _valueTextBox.CaretIndex = _valueTextBox.Text.Length;
+                CaretIndex = Text.Length;
             }
         }
 
@@ -1106,8 +1056,8 @@ namespace WSharp.Wpf.Controls
 
         public static readonly RoutedEvent MaximumReachedEvent = EventManager.RegisterRoutedEvent(nameof(MaximumReached), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberInput));
         public static readonly RoutedEvent MinimumReachedEvent = EventManager.RegisterRoutedEvent(nameof(MinimumReached), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberInput));
-        public static readonly RoutedEvent ValueIncrementedEvent = EventManager.RegisterRoutedEvent(nameof(ValueIncremented), RoutingStrategy.Bubble, typeof(NumbericUpDownChangedRoutedEventHandler), typeof(NumberInput));
-        public static readonly RoutedEvent ValueDecrementedEvent = EventManager.RegisterRoutedEvent(nameof(ValueDecremented), RoutingStrategy.Bubble, typeof(NumbericUpDownChangedRoutedEventHandler), typeof(NumberInput));
+        public static readonly RoutedEvent ValueIncrementedEvent = EventManager.RegisterRoutedEvent(nameof(ValueIncremented), RoutingStrategy.Bubble, typeof(NumberInputChangedRoutedEventHandler), typeof(NumberInput));
+        public static readonly RoutedEvent ValueDecrementedEvent = EventManager.RegisterRoutedEvent(nameof(ValueDecremented), RoutingStrategy.Bubble, typeof(NumberInputChangedRoutedEventHandler), typeof(NumberInput));
         public static readonly RoutedEvent DelayChangedEvent = EventManager.RegisterRoutedEvent(nameof(DelayChanged), RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(NumberInput));
 
         /// <summary>
@@ -1128,13 +1078,13 @@ namespace WSharp.Wpf.Controls
             remove => RemoveHandler(MinimumReachedEvent, value);
         }
 
-        public event NumbericUpDownChangedRoutedEventHandler ValueIncremented
+        public event NumberInputChangedRoutedEventHandler ValueIncremented
         {
             add => AddHandler(ValueIncrementedEvent, value);
             remove => RemoveHandler(ValueIncrementedEvent, value);
         }
 
-        public event NumbericUpDownChangedRoutedEventHandler ValueDecremented
+        public event NumberInputChangedRoutedEventHandler ValueDecremented
         {
             add => AddHandler(ValueDecrementedEvent, value);
             remove => RemoveHandler(ValueDecrementedEvent, value);
@@ -1150,9 +1100,9 @@ namespace WSharp.Wpf.Controls
 
         protected void RaiseMaxinumReached() => RaiseEvent(new RoutedEventArgs(MaximumReachedEvent));
 
-        protected void RaiseValueIncremented(double interval) => RaiseEvent(new NumericUpDownChangedRoutedEventArgs(ValueIncrementedEvent, interval));
+        protected void RaiseValueIncremented(double interval) => RaiseEvent(new NumberInputChangedRoutedEventArgs(ValueIncrementedEvent, interval));
 
-        protected void RaiseValueDecremented(double interval) => RaiseEvent(new NumericUpDownChangedRoutedEventArgs(ValueDecrementedEvent, interval));
+        protected void RaiseValueDecremented(double interval) => RaiseEvent(new NumberInputChangedRoutedEventArgs(ValueDecrementedEvent, interval));
 
         protected void RaiseDelayChanged(double oldValue, double newValue)
             => RaiseEvent(new RoutedPropertyChangedEventArgs<double>(oldValue, newValue, ValueDecrementedEvent));

@@ -32,12 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MaterialDesignColors, Version=1.2.0.325, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.2.0\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=2.6.0.325, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.2.6.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -77,20 +71,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\WSharp.1.0.0\lib\netstandard2.0\WSharp.dll</HintPath>
+    <Reference Include="WSharp, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WSharp.1.0.1\lib\netstandard2.0\WSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ACollectionControl.cs" />
+    <Compile Include="Controls\ATextInput.cs" />
     <Compile Include="Controls\ValueControl.cs" />
     <Compile Include="Controls\EButtonsAlignment.cs" />
     <Compile Include="Controls\LogEntry.cs" />
     <Compile Include="Controls\LogsView.cs" />
     <Compile Include="Controls\ENumericInputMode.cs" />
     <Compile Include="Controls\NumberInput.cs" />
-    <Compile Include="Controls\NumericUpDownChangedRoutedEventArgs.cs" />
-    <Compile Include="Controls\NumericUpDownChangedRoutedEventHandler.cs" />
+    <Compile Include="Controls\NumberInputChangedRoutedEventArgs.cs" />
+    <Compile Include="Controls\NumberInputChangedRoutedEventHandler.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\EditorBrowsableStateToBooleanConverter.cs" />
     <Compile Include="Converters\InvertedBooleanConverter.cs" />
@@ -132,27 +127,5 @@
     </None>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Page Include="Themes\Material.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material\DateTimePicker.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material\LogEntry.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Themes\Material\LogsView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>XamlIntelliSenseFileGenerator</Generator>
-    </Page>
-    <Page Include="Themes\Material\NumericUpDown.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

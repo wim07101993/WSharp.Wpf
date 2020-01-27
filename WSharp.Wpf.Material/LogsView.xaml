@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="clr-namespace:WSharp.Wpf.Controls"
-    xmlns:converters="clr-namespace:WSharp.Wpf.Converters"
+    xmlns:controls="clr-namespace:WSharp.Wpf.Controls;assembly=WSharp.Wpf"
+    xmlns:converters="clr-namespace:WSharp.Wpf.Converters;assembly=WSharp.Wpf"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Style TargetType="{x:Type controls:LogsView}">
         <Style.Setters>
@@ -142,7 +142,7 @@
                                     </StackPanel>
 
                                     <!--  process id  -->
-                                    <controls:NumericUpDown
+                                    <controls:NumberInput
                                         materialDesign:HintAssist.Hint="ProcessId"
                                         Visibility="{TemplateBinding ProcessIdFilterVisibility}"
                                         Value="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=ProcessIdFilter}" />
